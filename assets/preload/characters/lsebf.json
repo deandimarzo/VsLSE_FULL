@@ -1,0 +1,111 @@
+{
+    "animations": [
+        {
+            "loop": false,
+            "offsets": [
+				20,
+				20
+			],
+            "anim": "idle",
+            "fps": 24,
+            "name": "BF idle dance guitar",
+            "indices": []
+		},
+        {
+            "loop": false,
+            "offsets": [
+				41,
+				17
+			],
+            "anim": "singLEFT",
+            "fps": 24,
+            "name": "BF NOTE LEFT guitar",
+            "indices": []
+		},
+        {
+            "loop": false,
+            "offsets": [
+				70,
+				-23
+			],
+            "anim": "singDOWN",
+            "fps": 24,
+            "name": "BF NOTE DOWN guitar",
+            "indices": []
+		},
+        {
+            "loop": false,
+            "offsets": [
+				98,
+				51
+			],
+            "anim": "singUP",
+            "fps": 24,
+            "name": "BF NOTE UP guitar",
+            "indices": []
+		},
+        {
+            "loop": false,
+            "offsets": [
+				46,
+				13
+			],
+            "anim": "singRIGHT",
+            "fps": 24,
+            "name": "BF NOTE RIGHT guitar",
+            "indices": []
+		},
+        {
+            "loop": false,
+            "offsets": [
+				77,
+				-1
+			],
+            "anim": "singDOWNmiss",
+            "fps": 24,
+            "name": "BF NOTE DOWN MISS guitar",
+            "indices": []
+		},
+        {
+            "loop": false,
+            "offsets": [
+				105,
+				79
+			],
+            "anim": "singUPmiss",
+            "fps": 24,
+            "name": "BF NOTE UP MISS guitar",
+            "indices": []
+		},
+        {
+            "loop": false,
+            "offsets": [
+				45,
+				39
+			],
+            "anim": "singRIGHTmiss",
+            "fps": 24,
+            "name": "BF NOTE RIGHT MISS guitar",
+            "indices": []
+		}
+	],
+    "no_antialiasing": false,
+    "image": "characters/lsebf",
+    "position": [
+		0,
+		350
+	],
+    "healthicon": "bf",
+    "flip_x": true,
+    "healthbar_colors": [
+		49,
+		176,
+		209
+	],
+    "camera_position": [
+		0,
+		0
+	],
+    "sing_duration": 4,
+    "scale": 1
+}
