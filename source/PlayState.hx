@@ -191,6 +191,8 @@ class PlayState extends MusicBeatState
 	public var camGame:FlxCamera;
 	public var camOther:FlxCamera;
 	public var cameraSpeed:Float = 1;
+    
+    public var guitarTime:Bool = false;
 
 	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
 	var dialogueJson:DialogueFile = null;
@@ -2606,7 +2608,37 @@ class PlayState extends MusicBeatState
 						}
 					}
 				}
+                
+                
+                if (guitarTime) {
+                    // BEGIN MY AWFUL EXPERIMENTATION -LSE
+                    // daNote.distance starts around 2400.
+                    // initial coordinates: 540, 100
+                    // final coordinates: 540, 800
 
+                    var guitarDistance = Math.pow(daNote.distance / 2400, 0.8) * SONG.speed;
+
+                    // Nudge the notes closer together at origin, and further apart at destination.
+                    var guitarWidthOrigin = -40; // modifier for notes at origin
+                    var guitarWidthStrum = 20; // modifier for notes at strumline
+                    var guitarScaleDistance = 0.2;
+                    var guitarWidthMod = (daNote.noteData % 4) - 1.5;
+
+
+                    daNote.x += (FlxMath.lerp(guitarWidthStrum, guitarWidthOrigin, guitarDistance) * guitarWidthMod);
+
+                    daNote.y = FlxMath.lerp(500,100,guitarDistance);
+
+                    var guitarScale = FlxMath.bound(FlxMath.lerp(1, guitarScaleDistance, guitarDistance),0,1);
+
+                    daNote.scale.set(guitarScale, guitarScale);
+
+                    // resort notes
+                    notes.sort(FlxSort.byY, FlxSort.ASCENDING);
+
+                }
+                
+                
 				if (!daNote.mustPress && daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote)
 				{
 					opponentNoteHit(daNote);
@@ -2645,6 +2677,10 @@ class PlayState extends MusicBeatState
 				}
 			});
 		}
+                
+                
+        
+                
 		checkEventNote();
 
 		if (!inCutscene) {
@@ -2826,7 +2862,13 @@ class PlayState extends MusicBeatState
 				var value:Int = Std.parseInt(value1);
 				if(Math.isNaN(value)) value = 1;
 				gfSpeed = value;
+                
+            case 'Enter Guitar Mode':
+				guitarTime = true;
 
+             case 'Exit Guitar Mode':
+				guitarTime = false;
+                
 			case 'Blammed Lights':
 				var lightId:Int = Std.parseInt(value1);
 				if(Math.isNaN(lightId)) lightId = 0;
