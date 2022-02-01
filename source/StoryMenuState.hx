@@ -61,11 +61,11 @@ class StoryMenuState extends MusicBeatState
 		if(curWeek >= WeekData.weeksList.length) curWeek = 0;
 		persistentUpdate = persistentDraw = true;
 
-		scoreText = new FlxText(10, 10, 0, "SCORE: 49324858", 36);
-		scoreText.setFormat("VCR OSD Mono", 32);
+		scoreText = new FlxText(FlxG.width * 0.7, 10, 0, "SCORE: 49324858", 36);
+		scoreText.setFormat(Paths.font("Spartan-Light.ttf"), 32);
 
-		txtWeekTitle = new FlxText(FlxG.width * 0.7, 10, 0, "", 32);
-		txtWeekTitle.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, RIGHT);
+		txtWeekTitle = new FlxText(10, 10, 0, "", 32);
+		txtWeekTitle.setFormat(Paths.font("Spartan-Light.ttf"), 32, FlxColor.WHITE, RIGHT);
 		txtWeekTitle.alpha = 0.7;
 
 		var rankText:FlxText = new FlxText(0, 10);
@@ -161,19 +161,29 @@ class StoryMenuState extends MusicBeatState
 		rightArrow.antialiasing = ClientPrefs.globalAntialiasing;
 		difficultySelectors.add(rightArrow);
 
-		add(bgYellow);
-		add(bgSprite);
-		add(grpWeekCharacters);
-
+		// add(bgYellow);
+		// add(bgSprite);
+		// add(grpWeekCharacters);
+        
+        /*
 		var tracksSprite:FlxSprite = new FlxSprite(FlxG.width * 0.07, bgSprite.y + 425).loadGraphic(Paths.image('Menu_Tracks'));
 		tracksSprite.antialiasing = ClientPrefs.globalAntialiasing;
 		add(tracksSprite);
+        */
+        
+        var txtTracks:FlxText = new FlxText(40, 320, 0, "", 18);
+		txtTracks.setFormat(Paths.font("Spartan-Light.ttf"), 22, 0xFF747474, LEFT);
+		txtTracks.alpha = 1;
+        txtTracks.text="TRACK LIST";
+        add(txtTracks);
 
-		txtTracklist = new FlxText(FlxG.width * 0.05, tracksSprite.y + 60, 0, "", 32);
-		txtTracklist.alignment = CENTER;
-		txtTracklist.font = rankText.font;
-		txtTracklist.color = 0xFFe55777;
+		txtTracklist = new FlxText(40, txtTracks.y + 28, 0, "", 32);
+		txtTracklist.setFormat(Paths.font("Spartan-Light.ttf"), 36, FlxColor.WHITE, LEFT);
 		add(txtTracklist);
+        
+        trace(txtTracks);
+        trace(txtTracklist);
+        
 		// add(rankText);
 		add(scoreText);
 		add(txtWeekTitle);
@@ -373,7 +383,7 @@ class StoryMenuState extends MusicBeatState
 
 		var leName:String = leWeek.storyName;
 		txtWeekTitle.text = leName.toUpperCase();
-		txtWeekTitle.x = FlxG.width - (txtWeekTitle.width + 10);
+		// txtWeekTitle.x = FlxG.width - (txtWeekTitle.width + 10);
 
 		var bullShit:Int = 0;
 
@@ -457,8 +467,8 @@ class StoryMenuState extends MusicBeatState
 
 		txtTracklist.text = txtTracklist.text.toUpperCase();
 
-		txtTracklist.screenCenter(X);
-		txtTracklist.x -= FlxG.width * 0.35;
+		// txtTracklist.screenCenter(X);
+		// txtTracklist.x -= FlxG.width * 0.35;
 
 		#if !switch
 		intendedScore = Highscore.getWeekScore(WeekData.weeksList[curWeek], curDifficulty);
