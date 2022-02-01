@@ -35,11 +35,8 @@ class MainMenuState extends MusicBeatState
 	var optionShit:Array<String> = [
 		'story_mode',
 		'freeplay',
-		#if MODS_ALLOWED 'mods', #end
-		#if ACHIEVEMENTS_ALLOWED 'awards', #end
-		'credits',
-		#if !switch 'donate', #end
-		'options'
+		'options',
+		'credits'
 	];
 
 	var magenta:FlxSprite;
@@ -104,8 +101,11 @@ class MainMenuState extends MusicBeatState
 
 		for (i in 0...optionShit.length)
 		{
-			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(0, (i * 140)  + offset);
+			var offset:Float = 40 - (Math.max(optionShit.length, 4) - 4) * 10;
+			var menuItem:FlxSprite = new FlxSprite(800, (i * 130)  + offset);
+            
+           
+            
 			menuItem.scale.x = scale;
 			menuItem.scale.y = scale;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
@@ -113,15 +113,27 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
-			menuItem.screenCenter(X);
+			// menuItem.screenCenter(X);
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
 			menuItem.scrollFactor.set(0, scr);
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
-			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
+			menuItem.setGraphicSize(Std.int(menuItem.width * 0.8));
+            var menuPlacementX = 1260;
+            menuItem.x = menuPlacementX - (menuItem.width * 0.8);
+            trace(menuItem.width);
 			menuItem.updateHitbox();
+            
+            
+             
 		}
+        
+        var menuLogo:FlxSprite = new FlxSprite(-630,-190);
+        
+        menuLogo.loadGraphic(Paths.image("menuLogo"));
+        trace(menuLogo);
+        add(menuLogo);
 
 		FlxG.camera.follow(camFollowPos, null, 1);
 
@@ -261,7 +273,7 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
-			spr.screenCenter(X);
+			// spr.screenCenter(X);
 		});
 	}
 
@@ -286,8 +298,8 @@ class MainMenuState extends MusicBeatState
 				if(menuItems.length > 4) {
 					add = menuItems.length * 8;
 				}
-				camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y - add);
-				spr.centerOffsets();
+				// camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y - add);
+				// spr.centerOffsets();
 			}
 		});
 	}
