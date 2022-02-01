@@ -31,6 +31,8 @@ class MainMenuState extends MusicBeatState
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
+    
+    var menuLine:FlxSprite;
 	
 	var optionShit:Array<String> = [
 		'story_mode',
@@ -43,6 +45,7 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
+    
 
 	override function create()
 	{
@@ -101,8 +104,8 @@ class MainMenuState extends MusicBeatState
 
 		for (i in 0...optionShit.length)
 		{
-			var offset:Float = 40 - (Math.max(optionShit.length, 4) - 4) * 10;
-			var menuItem:FlxSprite = new FlxSprite(800, (i * 130)  + offset);
+			var offset:Float = 20 - (Math.max(optionShit.length, 4) - 4) * 10;
+			var menuItem:FlxSprite = new FlxSprite(800, (i * 120)  + offset);
             
            
             
@@ -129,12 +132,22 @@ class MainMenuState extends MusicBeatState
              
 		}
         
-        var menuLogo:FlxSprite = new FlxSprite(-630,-190);
+        var menuLogo:FlxSprite = new FlxSprite(0,200);
         
         menuLogo.loadGraphic(Paths.image("menuLogo"));
         menuLogo.scale.set(0.9,0.9);
-        trace(menuLogo);
+        menuLogo.scrollFactor.set();
         add(menuLogo);
+        
+        menuLine = new FlxSprite();
+        menuLine.makeGraphic(Std.int(menuItems.members[0].width), 4, 0xFFFF2C2C);
+        menuLine.x = menuItems.members[0].x;
+        menuLine.y = menuItems.members[0].y + menuItems.members[0].height + 8;
+        menuLine.scrollFactor.set();
+        add(menuLine);
+        
+        
+        // trace(menuItems.members[0]);
 
 		FlxG.camera.follow(camFollowPos, null, 1);
 
@@ -146,6 +159,10 @@ class MainMenuState extends MusicBeatState
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
+        
+        
+        
+        
 
 		// NG.core.calls.event.logEvent('swag').send();
 
@@ -286,6 +303,10 @@ class MainMenuState extends MusicBeatState
 			curSelected = 0;
 		if (curSelected < 0)
 			curSelected = menuItems.length - 1;
+        
+        menuLine.makeGraphic(Std.int(menuItems.members[curSelected].width), 4, 0xFFFF2C2C);
+        menuLine.x = menuItems.members[curSelected].x;
+        menuLine.y = menuItems.members[curSelected].y + menuItems.members[0].height + 8;
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
