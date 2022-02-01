@@ -119,9 +119,9 @@ class MainMenuState extends MusicBeatState
 			if(optionShit.length < 6) scr = 0;
 			menuItem.scrollFactor.set(0, scr);
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
-			menuItem.setGraphicSize(Std.int(menuItem.width * 0.8));
+			menuItem.setGraphicSize(Std.int(menuItem.width * 0.72));
             var menuPlacementX = 1260;
-            menuItem.x = menuPlacementX - (menuItem.width * 0.8);
+            menuItem.x = menuPlacementX - (menuItem.width * 0.72);
             trace(menuItem.width);
 			menuItem.updateHitbox();
             
@@ -132,6 +132,7 @@ class MainMenuState extends MusicBeatState
         var menuLogo:FlxSprite = new FlxSprite(-630,-190);
         
         menuLogo.loadGraphic(Paths.image("menuLogo"));
+        menuLogo.scale.set(0.9,0.9);
         trace(menuLogo);
         add(menuLogo);
 
