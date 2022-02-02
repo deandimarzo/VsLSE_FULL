@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				-87,
+				10
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "guitar_left"
+		},
+		{
+			"offsets": [
+				-77,
+				21
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "guitar_down"
+		},
+		{
+			"offsets": [
+				-94,
+				18
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singUP",
+			"loop": false,
+			"name": "guitar_up"
+		},
+		{
+			"offsets": [
+				-87,
+				-1
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "guitar_right"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "idle",
+			"loop": false,
+			"name": "guitar_idle"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/lse_assets",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "lse",
+	"flip_x": false,
+	"healthbar_colors": [
+		175,
+		102,
+		206
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 6.1,
+	"scale": 1
+}
