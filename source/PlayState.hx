@@ -192,10 +192,12 @@ class PlayState extends MusicBeatState
 	public var camOther:FlxCamera;
 	public var cameraSpeed:Float = 1;
     
-    public var dadFretboard:FlxSprite;
     public var bfFretboard:FlxSprite;
     
-    public var guitarTime:Bool = false;
+    public static var guitarTime:Bool = false;
+    public var guitarOriginX:Array<Float> = [395, 550, 705, 885];
+    public var guitarStrumX:Array<Float> = [280, 515, 765, 1000];
+    public var guitarStrumY:Float = 700;
 
 	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
 	var dialogueJson:DialogueFile = null;
@@ -259,6 +261,8 @@ class PlayState extends MusicBeatState
 	var detailsText:String = "";
 	var detailsPausedText:String = "";
 	#end
+        
+    
 
 	//Achievement shit
 	var keysPressed:Array<Bool> = [];
@@ -277,9 +281,13 @@ class PlayState extends MusicBeatState
 	
 	// Less laggy controls
 	private var keysArray:Array<Dynamic>;
-
+    
 	override public function create()
 	{
+        
+        // DELETE THIS
+
+   
 		Paths.clearStoredMemory();
 
 		// for lua
@@ -310,6 +318,8 @@ class PlayState extends MusicBeatState
 		instakillOnMiss = ClientPrefs.getGameplaySetting('instakill', false);
 		practiceMode = ClientPrefs.getGameplaySetting('practice', false);
 		cpuControlled = ClientPrefs.getGameplaySetting('botplay', false);
+        
+        guitarTime = false;
 
 		
 		
@@ -340,7 +350,7 @@ class PlayState extends MusicBeatState
 
 		if (SONG == null)
 			SONG = Song.loadFromJson('tutorial');
-
+  
 		Conductor.mapBPMChanges(SONG);
 		Conductor.changeBPM(SONG.bpm);
 
@@ -834,22 +844,16 @@ class PlayState extends MusicBeatState
 			gf.visible = false;
 		}
     
-        // Prep the guitar fretboard
-        dadFretboard = new FlxSprite();
-        dadFretboard.loadGraphic(Paths.image("fretboard"));
-        dadFretboard.x = -450;
-        dadFretboard.y = -200;
-        dadFretboard.scrollFactor.set();
-        dadFretboard.alpha = 0;
-        add(dadFretboard);
+
     
         bfFretboard = new FlxSprite();
         bfFretboard.loadGraphic(Paths.image("fretboard"));
-        bfFretboard.x = 700;
+        bfFretboard.x = (FlxG.width / 2) - (bfFretboard.width / 2);
         bfFretboard.y = -200;
         bfFretboard.scrollFactor.set();
         bfFretboard.alpha = 0;
         add(bfFretboard);
+        
 
 		switch(curStage)
 		{
@@ -1201,6 +1205,8 @@ class PlayState extends MusicBeatState
 
 		Paths.clearUnusedMemory();
 	}
+
+
 
 	function set_songSpeed(value:Float):Float
 	{
@@ -1895,7 +1901,7 @@ class PlayState extends MusicBeatState
 				else
 					oldNote = null;
 
-				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote);
+				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote,false,false,guitarTime);
 				swagNote.mustPress = gottaHitNote;
 				swagNote.sustainLength = songNotes[2];
 				swagNote.gfNote = (section.gfSection && (songNotes[1]<4));
@@ -2212,10 +2218,7 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
-		/*if (FlxG.keys.justPressed.NINE)
-		{
-			iconP1.swapOldIcon();
-		}*/
+
 
 		callOnLuas('onUpdate', [elapsed]);
 
@@ -2638,33 +2641,59 @@ class PlayState extends MusicBeatState
                     // initial coordinates: 540, 100
                     // final coordinates: 540, 800
                     
-                    dadFretboard.alpha = 1;
                     bfFretboard.alpha = 1;
-                    
+             
                     var guitarDistance = Math.pow(daNote.distance / 2400, 0.8) * SONG.speed;
-
+                    
+                    
+                    
                     // Nudge the notes closer together at origin, and further apart at destination.
-                    var guitarWidthOrigin = -40; // modifier for notes at origin
-                    var guitarWidthStrum = 20; // modifier for notes at strumline
-                    var guitarScaleDistance = 0.2;
+                    var guitarWidthOrigin = -20; // modifier for notes at origin
+                    var guitarWidthStrum = 8; // modifier for notes at strumline
                     var guitarWidthMod = (daNote.noteData % 4) - 1.5;
+                    
+                    var guitarScaleDistance = 0.4;
+                    
 
+                    
+                    
+                    
 
-                    daNote.x += (FlxMath.lerp(guitarWidthStrum, guitarWidthOrigin, guitarDistance) * guitarWidthMod);
-
-                    daNote.y = FlxMath.lerp(500,100,guitarDistance);
-
-                    var guitarScale = FlxMath.bound(FlxMath.lerp(1, guitarScaleDistance, guitarDistance),0,1);
+                    var guitarScale = FlxMath.bound(FlxMath.lerp(0.6, guitarScaleDistance, guitarDistance),0,0.6);
 
                     daNote.scale.set(guitarScale, guitarScale);
                     daNote.alpha = guitarScale;
-
+                    
+                    
+                    
+                    // Get LSE's chart offscreen.
+                    if (!daNote.mustPress) {
+                        daNote.alpha = 0;
+                        
+                    } else {
+                        // Apply 2.5D transformations to BF's note coordinates.
+                        
+                        strumX = playerStrums.members[daNote.noteData].x - 310;
+                        
+                        daNote.x = strumX + (FlxMath.lerp(guitarWidthStrum, guitarWidthOrigin, guitarDistance) * guitarWidthMod);
+                        daNote.y = FlxMath.lerp(500,100,guitarDistance);
+                        
+                        daNote.x -= daNote.width / 2; // gotta compensate for the changing note size
+                        
+                        daNote.set_texture('NOTE_guitar');
+                    
+                     }      
+                    
+                    
+                    
+                    
                     // resort notes
                     notes.sort(FlxSort.byY, FlxSort.ASCENDING);
 
                 } else {
-                 dadFretboard.alpha = 0;
-                    bfFretboard.alpha = 0;   
+             
+                    bfFretboard.alpha = 0;  
+
                 }
                 
                 
@@ -2895,10 +2924,42 @@ class PlayState extends MusicBeatState
                 
             case 'Enter Guitar Mode':
 				guitarTime = true;
+                
+                // Set the notes to GH texture
+                notes.forEach(function(daNote:Note) {
+				    daNote.set_texture('NOTE_guitar');
+			    });
+                    
+                // hide strums
+                playerStrums.forEach(function(spr:StrumNote)
+                {
+                   spr.alpha = 0;
+                });
+
+                opponentStrums.forEach(function(spr:StrumNote)
+                {
+                   spr.alpha = 0;
+                });
                
 
              case 'Exit Guitar Mode':
 				guitarTime = false;
+                
+                // Set the notes to normal texture
+                notes.forEach(function(daNote:Note) {
+				    daNote.set_texture('NOTE_assets');
+			    });
+                
+                // show strums
+                playerStrums.forEach(function(spr:StrumNote)
+                {
+                   spr.alpha = 1;
+                });
+
+                opponentStrums.forEach(function(spr:StrumNote)
+                {
+                   spr.alpha = 1;
+                });
                
                 
 			case 'Blammed Lights':

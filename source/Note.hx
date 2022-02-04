@@ -70,8 +70,10 @@ class Note extends FlxSprite
 	public var noAnimation:Bool = false;
 	public var hitCausesMiss:Bool = false;
 	public var distance:Float = 2000;//plan on doing scroll directions soon -bb
+    
+    public var isGuitar:Bool;
 
-	private function set_texture(value:String):String {
+	public function set_texture(value:String):String {
 		if(texture != value) {
 			reloadNote('', value);
 		}
@@ -113,7 +115,7 @@ class Note extends FlxSprite
 		return value;
 	}
 
-	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?inEditor:Bool = false)
+	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?inEditor:Bool = false,?isGuitar:Bool = false)
 	{
 		super();
 
@@ -123,6 +125,7 @@ class Note extends FlxSprite
 		this.prevNote = prevNote;
 		isSustainNote = sustainNote;
 		this.inEditor = inEditor;
+        this.isGuitar = isGuitar;
 
 		x += (ClientPrefs.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X) + 50;
 		// MAKE SURE ITS DEFINITELY OFF SCREEN?
@@ -154,6 +157,10 @@ class Note extends FlxSprite
 				animation.play(animToPlay + 'Scroll');
 			}
 		}
+        
+        if (isGuitar) {
+            set_texture('NOTE_guitar');
+        }
 
 		// trace(prevNote);
 
@@ -230,6 +237,7 @@ class Note extends FlxSprite
 		var skin:String = texture;
 		if(texture.length < 1) {
 			skin = PlayState.SONG.arrowSkin;
+            
 			if(skin == null || skin.length < 1) {
 				skin = 'NOTE_assets';
 			}
