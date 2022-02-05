@@ -194,7 +194,7 @@ class PlayState extends MusicBeatState
 	public var cameraSpeed:Float = 1;
     
     public static var guitarOriginX:Array<Float> = [510, 595, 680 ,770];
-    public static var guitarStrumX:Array<Float> = [450, 575, 700 ,825];
+    public static var guitarStrumX:Array<Float> = [430, 565, 696 ,830];
     
     public var bfFretboard:FlxSprite;
     
@@ -1079,6 +1079,8 @@ class PlayState extends MusicBeatState
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
         bfFretboard.cameras = [camHUD];
+    
+        bfFretboard.scale.set(0.55,0.55);
         
 
 		// if (SONG.song == 'South')
