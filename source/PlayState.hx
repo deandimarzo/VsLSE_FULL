@@ -148,6 +148,7 @@ class PlayState extends MusicBeatState
 	public var opponentStrums:FlxTypedGroup<StrumNote>;
 	public var playerStrums:FlxTypedGroup<StrumNote>;
 	public var grpNoteSplashes:FlxTypedGroup<NoteSplash>;
+    public var guitarAssets:FlxTypedGroup<FlxSprite>;
 
 	public var camZooming:Bool = false;
 	private var curSong:String = "";
@@ -192,12 +193,13 @@ class PlayState extends MusicBeatState
 	public var camOther:FlxCamera;
 	public var cameraSpeed:Float = 1;
     
+    public static var guitarOriginX:Array<Float> = [510, 595, 680 ,770];
+    public static var guitarStrumX:Array<Float> = [450, 575, 700 ,825];
+    
     public var bfFretboard:FlxSprite;
     
     public static var guitarTime:Bool = false;
-    public var guitarOriginX:Array<Float> = [395, 550, 705, 885];
-    public var guitarStrumX:Array<Float> = [280, 515, 765, 1000];
-    public var guitarStrumY:Float = 700;
+    public var guitarStrumY:Float = 630;
 
 	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
 	var dialogueJson:DialogueFile = null;
@@ -1076,6 +1078,8 @@ class PlayState extends MusicBeatState
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
+        bfFretboard.cameras = [camHUD];
+        
 
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
@@ -2643,16 +2647,21 @@ class PlayState extends MusicBeatState
                     
                     bfFretboard.alpha = 1;
              
-                    var guitarDistance = Math.pow(daNote.distance / 2400, 0.8) * SONG.speed;
+                    var guitarDistance = daNote.distance / 2400;
                     
+                    if (ClientPrefs.downScroll) guitarDistance *= -1;
                     
+                    // trace("DISTANCE IS " + daNote.distance);
+        
                     
                     // Nudge the notes closer together at origin, and further apart at destination.
-                    var guitarWidthOrigin = -20; // modifier for notes at origin
-                    var guitarWidthStrum = 8; // modifier for notes at strumline
-                    var guitarWidthMod = (daNote.noteData % 4) - 1.5;
+                    // var guitarWidthOrigin = -20; // modifier for notes at origin
+                    // var guitarWidthStrum = 8; // modifier for notes at strumline
+                    // var guitarWidthMod = (daNote.noteData % 4) - 1.5;
                     
                     var guitarScaleDistance = 0.4;
+                    
+                    
                     
 
                     
@@ -2666,6 +2675,7 @@ class PlayState extends MusicBeatState
                     
                     
                     
+                    
                     // Get LSE's chart offscreen.
                     if (!daNote.mustPress) {
                         daNote.alpha = 0;
@@ -2675,10 +2685,11 @@ class PlayState extends MusicBeatState
                         
                         strumX = playerStrums.members[daNote.noteData].x - 310;
                         
-                        daNote.x = strumX + (FlxMath.lerp(guitarWidthStrum, guitarWidthOrigin, guitarDistance) * guitarWidthMod);
-                        daNote.y = FlxMath.lerp(500,100,guitarDistance);
+                        daNote.x = FlxMath.lerp( guitarStrumX[(daNote.noteData % 4)], guitarOriginX[(daNote.noteData % 4)], guitarDistance);
+                        daNote.y = FlxMath.lerp(guitarStrumY,-1000,guitarDistance);
                         
-                        daNote.x -= daNote.width / 2; // gotta compensate for the changing note size
+                        daNote.x -= 10 + (daNote.width / 2); // gotta compensate for the changing note size
+                        
                         
                         daNote.set_texture('NOTE_guitar');
                     
@@ -2929,12 +2940,17 @@ class PlayState extends MusicBeatState
                 notes.forEach(function(daNote:Note) {
 				    daNote.set_texture('NOTE_guitar');
 			    });
-                    
-                // hide strums
+                
+                // Move Strums
                 playerStrums.forEach(function(spr:StrumNote)
                 {
-                   spr.alpha = 0;
+                    spr.x = guitarStrumX[spr.ID] - 52;
+                    spr.y = guitarStrumY;
+                    spr.scale.set(0.9,0.9);
+                    spr.set_texture('NOTE_guitar');
                 });
+
+            
 
                 opponentStrums.forEach(function(spr:StrumNote)
                 {
