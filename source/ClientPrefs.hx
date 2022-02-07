@@ -18,6 +18,7 @@ class ClientPrefs {
 	public static var cursing:Bool = true;
 	public static var violence:Bool = true;
 	public static var camZooms:Bool = true;
+    public static var guitarMode:Bool = true;
 	public static var hideHud:Bool = false;
 	public static var noteOffset:Int = 0;
 	public static var arrowHSV:Array<Array<Int>> = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
@@ -108,6 +109,7 @@ class ClientPrefs {
 		FlxG.save.data.noteSplashes = noteSplashes;
 		FlxG.save.data.lowQuality = lowQuality;
 		FlxG.save.data.framerate = framerate;
+        FlxG.save.data.guitarMode = guitarMode;
 		//FlxG.save.data.cursing = cursing;
 		//FlxG.save.data.violence = violence;
 		FlxG.save.data.camZooms = camZooms;
@@ -159,9 +161,13 @@ class ClientPrefs {
 		if(FlxG.save.data.flashing != null) {
 			flashing = FlxG.save.data.flashing;
 		}
+        if(FlxG.save.data.guitarMode != null) {
+			flashing = FlxG.save.data.guitarMode;
+		}
 		if(FlxG.save.data.globalAntialiasing != null) {
 			globalAntialiasing = FlxG.save.data.globalAntialiasing;
 		}
+        
 		if(FlxG.save.data.noteSplashes != null) {
 			noteSplashes = FlxG.save.data.noteSplashes;
 		}
