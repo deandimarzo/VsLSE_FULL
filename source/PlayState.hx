@@ -2972,8 +2972,18 @@ class PlayState extends MusicBeatState
              case 'Exit Guitar Mode':
                 if (ClientPrefs.guitarMode) {
                     guitarTime = false;
+        
+                    
 
                     // put stuff back where it goes
+                    timeBarBG.visible = showTime;
+                    timeBar.visible = showTime;
+                    timeTxt.visible = showTime;
+
+                    iconFactor = 1;
+                    healthBar.y = (FlxG.height * 0.89) + 4;
+                    iconP1.y = healthBar.y - 75;
+                    iconP2.y = healthBar.y - 75;
 
                     playerStrums.forEach(function(spr:StrumNote)
                     {
