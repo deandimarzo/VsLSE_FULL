@@ -55,6 +55,7 @@ class NoteSplash extends FlxSprite
 			animation.addByPrefix("note0-" + i, "note splash purple " + i, 24, false);
 			animation.addByPrefix("note3-" + i, "note splash red " + i, 24, false);
 		}
+        textureLoaded = skin;
 	}
 
 	override function update(elapsed:Float) {
