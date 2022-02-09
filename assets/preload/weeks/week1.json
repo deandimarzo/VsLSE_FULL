@@ -1,31 +1,31 @@
 {
-	"storyName": "Your New Week",
-	"difficulties": "",
-	"hideFreeplay": false,
-	"weekBackground": "stage",
-	"weekBefore": "tutorial",
-	"freeplayColor": [
-		146,
-		113,
-		253
+    "storyName": "Demo Week",
+    "difficulties": "",
+    "hideFreeplay": false,
+    "weekBackground": "stage",
+    "weekBefore": "tutorial",
+    "freeplayColor": [
+		255,
+		50,
+		50
 	],
-	"startUnlocked": true,
-	"hideStoryMode": false,
-	"songs": [
+    "startUnlocked": true,
+    "hideStoryMode": false,
+    "songs": [
 		[
 			"Gain Stage",
-			"dad",
+			"lse",
 			[
-				146,
-				113,
-				253
+				255,
+				50,
+				50
 			]
 		]
 	],
-	"weekCharacters": [
+    "weekCharacters": [
 		"dad",
 		"bf",
 		"gf"
 	],
-	"weekName": "Custom Week"
+    "weekName": "Demo Week"
 }
