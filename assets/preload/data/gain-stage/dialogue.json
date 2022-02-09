@@ -1,0 +1,60 @@
+{
+	"dialogue": [
+		{
+			"speed": 0.05,
+			"portrait": "lse",
+			"boxState": "normal",
+			"expression": "excited",
+			"text": "Hey, that wasn't too bad!"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "gf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Yeah, Boyfriend. I'll be honest, I didn't know you could play guitar!"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "excited",
+			"text": "BEEP"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "lse",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Is he always so talkative?"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "gf",
+			"boxState": "normal",
+			"expression": "confused",
+			"text": "You get used to it."
+		},
+		{
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Actually I speak English just fine."
+		},
+		{
+			"speed": 0.05,
+			"portrait": "gf",
+			"boxState": "normal",
+			"expression": "confused",
+			"text": "What th-"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "lse",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Ok then! Let's turn things up a little!"
+		}
+	]
+}

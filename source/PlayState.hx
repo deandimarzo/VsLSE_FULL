@@ -198,6 +198,8 @@ class PlayState extends MusicBeatState
     public static var guitarStrumNoteX:Array<Float> = [463, 590, 715 ,840];
     public var iconFactor:Float = 1;
     
+    public var starPower:Bool;
+    
     public var bfFretboard:FlxSprite;
     
     public static var guitarTime:Bool = false;
@@ -1181,6 +1183,9 @@ class PlayState extends MusicBeatState
 				case 'senpai' | 'roses' | 'thorns':
 					if(daSong == 'roses') FlxG.sound.play(Paths.sound('ANGRY'));
 					schoolIntro(doof);
+                    
+                case 'gain-stage':
+                        startDialogue(dialogueJson);
 
 				default:
 					startCountdown();
@@ -1910,7 +1915,7 @@ class PlayState extends MusicBeatState
 				else
 					oldNote = null;
 
-				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote,false,false,guitarTime);
+				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote,false,false,guitarTime,starPower);
 				swagNote.mustPress = gottaHitNote;
 				swagNote.sustainLength = songNotes[2];
 				swagNote.gfNote = (section.gfSection && (songNotes[1]<4));
@@ -2357,6 +2362,10 @@ class PlayState extends MusicBeatState
 		}
 
 		super.update(elapsed);
+                
+                
+                
+                
 
 		if(ratingName == '?') {
 			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Rating: ' + ratingName;
@@ -2407,11 +2416,11 @@ class PlayState extends MusicBeatState
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
 		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);
 
-		var mult:Float = FlxMath.lerp(1, iconP1.scale.x, CoolUtil.boundTo(1 - (elapsed * 9), 0, 1));
+		var mult:Float = FlxMath.lerp(1 * iconFactor, iconP1.scale.x, CoolUtil.boundTo(1 - (elapsed * 9), 0, 1));
 		iconP1.scale.set(mult * iconFactor, mult * iconFactor);
 		iconP1.updateHitbox();
 
-		var mult:Float = FlxMath.lerp(1, iconP2.scale.x, CoolUtil.boundTo(1 - (elapsed * 9), 0, 1));
+		var mult:Float = FlxMath.lerp(1 * iconFactor, iconP2.scale.x, CoolUtil.boundTo(1 - (elapsed * 9), 0, 1));
 		iconP2.scale.set(mult * iconFactor, mult * iconFactor);
 		iconP2.updateHitbox();
 
@@ -2523,6 +2532,20 @@ class PlayState extends MusicBeatState
 		if (generatedMusic)
 		{
 			var fakeCrochet:Float = (60 / SONG.bpm) * 1000;
+            
+            // Star Power Code Here
+            
+            // When streak is over a certain value (depending on difficulty), Star Power engages.
+            // When Star Power is engaged, notes glow or change to stars, are worth double points, and double health
+            
+            if (combo == 10 && !starPower) {
+                starPowered(true);
+            } else if(combo == 0 && starPower) {
+                starPowered(false);
+            }
+            
+            
+            
 			notes.forEachAlive(function(daNote:Note)
 			{
 				/*if (daNote.y > FlxG.height)
@@ -2746,6 +2769,9 @@ class PlayState extends MusicBeatState
 					daNote.destroy();
 				}
 			});
+            
+            
+            
 		}
                 
                 
@@ -2828,6 +2854,27 @@ class PlayState extends MusicBeatState
 		DiscordClient.changePresence("Chart Editor", null, null, true);
 		#end
 	}
+        
+    private function starPowered(starPowering:Bool = true) {
+        if (starPowering) {
+            starPower = true;
+            trace("Star Power BEGINS");
+            
+            // Set the notes to Star Power texture
+            notes.forEach(function(daNote:Note) {
+                daNote.set_texture('NOTE_assets_glow');
+            });
+            
+        } else {
+            starPower = false;
+            trace("Star Power ENDS");
+            
+            // Set the notes to Star Power texture
+            notes.forEach(function(daNote:Note) {
+                daNote.set_texture('NOTE_assets');
+            });
+        }
+    }
 
 	public var isDead:Bool = false; //Don't mess with this on Lua!!!
 	function doDeathCheck(?skipHealthCheck:Bool = false) {
@@ -2983,6 +3030,7 @@ class PlayState extends MusicBeatState
 
                     iconFactor = 1;
                     healthBar.y = (FlxG.height * 0.89) + 4;
+                    if(ClientPrefs.downScroll) healthBar.y = (0.11 * FlxG.height) + 4;
                     iconP1.y = healthBar.y - 75;
                     iconP2.y = healthBar.y - 75;
 
@@ -4155,8 +4203,15 @@ class PlayState extends MusicBeatState
 				popUpScore(note);
 				if(combo > 9999) combo = 9999;
 			}
-			health += note.hitHealth * healthGain;
-
+			
+            
+                        
+            health += starPower ? note.hitHealth * healthGain * 2 : note.hitHealth * healthGain;
+            
+            
+                        
+                        
+                        
 			if(!note.noAnimation) {
 				var daAlt = '';
 				if(note.noteType == 'Alt Animation') daAlt = '-alt';

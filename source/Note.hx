@@ -72,6 +72,7 @@ class Note extends FlxSprite
 	public var distance:Float = 2000;//plan on doing scroll directions soon -bb
     
     public var isGuitar:Bool;
+    public var isStar:Bool;
 
 	public function set_texture(value:String):String {
 		if(texture != value) {
@@ -115,7 +116,7 @@ class Note extends FlxSprite
 		return value;
 	}
 
-	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?inEditor:Bool = false,?isGuitar:Bool = false)
+	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?inEditor:Bool = false,?isGuitar:Bool = false, ?isStar:Bool = false)
 	{
 		super();
 
@@ -126,6 +127,8 @@ class Note extends FlxSprite
 		isSustainNote = sustainNote;
 		this.inEditor = inEditor;
         this.isGuitar = isGuitar;
+        this.isStar = isStar;
+        
 
 		x += (ClientPrefs.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X) + 50;
 		// MAKE SURE ITS DEFINITELY OFF SCREEN?
@@ -160,6 +163,10 @@ class Note extends FlxSprite
         
         if (isGuitar) {
             set_texture('NOTE_guitar');
+        }
+        
+        if (isStar) {
+            set_texture('NOTE_assets_glow');
         }
 
 		// trace(prevNote);
