@@ -167,6 +167,7 @@ class Note extends FlxSprite
         
         if (isStar) {
             set_texture('NOTE_assets_glow');
+            trace('star spawned');
         }
 
 		// trace(prevNote);

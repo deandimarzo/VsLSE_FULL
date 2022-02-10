@@ -199,11 +199,14 @@ class PlayState extends MusicBeatState
     public var iconFactor:Float = 1;
     
     public var starPower:Bool;
+    public var starPowerThreshold:Int = 50;
     
     public var bfFretboard:FlxSprite;
     
     public static var guitarTime:Bool = false;
     public var guitarStrumY:Float = 630;
+    
+    public var guitarTween:FlxTween;
 
 	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
 	var dialogueJson:DialogueFile = null;
@@ -363,6 +366,7 @@ class PlayState extends MusicBeatState
 
 		#if desktop
 		storyDifficultyText = CoolUtil.difficulties[storyDifficulty];
+        
 
 		// String that contains the mode defined here so it isn't necessary to call changePresence for each mode
 		if (isStoryMode)
@@ -381,6 +385,13 @@ class PlayState extends MusicBeatState
 		GameOverSubstate.resetVariables();
 		var songName:String = Paths.formatToSongPath(SONG.song);
 
+        switch (storyDifficultyText) {
+            case 'easy':
+                starPowerThreshold = 20;
+            case 'medium' | 'hard':
+                starPowerThreshold = 50;
+        }
+        
 		curStage = PlayState.SONG.stage;
 		//trace('stage is: ' + curStage);
 		if(PlayState.SONG.stage == null || PlayState.SONG.stage.length < 1) {
@@ -2538,11 +2549,13 @@ class PlayState extends MusicBeatState
             // When streak is over a certain value (depending on difficulty), Star Power engages.
             // When Star Power is engaged, notes glow or change to stars, are worth double points, and double health
             
-            if (combo == 10 && !starPower) {
+            if (combo == starPowerThreshold && !starPower) {
                 starPowered(true);
             } else if(combo == 0 && starPower) {
                 starPowered(false);
             }
+            
+            
             
             
             
@@ -2673,7 +2686,7 @@ class PlayState extends MusicBeatState
                     // initial coordinates: 540, 100
                     // final coordinates: 540, 800
                     
-                    bfFretboard.alpha = 1;
+                    
              
                     var guitarDistance = daNote.distance / 2400;
                     
@@ -2691,9 +2704,7 @@ class PlayState extends MusicBeatState
                         
                     } else {
                         // Apply 2.5D transformations to BF's note coordinates.
-                        
-                        
-                        
+
                         strumX = playerStrums.members[daNote.noteData].x - 310;
                         if (ClientPrefs.downScroll) guitarDistance *= -1;
                         daNote.y = FlxMath.lerp(guitarStrumY,-1500,guitarDistance);
@@ -2706,10 +2717,9 @@ class PlayState extends MusicBeatState
                         
                         daNote.x = FlxMath.lerp( guitarStrumX[(daNote.noteData % 4)], guitarOriginX[(daNote.noteData % 4)], guitarY);
                         
-                        
                         if (daNote.isSustainNote) {
                             daNote.scale.set(0.75,0.75);
-                            daNote.x += 35;
+                            daNote.x += 40;
                         }
                         
                         daNote.x -= 10 + (daNote.width / 2); // gotta compensate for the changing note size
@@ -2717,10 +2727,7 @@ class PlayState extends MusicBeatState
                         daNote.set_texture('NOTE_guitar');
                     
                      }      
-                    
-                    
-                    
-                    
+   
                     // resort notes
                     notes.sort(FlxSort.byY, FlxSort.ASCENDING);
 
@@ -2730,7 +2737,19 @@ class PlayState extends MusicBeatState
 
                 }
                 
-                
+                if (starPower) {
+                    if (guitarTime) {
+                     notes.forEachAlive(function(daNote:Note)
+                     {       
+                        daNote.set_texture('NOTE_guitar_star');   
+                         if (daNote.isSustainNote) {
+                            daNote.x += 10;
+                        }
+                     });
+                    } else {
+                         daNote.set_texture('NOTE_assets_glow');    
+                    }
+                }
                 
 				if (!daNote.mustPress && daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote)
 				{
@@ -2770,13 +2789,8 @@ class PlayState extends MusicBeatState
 				}
 			});
             
-            
-            
 		}
-                
-                
-        
-                
+     
 		checkEventNote();
 
 		if (!inCutscene) {
@@ -2856,6 +2870,8 @@ class PlayState extends MusicBeatState
 	}
         
     private function starPowered(starPowering:Bool = true) {
+        var camZoom:Float = 0.05;
+        
         if (starPowering) {
             starPower = true;
             trace("Star Power BEGINS");
@@ -2865,6 +2881,7 @@ class PlayState extends MusicBeatState
                 daNote.set_texture('NOTE_assets_glow');
             });
             
+   
         } else {
             starPower = false;
             trace("Star Power ENDS");
@@ -2873,6 +2890,8 @@ class PlayState extends MusicBeatState
             notes.forEach(function(daNote:Note) {
                 daNote.set_texture('NOTE_assets');
             });
+            
+ 
         }
     }
 
@@ -2991,6 +3010,10 @@ class PlayState extends MusicBeatState
                     healthBar.y = 50;
                     iconP1.y = healthBar.y - 70;
                     iconP2.y = healthBar.y - 70;
+                
+                    bfFretboard.alpha = 0;
+                    bfFretboard.y += 100;
+                    guitarTween = FlxTween.tween(bfFretboard, {x:bfFretboard.x, y:bfFretboard.y-100, alpha:1},1, { type:FlxTween.ONESHOT, ease:FlxEase.quadInOut });
 
 
                     // Set the notes to GH texture
@@ -3692,7 +3715,7 @@ class PlayState extends MusicBeatState
 		}
 
 		if(!practiceMode && !cpuControlled) {
-			songScore += score;
+			songScore += starPower ? Std.int(score * 1.5) : score;
 			songHits++;
 			totalPlayed++;
 			RecalculateRating();
