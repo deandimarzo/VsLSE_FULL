@@ -206,6 +206,8 @@ class PlayState extends MusicBeatState
     public var guitarStrumY:Float = 630;
     
     public var guitarTween:FlxTween;
+    
+    public var middleScrolling:Bool = false;
 
 	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
 	var dialogueJson:DialogueFile = null;
@@ -298,6 +300,10 @@ class PlayState extends MusicBeatState
 
    
 		Paths.clearStoredMemory();
+        
+        if (ClientPrefs.middleScroll || CoolUtil.difficulties[storyDifficulty] == "Mania") middleScrolling = true;
+        
+        
 
 		// for lua
 		instance = this;
@@ -902,7 +908,7 @@ class PlayState extends MusicBeatState
 
 		Conductor.songPosition = -5000;
 
-		strumLine = new FlxSprite(ClientPrefs.middleScroll ? STRUM_X_MIDDLESCROLL : STRUM_X, 50).makeGraphic(FlxG.width, 10);
+		strumLine = new FlxSprite(middleScrolling ? STRUM_X_MIDDLESCROLL : STRUM_X, 50).makeGraphic(FlxG.width, 10);
 		if(ClientPrefs.downScroll) strumLine.y = FlxG.height - 150;
 		strumLine.scrollFactor.set();
 
@@ -1007,6 +1013,12 @@ class PlayState extends MusicBeatState
 
 		camFollow = new FlxPoint();
 		camFollowPos = new FlxObject(0, 0, 1, 1);
+    
+        if (CoolUtil.difficulties[storyDifficulty] == "Mania") {
+            boyfriend.alpha = 0;
+            gf.alpha = 0;
+            dad.alpha = 0;
+        }
 
 		snapCamFollowToPos(camPos.x, camPos.y);
 		if (prevCamFollow != null)
@@ -1660,7 +1672,7 @@ class PlayState extends MusicBeatState
 			for (i in 0...opponentStrums.length) {
 				setOnLuas('defaultOpponentStrumX' + i, opponentStrums.members[i].x);
 				setOnLuas('defaultOpponentStrumY' + i, opponentStrums.members[i].y);
-				//if(ClientPrefs.middleScroll) opponentStrums.members[i].visible = false;
+				//if(middleScrolling) opponentStrums.members[i].visible = false;
 			}
 
 			startedCountdown = true;
@@ -1789,7 +1801,7 @@ class PlayState extends MusicBeatState
 				notes.forEachAlive(function(note:Note) {
 					note.copyAlpha = false;
 					note.alpha = note.multAlpha;
-					if(ClientPrefs.middleScroll && !note.mustPress) {
+					if(middleScrolling && !note.mustPress) {
 						note.alpha *= 0.5;
 					}
 				});
@@ -1956,7 +1968,7 @@ class PlayState extends MusicBeatState
 						{
 							sustainNote.x += FlxG.width / 2; // general offset
 						}
-						else if(ClientPrefs.middleScroll)
+						else if(middleScrolling)
 						{
 							sustainNote.x += 310;
 							if(daNoteData > 1)
@@ -1971,7 +1983,7 @@ class PlayState extends MusicBeatState
 				{
 					swagNote.x += FlxG.width / 2; // general offset
 				}
-				else if(ClientPrefs.middleScroll)
+				else if(middleScrolling)
 				{
 					swagNote.x += 310;
 					if(daNoteData > 1) //Up and Right
@@ -2060,9 +2072,9 @@ class PlayState extends MusicBeatState
 		{
 			// FlxG.log.add(i);
 			var targetAlpha:Float = 1;
-			if (player < 1 && ClientPrefs.middleScroll) targetAlpha = 0.35;
+			if (player < 1 && middleScrolling) targetAlpha = 0.35;
 
-			var babyArrow:StrumNote = new StrumNote(ClientPrefs.middleScroll ? STRUM_X_MIDDLESCROLL : STRUM_X, strumLine.y, i, player);
+			var babyArrow:StrumNote = new StrumNote(middleScrolling ? STRUM_X_MIDDLESCROLL : STRUM_X, strumLine.y, i, player);
 			babyArrow.downScroll = ClientPrefs.downScroll;
 			if (!isStoryMode)
 			{
@@ -2081,7 +2093,7 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				if(ClientPrefs.middleScroll)
+				if(middleScrolling)
 				{
 					babyArrow.x += 310;
 					if(i > 1) { //Up and Right
@@ -3056,7 +3068,7 @@ class PlayState extends MusicBeatState
 
                     playerStrums.forEach(function(spr:StrumNote)
                     {
-                        spr.x = ClientPrefs.middleScroll ? STRUM_X_MIDDLESCROLL : STRUM_X;
+                        spr.x = middleScrolling ? STRUM_X_MIDDLESCROLL : STRUM_X;
                         spr.postAddedToGroup();
                         spr.y = strumLine.y;
                         spr.scale.set(1,1);
