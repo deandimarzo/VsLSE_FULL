@@ -196,8 +196,7 @@ class PlayState extends MusicBeatState
     public static var guitarOriginX:Array<Float> = [532, 617, 706, 788];
     public static var guitarStrumX:Array<Float> = [474, 601, 725, 850];
     public static var guitarStrumNoteX:Array<Float> = [463, 590, 715 ,840];
-    public var iconFactor:Float = 1;
-    
+
     public var starPower:Bool;
     public var starPowerThreshold:Int = 50;
     
@@ -2427,12 +2426,12 @@ class PlayState extends MusicBeatState
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
 		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);
 
-		var mult:Float = FlxMath.lerp(1 * iconFactor, iconP1.scale.x, CoolUtil.boundTo(1 - (elapsed * 9), 0, 1));
-		iconP1.scale.set(mult * iconFactor, mult * iconFactor);
+		var mult:Float = FlxMath.lerp(1, iconP1.scale.x, CoolUtil.boundTo(1 - (elapsed * 9), 0, 1));
+		iconP1.scale.set(mult, mult);
 		iconP1.updateHitbox();
 
-		var mult:Float = FlxMath.lerp(1 * iconFactor, iconP2.scale.x, CoolUtil.boundTo(1 - (elapsed * 9), 0, 1));
-		iconP2.scale.set(mult * iconFactor, mult * iconFactor);
+		var mult:Float = FlxMath.lerp(1, iconP2.scale.x, CoolUtil.boundTo(1 - (elapsed * 9), 0, 1));
+		iconP2.scale.set(mult, mult);
 		iconP2.updateHitbox();
 
 		var iconOffset:Int = 26;
@@ -3006,7 +3005,6 @@ class PlayState extends MusicBeatState
                     timeBar.visible = false;
                     timeTxt.visible = false;
 
-                    iconFactor = 0.9;
                     healthBar.y = 50;
                     iconP1.y = healthBar.y - 70;
                     iconP2.y = healthBar.y - 70;
@@ -3051,7 +3049,6 @@ class PlayState extends MusicBeatState
                     timeBar.visible = showTime;
                     timeTxt.visible = showTime;
 
-                    iconFactor = 1;
                     healthBar.y = (FlxG.height * 0.89) + 4;
                     if(ClientPrefs.downScroll) healthBar.y = (0.11 * FlxG.height) + 4;
                     iconP1.y = healthBar.y - 75;
@@ -4592,8 +4589,8 @@ class PlayState extends MusicBeatState
 			camHUD.zoom += 0.03;
 		}
 
-		iconP1.scale.set(1.2 * iconFactor, 1.2 * iconFactor);
-		iconP2.scale.set(1.2 * iconFactor, 1.2 * iconFactor);
+		iconP1.scale.set(1.2, 1.2);
+		iconP2.scale.set(1.2, 1.2);
 
 		iconP1.updateHitbox();
 		iconP2.updateHitbox();
