@@ -12,6 +12,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
+import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
@@ -50,6 +51,9 @@ class StoryMenuState extends MusicBeatState
 	var sprDifficulty:FlxSprite;
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
+    
+    var storyMenuBG:FlxSprite;
+    var maniaMenuBG:FlxSprite;
 
 	override function create()
 	{
@@ -83,10 +87,17 @@ class StoryMenuState extends MusicBeatState
         
         
         
-        var storyMenuBG:FlxSprite = new FlxSprite();
+        storyMenuBG = new FlxSprite();
         storyMenuBG.loadGraphic(Paths.image('storyMenuBG'));
         storyMenuBG.x = 350;
         add(storyMenuBG);
+        
+        maniaMenuBG = new FlxSprite();
+        maniaMenuBG.loadGraphic(Paths.image('maniaMenuBG'));
+        maniaMenuBG.x = 320;
+        maniaMenuBG.alpha = 0;
+        add(maniaMenuBG);
+        
         
         var storyMenuOverlay:FlxSprite = new FlxSprite();
         storyMenuOverlay.loadGraphic(Paths.image('storyMenuOverlay'));
@@ -357,7 +368,25 @@ class StoryMenuState extends MusicBeatState
 		}
 		else
 			newImagePath = image;
-
+        
+        trace("curDif = " + CoolUtil.difficulties[curDifficulty]);
+        if (CoolUtil.difficulties[curDifficulty] == "Mania") {
+            if (maniaMenuBG.alpha != 1) {
+                var tweenOffset = 100 * change;
+                maniaMenuBG.x += tweenOffset;
+                FlxTween.tween(maniaMenuBG, {x:maniaMenuBG.x - tweenOffset, y:maniaMenuBG.y, alpha:1},0.25, { type:FlxTween.ONESHOT, ease:FlxEase.quadInOut });
+                FlxTween.tween(storyMenuBG, {alpha:0},0.25, { type:FlxTween.ONESHOT, ease:FlxEase.quadInOut });
+            }
+        } else {
+            if (storyMenuBG.alpha != 1) {
+                var tweenOffset = 100 * change;
+                storyMenuBG.x += tweenOffset;
+                FlxTween.tween(storyMenuBG, {x:storyMenuBG.x - tweenOffset, y:storyMenuBG.y, alpha:1},0.25, { type:FlxTween.ONESHOT, ease:FlxEase.quadInOut });
+                FlxTween.tween(maniaMenuBG, {alpha:0},0.25, { type:FlxTween.ONESHOT, ease:FlxEase.quadInOut });
+            }
+        }
+        
+        
 		if(newImagePath != lastImagePath)
 		{
 			sprDifficulty.loadGraphic(image);
