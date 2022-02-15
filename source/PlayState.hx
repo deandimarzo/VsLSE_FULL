@@ -2920,28 +2920,30 @@ class PlayState extends MusicBeatState
 	}
         
     private function starPowered(starPowering:Bool = true) {
-        var camZoom:Float = 0.05;
-        
-        if (starPowering) {
-            starPower = true;
-            trace("Star Power BEGINS");
-            
-            // Set the notes to Star Power texture
-            notes.forEach(function(daNote:Note) {
-                daNote.set_texture('NOTE_assets_glow');
-            });
-            
-   
-        } else {
-            starPower = false;
-            trace("Star Power ENDS");
-            
-            // Set the notes to Star Power texture
-            notes.forEach(function(daNote:Note) {
-                daNote.set_texture('NOTE_assets');
-            });
-            
- 
+        if (!maniaMode) {
+            var camZoom:Float = 0.05;
+
+            if (starPowering) {
+                starPower = true;
+                trace("Star Power BEGINS");
+
+                // Set the notes to Star Power texture
+                notes.forEach(function(daNote:Note) {
+                    daNote.set_texture('NOTE_assets_glow');
+                });
+
+
+            } else {
+                starPower = false;
+                trace("Star Power ENDS");
+
+                // Set the notes to Star Power texture
+                notes.forEach(function(daNote:Note) {
+                    daNote.set_texture('NOTE_assets');
+                });
+
+
+            }
         }
     }
 
@@ -3757,7 +3759,7 @@ class PlayState extends MusicBeatState
 		}
 
 
-		if(daRating == 'sick' && !note.noteSplashDisabled)
+		if(daRating == 'sick' && !note.noteSplashDisabled && !maniaMode)
 		{
 			spawnNoteSplashOnNote(note);
 		}
