@@ -127,6 +127,7 @@ class PlayState extends MusicBeatState
 	public static var storyDifficulty:Int = 1;
 
 	public var vocals:FlxSound;
+    public var instSound:FlxSound;
 
 	public var dad:Character;
 	public var gf:Character;
@@ -203,6 +204,8 @@ class PlayState extends MusicBeatState
     public var bfFretboard:FlxSprite;
     
     public static var guitarTime:Bool = false;
+    public var maniaMode:Bool = false;
+    public var maniaBG:FlxSprite;
     public var guitarStrumY:Float = 630;
     
     public var guitarTween:FlxTween;
@@ -301,7 +304,9 @@ class PlayState extends MusicBeatState
    
 		Paths.clearStoredMemory();
         
-        if (ClientPrefs.middleScroll || CoolUtil.difficulties[storyDifficulty] == "Mania") middleScrolling = true;
+        if (CoolUtil.difficulties[storyDifficulty] == "Mania") maniaMode = true;
+        
+        if (ClientPrefs.middleScroll || maniaMode) middleScrolling = true;
         
         
 
@@ -1014,11 +1019,7 @@ class PlayState extends MusicBeatState
 		camFollow = new FlxPoint();
 		camFollowPos = new FlxObject(0, 0, 1, 1);
     
-        if (CoolUtil.difficulties[storyDifficulty] == "Mania") {
-            boyfriend.alpha = 0;
-            gf.alpha = 0;
-            dad.alpha = 0;
-        }
+        
 
 		snapCamFollowToPos(camPos.x, camPos.y);
 		if (prevCamFollow != null)
@@ -1207,7 +1208,9 @@ class PlayState extends MusicBeatState
 					schoolIntro(doof);
                     
                 case 'gain-stage':
+                    if (CoolUtil.difficulties[storyDifficulty] != "Mania") {
                         startDialogue(dialogueJson);
+                    }
 
 				default:
 					startCountdown();
@@ -1674,6 +1677,34 @@ class PlayState extends MusicBeatState
 				setOnLuas('defaultOpponentStrumY' + i, opponentStrums.members[i].y);
 				//if(middleScrolling) opponentStrums.members[i].visible = false;
 			}
+            
+            if (maniaMode) {
+            boyfriend.alpha = 0;
+            gf.alpha = 0;
+            dad.alpha = 0;
+            trace("MANIA MODE!!!");
+                
+            var maniaOverlay:FlxSprite = new FlxSprite();
+            maniaOverlay.loadGraphic(Paths.image("ddr_overlay"));
+            maniaOverlay.scrollFactor.set();
+            add(maniaOverlay);
+            iconP1.visible = false;
+            iconP2.visible = false;
+            healthBar.visible = false;
+            healthBarBG.visible = false;
+                
+                
+            /* maniaBG = new FlxSprite();
+            maniaBG.makeGraphic(1200, 1200, 0xFF888888);
+            maniaBG.scrollFactor.set(0,0);
+            // trace("Should be a graphic rn");
+            add(maniaBG);
+                trace(maniaBG);
+            */
+            for (i in 0...opponentStrums.length) {
+                opponentStrums.members[i].visible = false;
+            }
+        }
 
 			startedCountdown = true;
 			Conductor.songPosition = 0;
@@ -1881,9 +1912,11 @@ class PlayState extends MusicBeatState
 			vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
 		else
 			vocals = new FlxSound();
+        
+        instSound = new FlxSound().loadEmbedded(Paths.inst(PlayState.SONG.song));
 
 		FlxG.sound.list.add(vocals);
-		FlxG.sound.list.add(new FlxSound().loadEmbedded(Paths.inst(PlayState.SONG.song)));
+		FlxG.sound.list.add(instSound);
 
 		notes = new FlxTypedGroup<Note>();
 		add(notes);
@@ -2257,6 +2290,12 @@ class PlayState extends MusicBeatState
 
 
 		callOnLuas('onUpdate', [elapsed]);
+        
+        if (maniaMode) {
+                // var maniaBright = FlxMath.remapToRange(1 - ((((curStep + 1) % 4) / 4) + 0.25), 0, 1, 0.5, 0.6);
+            // maniaBG.color = FlxColor.fromHSB(curStep * 4, 1, 0.2);
+            
+        }
 
 		switch (curStage)
 		{
@@ -2440,6 +2479,7 @@ class PlayState extends MusicBeatState
 
 		var mult:Float = FlxMath.lerp(1, iconP1.scale.x, CoolUtil.boundTo(1 - (elapsed * 9), 0, 1));
 		iconP1.scale.set(mult, mult);
+        // trace("Mult: " + mult);
 		iconP1.updateHitbox();
 
 		var mult:Float = FlxMath.lerp(1, iconP2.scale.x, CoolUtil.boundTo(1 - (elapsed * 9), 0, 1));
@@ -2691,6 +2731,7 @@ class PlayState extends MusicBeatState
 				}
                 
                 
+                
                 if (guitarTime) {
                     // BEGIN MY AWFUL EXPERIMENTATION -LSE
                     // daNote.distance starts around 2400.
@@ -2712,7 +2753,6 @@ class PlayState extends MusicBeatState
                     // Get LSE's chart offscreen.
                     if (!daNote.mustPress) {
                         daNote.alpha = 0;
-                        
                     } else {
                         // Apply 2.5D transformations to BF's note coordinates.
 
@@ -2730,7 +2770,7 @@ class PlayState extends MusicBeatState
                         
                         if (daNote.isSustainNote) {
                             daNote.scale.set(0.75,0.75);
-                            daNote.x += 40;
+                            daNote.x += 43;
                         }
                         
                         daNote.x -= 10 + (daNote.width / 2); // gotta compensate for the changing note size
@@ -2752,13 +2792,12 @@ class PlayState extends MusicBeatState
                     if (guitarTime) {
                      notes.forEachAlive(function(daNote:Note)
                      {       
-                        daNote.set_texture('NOTE_guitar_star');   
-                         if (daNote.isSustainNote) {
-                            daNote.x += 10;
-                        }
+                        daNote.set_texture('NOTE_guitar_glow');   
+                         
                      });
                     } else {
                          daNote.set_texture('NOTE_assets_glow');    
+                        if (!daNote.isSustainNote) daNote.x -= 12;
                     }
                 }
                 
@@ -4129,8 +4168,11 @@ class PlayState extends MusicBeatState
 			}
 			totalPlayed++;
 			RecalculateRating();
+            
+            var missType:String = 'missnote';
+            if (guitarTime) missType = 'missguitar';
 
-			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
+			FlxG.sound.play(Paths.soundRandom(missType, 1, 3), FlxG.random.float(0.1, 0.2));
 			// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
 			// FlxG.log.add('played imss note');
 
@@ -4332,6 +4374,7 @@ class PlayState extends MusicBeatState
 		var skin:String = 'noteSplashes';
 		if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) skin = PlayState.SONG.splashSkin;
 		
+        
    
         
 		var hue:Float = ClientPrefs.arrowHSV[data % 4][0] / 360;
@@ -4343,9 +4386,12 @@ class PlayState extends MusicBeatState
 			sat = note.noteSplashSat;
 			brt = note.noteSplashBrt;
 		}
+        
+        if (guitarTime) skin = "guitarSplashes";
+        var guitarOffset = guitarTime ? 105 : 0;
 
 		var splash:NoteSplash = grpNoteSplashes.recycle(NoteSplash);
-		splash.setupNoteSplash(x, y, data, skin, hue, sat, brt);
+		splash.setupNoteSplash(x + guitarOffset, y, data, skin, hue, sat, brt);
 		grpNoteSplashes.add(splash);
 	}
 

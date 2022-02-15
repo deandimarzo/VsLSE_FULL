@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="LSE_Dialogue.png">
+	<!-- Created with Adobe Animate version 21.0.9.42677 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="DEAN SIDE EYE0000" x="0" y="0" width="415" height="445"/>
+	<SubTexture name="DEAN SIDE EYE0001" x="415" y="0" width="415" height="445"/>
+	<SubTexture name="DEAN SIDE EYE0002" x="830" y="0" width="415" height="445"/>
+	<SubTexture name="DEAN SIDE EYE0003" x="1245" y="0" width="415" height="445"/>
+	<SubTexture name="DEAN SIDE EYE0004" x="1660" y="0" width="415" height="445"/>
+	<SubTexture name="DEAN SIDE EYE0005" x="2075" y="0" width="415" height="445"/>
+	<SubTexture name="DEAN SIDE EYE0006" x="2490" y="0" width="415" height="445"/>
+	<SubTexture name="DEAN SIDE EYE0007" x="2905" y="0" width="415" height="445"/>
+	<SubTexture name="DEAN SIDE EYE0008" x="3320" y="0" width="415" height="445"/>
+	<SubTexture name="DEAN SIDE EYE0009" x="0" y="445" width="415" height="445"/>
+	<SubTexture name="DEAN TALK0000" x="415" y="445" width="420" height="426"/>
+	<SubTexture name="DEAN TALK0001" x="835" y="445" width="420" height="426"/>
+	<SubTexture name="DEAN TALK0002" x="1255" y="445" width="420" height="426"/>
+	<SubTexture name="DEAN TALK0003" x="1675" y="445" width="420" height="426"/>
+	<SubTexture name="DEAN TALK0004" x="2095" y="445" width="420" height="426"/>
+	<SubTexture name="DEAN TALK0005" x="2515" y="445" width="420" height="426"/>
+	<SubTexture name="DEAN TALK0006" x="2935" y="445" width="420" height="426"/>
+	<SubTexture name="DEAN TALK0007" x="3355" y="445" width="420" height="426"/>
+	<SubTexture name="DEAN TALK0008" x="0" y="890" width="420" height="426"/>
+	<SubTexture name="DEAN TALK0009" x="420" y="890" width="420" height="426"/>
+</TextureAtlas>
