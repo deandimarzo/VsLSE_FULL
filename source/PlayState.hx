@@ -157,6 +157,7 @@ class PlayState extends MusicBeatState
 	public var gfSpeed:Int = 1;
 	public var health:Float = 1;
 	public var combo:Int = 0;
+    public var gCombo:Int = 0;
 
 	private var healthBarBG:AttachedSprite;
 	public var healthBar:FlxBar;
@@ -198,12 +199,13 @@ class PlayState extends MusicBeatState
     public static var guitarStrumX:Array<Float> = [474, 601, 725, 850];
     public static var guitarStrumNoteX:Array<Float> = [463, 590, 715 ,840];
 
-    public var starPower:Bool;
-    public var starPowerThreshold:Int = 50;
+    public var starPower:Bool = false;
+    public var starPowerThreshold:Int = 10;
     
     public var bfFretboard:FlxSprite;
+    public var starLightning:FlxSprite;
     
-    public static var guitarTime:Bool = false;
+    public var guitarTime:Bool = false;
     public var maniaMode:Bool = false;
     public var maniaBG:FlxSprite;
     public var guitarStrumY:Float = 630;
@@ -395,11 +397,14 @@ class PlayState extends MusicBeatState
 		GameOverSubstate.resetVariables();
 		var songName:String = Paths.formatToSongPath(SONG.song);
 
+        trace (storyDifficultyText);
         switch (storyDifficultyText) {
-            case 'easy':
+            case 'Easy':
                 starPowerThreshold = 20;
-            case 'medium' | 'hard':
-                starPowerThreshold = 50;
+            case 'Normal':
+                starPowerThreshold = 30;
+            case 'Hard':
+                starPowerThreshold = 40;
         }
         
 		curStage = PlayState.SONG.stage;
@@ -872,7 +877,6 @@ class PlayState extends MusicBeatState
 			gf.visible = false;
 		}
     
-
     
         bfFretboard = new FlxSprite();
         bfFretboard.loadGraphic(Paths.image("fretboard"));
@@ -880,9 +884,25 @@ class PlayState extends MusicBeatState
         bfFretboard.y = -200;
         bfFretboard.scrollFactor.set();
         bfFretboard.alpha = 0;
-        add(bfFretboard);
+        
+    
+        starLightning = new FlxSprite();
+        starLightning.frames = Paths.getSparrowAtlas('starLightning');
+        starLightning.animation.addByPrefix('star', 'STAR LIGHTNING', 24, true);
+        
+        starLightning.x = (FlxG.width / 2) - (starLightning.width / 2);
+        starLightning.y = 80;
+        starLightning.scrollFactor.set();
         
 
+        starLightning.alpha = 0;
+        add(starLightning);
+        starLightning.animation.play('star', true);
+    
+        add(bfFretboard);
+        
+        
+    
 		switch(curStage)
 		{
 			case 'limo':
@@ -1107,6 +1127,7 @@ class PlayState extends MusicBeatState
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
         bfFretboard.cameras = [camHUD];
+        starLightning.cameras = [camHUD];
     
         bfFretboard.scale.set(0.55,0.55);
         
@@ -2600,13 +2621,15 @@ class PlayState extends MusicBeatState
             // When streak is over a certain value (depending on difficulty), Star Power engages.
             // When Star Power is engaged, notes glow or change to stars, are worth double points, and double health
             
-            if (combo == starPowerThreshold && !starPower) {
+            // trace(gCombo + " / " + starPowerThreshold);
+            if (gCombo >= starPowerThreshold && !starPower) {
+                trace("Calling StarPower ON");
                 starPowered(true);
-            } else if(combo == 0 && starPower) {
+                
+            } else if(gCombo < starPowerThreshold && starPower) {
                 starPowered(false);
+                trace("Calling StarPower OFF");
             }
-            
-            
             
             
             
@@ -2777,16 +2800,13 @@ class PlayState extends MusicBeatState
                         daNote.x -= 10 + (daNote.width / 2); // gotta compensate for the changing note size
                         
                         daNote.set_texture('NOTE_guitar');
-                    
                      }      
    
                     // resort notes
                     notes.sort(FlxSort.byY, FlxSort.ASCENDING);
 
                 } else {
-             
                     bfFretboard.alpha = 0;  
-
                 }
                 
                 if (starPower) {
@@ -2794,12 +2814,8 @@ class PlayState extends MusicBeatState
                      notes.forEachAlive(function(daNote:Note)
                      {       
                         daNote.set_texture('NOTE_guitar_star');   
-                         
                      });
-                    } else {
-                         daNote.set_texture('NOTE_assets_glow');    
-                        if (!daNote.isSustainNote) daNote.x -= 12;
-                    }
+                    }    
                 }
                 
 				if (!daNote.mustPress && daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote)
@@ -2839,7 +2855,6 @@ class PlayState extends MusicBeatState
 					daNote.destroy();
 				}
 			});
-            
 		}
      
 		checkEventNote();
@@ -2921,12 +2936,14 @@ class PlayState extends MusicBeatState
 	}
         
     private function starPowered(starPowering:Bool = true) {
-        if (!maniaMode) {
+        if (!maniaMode && guitarTime) {
             var camZoom:Float = 0.05;
 
             if (starPowering) {
                 starPower = true;
                 trace("Star Power BEGINS");
+                starLightning.alpha = 1;
+                trace(starLightning);
 
                 // Set the notes to Star Power texture
                 notes.forEach(function(daNote:Note) {
@@ -2937,7 +2954,7 @@ class PlayState extends MusicBeatState
             } else {
                 starPower = false;
                 trace("Star Power ENDS");
-
+                starLightning.alpha = 0;
                 // Set the notes to Star Power texture
                 notes.forEach(function(daNote:Note) {
                     daNote.set_texture('NOTE_assets');
@@ -3058,6 +3075,7 @@ class PlayState extends MusicBeatState
                     timeBarBG.visible = false;
                     timeBar.visible = false;
                     timeTxt.visible = false;
+                    gCombo = 0;
 
                     healthBar.y = 50;
                     iconP1.y = healthBar.y - 70;
@@ -3095,6 +3113,7 @@ class PlayState extends MusicBeatState
              case 'Exit Guitar Mode':
                 if (ClientPrefs.guitarMode) {
                     guitarTime = false;
+                    starPower = false;
         
                     
 
@@ -3102,6 +3121,8 @@ class PlayState extends MusicBeatState
                     timeBarBG.visible = showTime;
                     timeBar.visible = showTime;
                     timeTxt.visible = showTime;
+                    
+                    starLightning.alpha = 0;
 
                     healthBar.y = (FlxG.height * 0.89) + 4;
                     if(ClientPrefs.downScroll) healthBar.y = (0.11 * FlxG.height) + 4;
@@ -3896,10 +3917,6 @@ class PlayState extends MusicBeatState
 
 			daLoop++;
 		}
-		/* 
-			trace(combo);
-			trace(seperatedScore);
-		 */
 
 		coolText.text = Std.string(seperatedScore);
 		// add(coolText);
@@ -4112,6 +4129,7 @@ class PlayState extends MusicBeatState
 			}
 		});
 		combo = 0;
+        gCombo = 0;
 
 		health -= daNote.missHealth * healthLoss;
 		if(instakillOnMiss)
@@ -4164,6 +4182,7 @@ class PlayState extends MusicBeatState
 				gf.playAnim('sad');
 			}
 			combo = 0;
+            gCombo = 0;
 
 			if(!practiceMode) songScore -= 10;
 			if(!endingSong) {
@@ -4277,6 +4296,9 @@ class PlayState extends MusicBeatState
 			if (!note.isSustainNote)
 			{
 				combo += 1;
+                        if (guitarTime) {
+                gCombo += 1;       
+                }
 				popUpScore(note);
 				if(combo > 9999) combo = 9999;
 			}
