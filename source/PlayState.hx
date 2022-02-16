@@ -2644,6 +2644,7 @@ class PlayState extends MusicBeatState
 					strumDirection = opponentStrums.members[daNote.noteData].direction;
 					strumAlpha = opponentStrums.members[daNote.noteData].alpha;
 					strumScroll = opponentStrums.members[daNote.noteData].downScroll;
+                    if (maniaMode) daNote.visible = false;
 				}
 
 				strumX += daNote.offsetX;
@@ -2792,7 +2793,7 @@ class PlayState extends MusicBeatState
                     if (guitarTime) {
                      notes.forEachAlive(function(daNote:Note)
                      {       
-                        daNote.set_texture('NOTE_guitar_glow');   
+                        daNote.set_texture('NOTE_guitar_star');   
                          
                      });
                     } else {
