@@ -204,6 +204,8 @@ class PlayState extends MusicBeatState
     
     public var bfFretboard:FlxSprite;
     public var starLightning:FlxSprite;
+    public var guitarFade:FlxSprite;
+    public var starFade:FlxSprite;
     
     public var guitarTime:Bool = false;
     public var maniaMode:Bool = false;
@@ -746,6 +748,21 @@ class PlayState extends MusicBeatState
 		if (curStage == 'limo')
 			add(limo);
 
+
+        guitarFade = new FlxSprite();
+        guitarFade.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+        guitarFade.alpha = 0;
+        guitarFade.scrollFactor.set();
+
+
+        starFade = new FlxSprite();
+        starFade.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+        starFade.alpha = 0;
+        starFade.scrollFactor.set();
+
+        add(guitarFade);
+        add(starFade);
+
 		add(dadGroup);
 		add(boyfriendGroup);
 		
@@ -877,7 +894,9 @@ class PlayState extends MusicBeatState
 			gf.visible = false;
 		}
     
-    
+
+
+
         bfFretboard = new FlxSprite();
         bfFretboard.loadGraphic(Paths.image("fretboard"));
         bfFretboard.x = (FlxG.width / 2) - (bfFretboard.width / 2);
@@ -900,6 +919,8 @@ class PlayState extends MusicBeatState
         starLightning.animation.play('star', true);
     
         add(bfFretboard);
+
+
         
         
     
@@ -1230,7 +1251,9 @@ class PlayState extends MusicBeatState
                     
                 case 'gain-stage':
                     if (CoolUtil.difficulties[storyDifficulty] != "Mania") {
-                        startDialogue(dialogueJson);
+                        
+                        startDialogue(dialogueJson, 'LSE_Dialogue02');
+                        
                     }
 
 				default:
@@ -1725,7 +1748,16 @@ class PlayState extends MusicBeatState
             for (i in 0...opponentStrums.length) {
                 opponentStrums.members[i].visible = false;
             }
-        }
+            } else {
+                // cache all note types:
+                var cacheNote:Note = new Note(0,0,null);
+                cacheNote.set_texture('NOTE_guitar');
+                cacheNote.set_texture('NOTE_guitar_star');
+                cacheNote.set_texture('NOTE_assets_glow');
+                cacheNote.kill();
+            }
+            
+            
 
 			startedCountdown = true;
 			Conductor.songPosition = 0;
@@ -2949,7 +2981,7 @@ class PlayState extends MusicBeatState
                 notes.forEach(function(daNote:Note) {
                     daNote.set_texture('NOTE_assets_glow');
                 });
-
+            FlxTween.tween(starFade, {alpha:0.8},1);
 
             } else {
                 starPower = false;
@@ -2959,7 +2991,7 @@ class PlayState extends MusicBeatState
                 notes.forEach(function(daNote:Note) {
                     daNote.set_texture('NOTE_assets');
                 });
-
+                FlxTween.tween(starFade, {alpha:0},1);
 
             }
         }
@@ -3085,7 +3117,8 @@ class PlayState extends MusicBeatState
                     bfFretboard.y += 100;
                     guitarTween = FlxTween.tween(bfFretboard, {x:bfFretboard.x, y:bfFretboard.y-100, alpha:1},1, { type:FlxTween.ONESHOT, ease:FlxEase.quadInOut });
 
-
+                    FlxTween.tween(guitarFade, {alpha:0.2},1);
+                        
                     // Set the notes to GH texture
                     notes.forEach(function(daNote:Note) {
                         daNote.set_texture('NOTE_guitar');
@@ -3115,7 +3148,8 @@ class PlayState extends MusicBeatState
                     guitarTime = false;
                     starPower = false;
         
-                    
+                    FlxTween.tween(guitarFade, {alpha:0},1);
+                        
 
                     // put stuff back where it goes
                     timeBarBG.visible = showTime;
@@ -3142,6 +3176,11 @@ class PlayState extends MusicBeatState
                     // Set the notes to normal texture
                     notes.forEach(function(daNote:Note) {
                         daNote.set_texture('NOTE_assets');
+                        if(daNote.isSustainNote && !daNote.animation.curAnim.name.endsWith('end'))
+                        {
+                            daNote.scale.y *= songSpeed;
+                            daNote.updateHitbox();
+                        }
                     });
 
                     // show strums
@@ -4412,7 +4451,13 @@ class PlayState extends MusicBeatState
 			brt = note.noteSplashBrt;
 		}
         
-        if (guitarTime) skin = "guitarSplashes";
+        if (guitarTime) {
+            skin = "guitarSplashes";
+            if (starPower) {
+                skin = "guitarSplashesStar";
+            }
+        }
+        
         var guitarOffset = guitarTime ? 105 : 0;
 
 		var splash:NoteSplash = grpNoteSplashes.recycle(NoteSplash);

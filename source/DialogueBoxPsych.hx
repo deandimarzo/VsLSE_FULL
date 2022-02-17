@@ -71,9 +71,14 @@ class DialogueCharacter extends FlxSprite
 	public var curCharacter:String = 'bf';
 	public var skiptimer = 0;
 	public var skipping = 0;
+    
+    
+    
 	public function new(x:Float = 0, y:Float = 0, character:String = null)
 	{
 		super(x, y);
+        
+
 
 		if(character == null) character = DEFAULT_CHARACTER;
 		this.curCharacter = character;
@@ -180,15 +185,21 @@ class DialogueBoxPsych extends FlxSpriteGroup
 	
 	var curCharacter:String = "";
 	//var charPositionList:Array<String> = ['left', 'center', 'right'];
+    
+    public var bgSong:String = null;
 
 	public function new(dialogueList:DialogueFile, ?song:String = null)
 	{
 		super();
+        
+        bgSong = song;
 
 		if(song != null && song != '') {
 			FlxG.sound.playMusic(Paths.music(song), 0);
 			FlxG.sound.music.fadeIn(2, 0, 1);
 		}
+        
+        
 		
 		bgFade = new FlxSprite(-500, -500).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.WHITE);
 		bgFade.scrollFactor.set();
@@ -449,6 +460,9 @@ class DialogueBoxPsych extends FlxSpriteGroup
 			curDialogue = dialogueList.dialogue[currentText];
 		} while(curDialogue == null);
 
+        FlxG.sound.play(Paths.sound(bgSong + "_" + currentText));
+        trace("Playing " + Paths.sound(bgSong + "_" + currentText));
+        
 		if(curDialogue.text == null || curDialogue.text.length < 1) curDialogue.text = ' ';
 		if(curDialogue.boxState == null) curDialogue.boxState = 'normal';
 		if(curDialogue.speed == null || Math.isNaN(curDialogue.speed)) curDialogue.speed = 0.05;

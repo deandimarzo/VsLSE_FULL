@@ -1,111 +1,111 @@
 {
-    "animations": [
-        {
-            "loop": false,
-            "offsets": [
+	"animations": [
+		{
+			"offsets": [
 				20,
 				20
 			],
-            "anim": "idle",
-            "fps": 24,
-            "name": "BF idle dance guitar",
-            "indices": []
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "BF idle dance guitar"
 		},
-        {
-            "loop": false,
-            "offsets": [
+		{
+			"offsets": [
 				41,
 				17
 			],
-            "anim": "singLEFT",
-            "fps": 24,
-            "name": "BF NOTE LEFT guitar",
-            "indices": []
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "BF NOTE LEFT guitar"
 		},
-        {
-            "loop": false,
-            "offsets": [
+		{
+			"offsets": [
 				70,
 				-23
 			],
-            "anim": "singDOWN",
-            "fps": 24,
-            "name": "BF NOTE DOWN guitar",
-            "indices": []
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "BF NOTE DOWN guitar"
 		},
-        {
-            "loop": false,
-            "offsets": [
+		{
+			"offsets": [
 				98,
 				51
 			],
-            "anim": "singUP",
-            "fps": 24,
-            "name": "BF NOTE UP guitar",
-            "indices": []
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "BF NOTE UP guitar"
 		},
-        {
-            "loop": false,
-            "offsets": [
+		{
+			"offsets": [
 				46,
 				13
 			],
-            "anim": "singRIGHT",
-            "fps": 24,
-            "name": "BF NOTE RIGHT guitar",
-            "indices": []
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "BF NOTE RIGHT guitar"
 		},
-        {
-            "loop": false,
-            "offsets": [
+		{
+			"offsets": [
 				77,
 				-1
 			],
-            "anim": "singDOWNmiss",
-            "fps": 24,
-            "name": "BF NOTE DOWN MISS guitar",
-            "indices": []
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWNmiss",
+			"indices": [],
+			"name": "BF NOTE DOWN MISS guitar"
 		},
-        {
-            "loop": false,
-            "offsets": [
+		{
+			"offsets": [
 				105,
 				79
 			],
-            "anim": "singUPmiss",
-            "fps": 24,
-            "name": "BF NOTE UP MISS guitar",
-            "indices": []
+			"loop": false,
+			"fps": 24,
+			"anim": "singUPmiss",
+			"indices": [],
+			"name": "BF NOTE UP MISS guitar"
 		},
-        {
-            "loop": false,
-            "offsets": [
+		{
+			"offsets": [
 				45,
 				39
 			],
-            "anim": "singRIGHTmiss",
-            "fps": 24,
-            "name": "BF NOTE RIGHT MISS guitar",
-            "indices": []
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHTmiss",
+			"indices": [],
+			"name": "BF NOTE RIGHT MISS guitar"
 		}
 	],
-    "no_antialiasing": false,
-    "image": "characters/lsebf",
-    "position": [
+	"no_antialiasing": false,
+	"image": "characters/lsebf",
+	"position": [
 		0,
 		350
 	],
-    "healthicon": "bf",
-    "flip_x": true,
-    "healthbar_colors": [
+	"healthicon": "bf",
+	"flip_x": true,
+	"healthbar_colors": [
 		49,
 		176,
 		209
 	],
-    "camera_position": [
+	"camera_position": [
 		0,
-		0
+		-100
 	],
-    "sing_duration": 4,
-    "scale": 1
+	"sing_duration": 4,
+	"scale": 1
 }
