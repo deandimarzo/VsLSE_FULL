@@ -9,7 +9,7 @@
 		},
         {
             "expression": "talk",
-            "text": "Yeah, Boyfriend. I'll be honest, I didn't know you could play guitar!",
+            "text": "Yeah, Boyfriend, I didn't know you could play guitar!",
             "boxState": "normal",
             "speed": 0.05,
             "portrait": "gf"

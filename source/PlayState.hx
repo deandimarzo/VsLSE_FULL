@@ -2814,7 +2814,7 @@ class PlayState extends MusicBeatState
 
                         strumX = playerStrums.members[daNote.noteData].x - 310;
                         if (ClientPrefs.downScroll) guitarDistance *= -1;
-                        daNote.y = FlxMath.lerp(guitarStrumY,-1500,guitarDistance);
+                        daNote.y = FlxMath.lerp(guitarStrumY - 15,-1500,guitarDistance);
                         var guitarY = -(daNote.y / (guitarStrumY - 100)) + 1.1887; // evil maths
                         
                         var guitarScale = FlxMath.bound(FlxMath.lerp(0.625, 1, daNote.y / guitarStrumY),0.625,1);
@@ -3124,6 +3124,8 @@ class PlayState extends MusicBeatState
                         daNote.set_texture('NOTE_guitar');
                     });
 
+        
+                    
                     // Move Strums
                     playerStrums.forEach(function(spr:StrumNote)
                     {
@@ -3139,7 +3141,9 @@ class PlayState extends MusicBeatState
                     {
                        spr.alpha = 0;
                     });
-                
+        
+ 
+                    
                 }
                
 
@@ -3149,14 +3153,16 @@ class PlayState extends MusicBeatState
                     starPower = false;
         
                     FlxTween.tween(guitarFade, {alpha:0},1);
-                        
-
+                    FlxTween.tween(starFade, {alpha:0},1);
+                    starPowered(false);    
+                    
                     // put stuff back where it goes
                     timeBarBG.visible = showTime;
                     timeBar.visible = showTime;
                     timeTxt.visible = showTime;
                     
                     starLightning.alpha = 0;
+            
 
                     healthBar.y = (FlxG.height * 0.89) + 4;
                     if(ClientPrefs.downScroll) healthBar.y = (0.11 * FlxG.height) + 4;
