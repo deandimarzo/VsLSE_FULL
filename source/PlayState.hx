@@ -913,17 +913,12 @@ class PlayState extends MusicBeatState
         starLightning.y = 80;
         starLightning.scrollFactor.set();
         
-
         starLightning.alpha = 0;
         add(starLightning);
         starLightning.animation.play('star', true);
     
         add(bfFretboard);
 
-
-        
-        
-    
 		switch(curStage)
 		{
 			case 'limo':
@@ -1251,9 +1246,8 @@ class PlayState extends MusicBeatState
                     
                 case 'gain-stage':
                     if (CoolUtil.difficulties[storyDifficulty] != "Mania") {
-                        camFollowPos.x -= 500;
+                        camFollowPos.x -= 560;
                         startDialogue(dialogueJson, 'LSE_Dialogue02');
-                        
                     }
 
 				default:
@@ -3151,9 +3145,15 @@ class PlayState extends MusicBeatState
                 if (ClientPrefs.guitarMode) {
                     guitarTime = false;
                     starPower = false;
-        
+                    guitarFade.x = 0;
+                    guitarFade.y = 0;
+                    guitarFade.scale.set(2,2);
+                    starFade.x = 0;
+                    starFade.y = 0;
+                    starFade.scale.set(2,2);
                     FlxTween.tween(guitarFade, {alpha:0},1);
                     FlxTween.tween(starFade, {alpha:0},1);
+        
                     starPowered(false);    
                     
                     // put stuff back where it goes
@@ -3658,7 +3658,16 @@ class PlayState extends MusicBeatState
 				#if !switch
 				var percent:Float = ratingPercent;
 				if(Math.isNaN(percent)) percent = 0;
-				Highscore.saveScore(SONG.song, songScore, storyDifficulty, percent);
+                var saveSong = SONG.song;
+                if (saveSong.substr(saveSong.length - 5, 5) == "mania") {
+                    saveSong = saveSong.substr(saveSong.length - 6, 0);
+                }
+                trace("Saving Score for " + saveSong);
+                trace("On Diff " + storyDifficulty);
+                trace("Score " + songScore);
+                trace("Percent " + percent);
+
+                Highscore.saveScore(saveSong, songScore, storyDifficulty, percent);
 				#end
 			}
 

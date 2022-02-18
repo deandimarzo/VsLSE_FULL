@@ -45,6 +45,10 @@ class FreeplayState extends MusicBeatState
 	private var curPlaying:Bool = false;
 
 	private var iconArray:Array<HealthIcon> = [];
+    
+    public var bgMania:FlxSprite;
+    public var txtMania1:FlxText;
+    public var txtMania2:FlxText;
 
 	var bg:FlxSprite;
 	var intendedColor:Int;
@@ -102,6 +106,27 @@ class FreeplayState extends MusicBeatState
 		add(bg);
 		bg.scale.x = bg.scale.y = scaleRatio;
 		bg.screenCenter();
+        
+        bgMania = new FlxSprite(FlxG.width - 400,300);
+        bgMania.makeGraphic(400,46,FlxColor.BLACK);
+        bgMania.alpha = 0;
+        add(bgMania);
+        
+        txtMania1 = new FlxText(bgMania.x + 2, bgMania.y + 2, 0, "", 18);
+		txtMania1.setFormat(Paths.font("vcr.ttf"), 22, FlxColor.WHITE, LEFT);
+		txtMania1.alpha = 0;
+        txtMania1.text="REMIX BY iFlicky";
+
+        
+        txtMania2 = new FlxText(bgMania.x + 2, bgMania.y + 18, 0, "", 18);
+		txtMania2.setFormat(Paths.font("vcr.ttf"), 22, FlxColor.WHITE, LEFT);
+		txtMania2.alpha = 0;
+        txtMania2.text="CHART BY FullCombro x Polarin";
+        
+        add(txtMania1);
+        add(txtMania2);
+        
+        
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
@@ -367,6 +392,16 @@ class FreeplayState extends MusicBeatState
 		if (curDifficulty >= CoolUtil.difficulties.length)
 			curDifficulty = 0;
 
+        if (curDifficulty == 3) {
+            FlxTween.tween(bgMania,{alpha:0.8},0.5);
+            FlxTween.tween(txtMania1,{alpha:1},0.5);
+            FlxTween.tween(txtMania2,{alpha:1},0.5);
+        } else {
+            FlxTween.tween(bgMania,{alpha:0},0.5);
+            FlxTween.tween(txtMania1,{alpha:0},0.5);
+            FlxTween.tween(txtMania2,{alpha:0},0.5);
+        }
+        
 		lastDifficultyName = CoolUtil.difficulties[curDifficulty];
 
 		#if !switch

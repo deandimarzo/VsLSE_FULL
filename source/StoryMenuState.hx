@@ -54,6 +54,12 @@ class StoryMenuState extends MusicBeatState
     
     var storyMenuBG:FlxSprite;
     var maniaMenuBG:FlxSprite;
+    
+    var remixArray:Array<String> = ['iFlicky'];
+    var chartArray:Array<String> = ['FullCombro x Polarin'];
+    public var txtRemix:FlxText;
+    public var txtChart:FlxText;
+    
 
 	override function create()
 	{
@@ -85,8 +91,7 @@ class StoryMenuState extends MusicBeatState
 
 		grpWeekText = new FlxTypedGroup<MenuItem>();
         
-        
-        
+                
         storyMenuBG = new FlxSprite();
         storyMenuBG.loadGraphic(Paths.image('storyMenuBG'));
         storyMenuBG.x = 350;
@@ -97,7 +102,6 @@ class StoryMenuState extends MusicBeatState
         maniaMenuBG.x = 320;
         maniaMenuBG.alpha = 0;
         add(maniaMenuBG);
-        
         
         var storyMenuOverlay:FlxSprite = new FlxSprite();
         storyMenuOverlay.loadGraphic(Paths.image('storyMenuOverlay'));
@@ -121,7 +125,17 @@ class StoryMenuState extends MusicBeatState
 		add(scoreText);
 		add(txtWeekTitle);
         
+        txtRemix = new FlxText(40, txtTracks.y + 68, 0, "", 18);
+		txtRemix.setFormat(Paths.font("Spartan-Light.ttf"), 22, 0xFF747474, LEFT);
+		txtRemix.alpha = 0;
+        txtRemix.text="REMIX BY";
+        add(txtRemix);
         
+        txtChart = new FlxText(40, txtTracks.y + 100, 0, "", 18);
+		txtChart.setFormat(Paths.font("Spartan-Light.ttf"), 22, 0xFF747474, LEFT);
+		txtChart.alpha = 0;
+        txtChart.text="CHART BY";
+        add(txtChart);
         
         
         
@@ -358,6 +372,16 @@ class StoryMenuState extends MusicBeatState
 			curDifficulty = CoolUtil.difficulties.length-1;
 		if (curDifficulty >= CoolUtil.difficulties.length)
 			curDifficulty = 0;
+        
+        if (CoolUtil.difficulties[curDifficulty] == "Mania") {
+            txtRemix.text = 'Remix by iFlicky';
+            txtChart.text = 'Chart by FullCombro x Polarin';
+            txtRemix.alpha = 1;
+            txtChart.alpha = 1;
+        } else {
+            txtRemix.alpha = 0;
+            txtChart.alpha = 0;
+        }
 
 		var image:Dynamic = Paths.image('menudifficulties/' + Paths.formatToSongPath(CoolUtil.difficulties[curDifficulty]));
 		var newImagePath:String = '';
@@ -385,7 +409,7 @@ class StoryMenuState extends MusicBeatState
                 FlxTween.tween(maniaMenuBG, {alpha:0},0.25, { type:FlxTween.ONESHOT, ease:FlxEase.quadInOut });
             }
         }
-        
+
         
 		if(newImagePath != lastImagePath)
 		{
@@ -429,18 +453,7 @@ class StoryMenuState extends MusicBeatState
 		// txtWeekTitle.x = FlxG.width - (txtWeekTitle.width + 10);
 
 		var bullShit:Int = 0;
-        /* 
-		for (item in grpWeekText.members)
-		{
-			item.targetY = bullShit - curWeek;
-			if (item.targetY == Std.int(0) && !weekIsLocked(curWeek))
-				item.alpha = 1;
-			else
-				item.alpha = 0.6;
-			bullShit++;
-		}
 
-        */
 
 		bgSprite.visible = true;
 		var assetName:String = leWeek.weekBackground;

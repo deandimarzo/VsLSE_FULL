@@ -460,7 +460,7 @@ class DialogueBoxPsych extends FlxSpriteGroup
 			curDialogue = dialogueList.dialogue[currentText];
 		} while(curDialogue == null);
 
-        FlxG.sound.destroy(); // Hopefully kill dialogue line? - update: IT WORKS!
+        // FlxG.sound.destroy(); // Hopefully kill dialogue line? - update: IT WORKS!
         FlxG.sound.play(Paths.sound(bgSong + "_" + currentText));
         trace("Playing " + Paths.sound(bgSong + "_" + currentText));
         
