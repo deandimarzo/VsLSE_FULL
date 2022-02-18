@@ -1251,7 +1251,7 @@ class PlayState extends MusicBeatState
                     
                 case 'gain-stage':
                     if (CoolUtil.difficulties[storyDifficulty] != "Mania") {
-                        
+                        camFollowPos.x -= 500;
                         startDialogue(dialogueJson, 'LSE_Dialogue02');
                         
                     }

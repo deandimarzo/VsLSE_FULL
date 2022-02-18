@@ -71,7 +71,7 @@ class TitleState extends MusicBeatState
 
 	var wackyImage:FlxSprite;
 
-	var easterEggEnabled:Bool = true; //Disable this to hide the easter egg
+	var easterEggEnabled:Bool = false; //Disable this to hide the easter egg
 	var easterEggKeyCombination:Array<FlxKey> = [FlxKey.B, FlxKey.B]; //bb stands for bbpanzu cuz he wanted this lmao
 	var lastKeysPressed:Array<FlxKey> = [];
 
@@ -265,7 +265,7 @@ class TitleState extends MusicBeatState
 		
 		
 		
-		add(bg);
+		//add(bg);
 
 		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
 		
@@ -317,9 +317,9 @@ class TitleState extends MusicBeatState
 			gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 	
 		gfDance.antialiasing = ClientPrefs.globalAntialiasing;
-		add(gfDance);
+		// add(gfDance);
 		gfDance.shader = swagShader.shader;
-		add(logoBl);
+		// add(logoBl);
 		//logoBl.shader = swagShader.shader;
 
 		titleText = new FlxSprite(titleJSON.startx, titleJSON.starty);
@@ -370,7 +370,7 @@ class TitleState extends MusicBeatState
 		credTextShit.visible = false;
 
 		ngSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('newgrounds_logo'));
-		add(ngSpr);
+		// add(ngSpr);
 		ngSpr.visible = false;
 		ngSpr.setGraphicSize(Std.int(ngSpr.width * 0.8));
 		ngSpr.updateHitbox();
@@ -581,62 +581,35 @@ class TitleState extends MusicBeatState
 			switch (sickBeats)
 			{
 				case 1:
-					#if PSYCH_WATERMARKS
-					createCoolText(['Psych Engine by'], 15);
-					#else
-					createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
-					#end
-				// credTextShit.visible = true;
-				case 3:
-					#if PSYCH_WATERMARKS
-					addMoreText('Shadow Mario', 15);
-					addMoreText('RiverOaken', 15);
-					addMoreText('bb-panzu', 15);
-					#else
-					addMoreText('present');
-					#end
-				// credTextShit.text += '\npresent...';
-				// credTextShit.addText();
-				case 4:
-					deleteCoolText();
-				// credTextShit.visible = false;
-				// credTextShit.text = 'In association \nwith';
-				// credTextShit.screenCenter();
-				case 5:
-					#if PSYCH_WATERMARKS
-					createCoolText(['Not associated', 'with'], -40);
-					#else
-					createCoolText(['In association', 'with'], -40);
-					#end
-				case 7:
-					addMoreText('newgrounds', -40);
-					ngSpr.visible = true;
-				// credTextShit.text += '\nNewgrounds';
-				case 8:
-					deleteCoolText();
-					ngSpr.visible = false;
-				// credTextShit.visible = false;
+					createCoolText(['Sam H']);
 
-				// credTextShit.text = 'Shoutouts Tom Fulp';
-				// credTextShit.screenCenter();
-				case 9:
-					createCoolText([curWacky[0]]);
 				// credTextShit.visible = true;
-				case 11:
-					addMoreText(curWacky[1]);
-				// credTextShit.text += '\nlmao';
-				case 12:
+				case 2:
+                    addMoreText('LongestSoloEver');
+					
+                case 4:
+                    deleteCoolText();
+                    createCoolText(['Manicies']);
+                case 5:
+                    addMoreText('MarbleInsanity');
+                case 6:
+                    addMoreText('FullCombro');
+                case 7:
+                    addMoreText('present');
+                case 8: 
+                    deleteCoolText();
+                    createCoolText([curWacky[0]]);
+                case 10: 
+                    addMoreText(curWacky[1]);
+                case 11:
 					deleteCoolText();
-				// credTextShit.visible = false;
-				// credTextShit.text = "Friday";
-				// credTextShit.screenCenter();
-				case 13:
+				case 12:
 					addMoreText('Friday');
 				// credTextShit.visible = true;
-				case 14:
+				case 13:
 					addMoreText('Night');
 				// credTextShit.text += '\nNight';
-				case 15:
+				case 14:
 					addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
 
 				case 16:
