@@ -3662,7 +3662,7 @@ class PlayState extends MusicBeatState
                 trace("SONG.song is " + saveSong);
                 trace ("saveSong ends with " + saveSong.substr(saveSong.length - 5, 5));
                 if (saveSong.substr(saveSong.length - 5, 5) == "mania") {
-                    saveSong = saveSong.substr(saveSong.length - 6, 0);
+                    saveSong = saveSong.substr(0, saveSong.length - 6);
                 }
                 trace("Saving Score for " + saveSong);
                 trace("On Diff " + storyDifficulty);
