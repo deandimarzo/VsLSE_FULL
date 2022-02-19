@@ -3658,7 +3658,9 @@ class PlayState extends MusicBeatState
 				#if !switch
 				var percent:Float = ratingPercent;
 				if(Math.isNaN(percent)) percent = 0;
-                var saveSong = SONG.song;
+                var saveSong:String = SONG.song;
+                trace("SONG.song is " + saveSong);
+                trace ("saveSong ends with " + saveSong.substr(saveSong.length - 5, 5));
                 if (saveSong.substr(saveSong.length - 5, 5) == "mania") {
                     saveSong = saveSong.substr(saveSong.length - 6, 0);
                 }
