@@ -1,59 +1,59 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
-				-87,
-				10
+				63,
+				-34
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "singLEFT",
-			"fps": 24,
-			"name": "guitar_left",
-			"indices": []
+			"indices": [],
+			"name": "guitar_left"
 		},
 		{
-			"loop": false,
 			"offsets": [
-				-77,
-				21
+				12,
+				-82
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "singDOWN",
-			"fps": 24,
-			"name": "guitar_down",
-			"indices": []
+			"indices": [],
+			"name": "guitar_down"
 		},
 		{
-			"loop": false,
 			"offsets": [
-				-94,
-				18
+				8,
+				50
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "singUP",
-			"fps": 24,
-			"name": "guitar_up",
-			"indices": []
+			"indices": [],
+			"name": "guitar_up"
 		},
 		{
-			"loop": false,
 			"offsets": [
-				-87,
-				-1
+				-5,
+				-63
 			],
-			"anim": "singRIGHT",
+			"loop": false,
 			"fps": 24,
-			"name": "guitar_right",
-			"indices": []
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "guitar_right"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				0,
 				0
 			],
-			"anim": "idle",
+			"loop": false,
 			"fps": 24,
-			"name": "guitar_idle",
-			"indices": []
+			"anim": "idle",
+			"indices": [],
+			"name": "guitar_idle"
 		}
 	],
 	"no_antialiasing": false,
