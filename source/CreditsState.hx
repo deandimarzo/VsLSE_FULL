@@ -87,6 +87,7 @@ class CreditsState extends MusicBeatState
             ['LongestSoloEver',		'lse',		'Composer / Coder / Charts / Menu Design / LSE Voice Actor',						'https://twitter.com/longestsoloever',	'FF6666'],
             ['Manicies',		'manicies',		'Sprite Artist / Animator',						'https://twitter.com/Manicies',	'6579de'],
             ['MarbleInsanity',		'marble',		'Character Design / Menu Art',						'https://twitter.com/MarbleInsanity',	'd1a125'],
+            ['iFlicky',		'iflicky',		'Gain Stage Mania Remix',						'https://www.youtube.com/c/iFlicky',	'c549db'],
             ['FullCombro',		'combro',		'Mania Mode Charts',						'https://www.youtube.com/FullCombro',	'cac280'],
             ['Polarin', 'polarin', 'Mania Mode Charts', 'https://www.tiktok.com/@polarin_', 'cac280'],
             ['Starbreak',		'starbreak',		'Menu Theme',						'https://www.youtube.com/c/StarbreakMusic',	'0d2678'],
@@ -102,7 +103,7 @@ class CreditsState extends MusicBeatState
 			['PhantomArcade',		'phantomarcade',	"Animator of Friday Night Funkin'",						'https://twitter.com/PhantomArcade3K',	'FFBB1B'],
 			['evilsk8r',			'evilsk8r',			"Artist of Friday Night Funkin'",						'https://twitter.com/evilsk8r',			'53E52C'],
 			['kawaisprite',			'kawaisprite',		"Composer of Friday Night Funkin'",						'https://twitter.com/kawaisprite',		'6475F3']
-		];
+		]; 
 		
 		for(i in pisspoop){
 			creditsStuff.push(i);
