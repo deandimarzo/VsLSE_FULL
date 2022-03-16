@@ -207,6 +207,9 @@ class PlayState extends MusicBeatState
     public var guitarFade:FlxSprite;
     public var starFade:FlxSprite;
     
+    public var dadSpotlight:FlxSprite;
+    public var bfSpotlight:FlxSprite;
+    
     public var guitarTime:Bool = false;
     public var maniaMode:Bool = false;
     public var maniaBG:FlxSprite;
@@ -756,12 +759,24 @@ class PlayState extends MusicBeatState
 
 
         starFade = new FlxSprite();
-        starFade.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+        starFade.makeGraphic(FlxG.width * 4, FlxG.height * 4, FlxColor.BLACK);
+        starFade.x = -FlxG.width * 1.5;
+        starFade.y = -FlxG.height * 1.5;
         starFade.alpha = 0;
         starFade.scrollFactor.set();
 
         add(guitarFade);
         add(starFade);
+
+        dadSpotlight = new FlxSprite();
+        dadSpotlight.loadGraphic(Paths.image("spotlight"));
+        dadSpotlight.alpha = 0;
+        add(dadSpotlight);
+
+        bfSpotlight = new FlxSprite();
+        bfSpotlight.loadGraphic(Paths.image("spotlight"));
+        bfSpotlight.alpha = 0;
+        add(bfSpotlight);
 
 		add(dadGroup);
 		add(boyfriendGroup);
@@ -1753,6 +1768,16 @@ class PlayState extends MusicBeatState
                 cacheNote.set_texture('NOTE_guitar_star');
                 cacheNote.set_texture('NOTE_assets_glow');
                 cacheNote.kill();
+                
+                // Place spotlights for potential events
+                dadSpotlight.x = dad.x - 355;
+                dadSpotlight.y = dad.y + dad.height - 1300;
+                
+                // Place spotlights for potential events
+                bfSpotlight.x = boyfriend.x - 315;
+                bfSpotlight.y = boyfriend.y + boyfriend.height - 1400;
+                bfSpotlight.scale.set(-1,1);
+                
             }
             
             
@@ -3099,6 +3124,17 @@ class PlayState extends MusicBeatState
 				if(Math.isNaN(value)) value = 1;
 				gfSpeed = value;
                 
+            case 'Fade Background':
+                var spotAlpha:Float = Std.parseFloat(value1);
+                var spotTime:Float = Std.parseFloat(value2);
+                if(Math.isNaN(spotAlpha)) spotAlpha = 0;
+                if(Math.isNaN(spotTime)) spotTime = 0.5;
+                FlxTween.tween(starFade, {alpha:spotAlpha},spotTime);
+                FlxTween.tween(dadSpotlight, {alpha:spotAlpha},spotTime);
+                FlxTween.tween(bfSpotlight, {alpha:spotAlpha},spotTime);
+        
+                
+                
             case 'Enter Guitar Mode':
                 if (ClientPrefs.guitarMode) {
                     guitarTime = true;
@@ -3152,9 +3188,7 @@ class PlayState extends MusicBeatState
                     guitarFade.x = 0;
                     guitarFade.y = 0;
                     guitarFade.scale.set(2,2);
-                    starFade.x = 0;
-                    starFade.y = 0;
-                    starFade.scale.set(2,2);
+
                     FlxTween.tween(guitarFade, {alpha:0},1);
                     FlxTween.tween(starFade, {alpha:0},1);
         
@@ -3325,15 +3359,24 @@ class PlayState extends MusicBeatState
 			case 'Kill Henchmen':
 				killHenchmen();
 
-			case 'Add Camera Zoom':
-				if(ClientPrefs.camZooms && FlxG.camera.zoom < 1.35) {
-					var camZoom:Float = Std.parseFloat(value1);
-					var hudZoom:Float = Std.parseFloat(value2);
-					if(Math.isNaN(camZoom)) camZoom = 0.015;
-					if(Math.isNaN(hudZoom)) hudZoom = 0.03;
+            case 'Camera Bump':
+                var value:Int = Std.parseInt(value1);
+                if (value == 1) {
+                    camZooming = true;
+                } else {
+                    camZooming = false;   
+                }
 
-					FlxG.camera.zoom += camZoom;
-					camHUD.zoom += hudZoom;
+			case 'Add Camera Zoom':
+				if(ClientPrefs.camZooms) {
+					var camZoom:Float = Std.parseFloat(value1);
+					var zoomTime:Float = Std.parseFloat(value2);
+					if(Math.isNaN(camZoom)) camZoom = 0.015;
+                    
+					if(Math.isNaN(zoomTime)) zoomTime = 0.5;
+
+                    FlxTween.tween(FlxG.camera, {zoom:FlxG.camera.zoom + camZoom}, zoomTime, {ease:FlxEase.quadInOut});
+                    defaultCamZoom += camZoom;
 				}
 
 			case 'Trigger BG Ghouls':
