@@ -152,6 +152,7 @@ class PlayState extends MusicBeatState
     public var guitarAssets:FlxTypedGroup<FlxSprite>;
 
 	public var camZooming:Bool = false;
+    public var camZoomPeriod:Int = 4;
 	private var curSong:String = "";
 
 	public var gfSpeed:Int = 1;
@@ -3361,10 +3362,16 @@ class PlayState extends MusicBeatState
 
             case 'Camera Bump':
                 var value:Int = Std.parseInt(value1);
+                var period:Int = Std.parseInt(value2);
+
+                if(Math.isNaN(period) || period == 0) period = 4;
+
                 if (value == 1) {
                     camZooming = true;
+                    camZoomPeriod = period;
                 } else {
-                    camZooming = false;   
+                    camZooming = false;  
+                    camZoomPeriod = 4;
                 }
 
 			case 'Add Camera Zoom':
@@ -3450,7 +3457,7 @@ class PlayState extends MusicBeatState
 					if(Math.isNaN(intensity)) intensity = 0;
 
 					if(duration > 0 && intensity != 0) {
-						targetsArray[i].shake(intensity, duration);
+						targetsArray[i].shake(intensity/10, duration);
 					}
 				}
 
@@ -4775,7 +4782,7 @@ class PlayState extends MusicBeatState
 		{
 			moveCameraSection(Std.int(curStep / 16));
 		}
-		if (camZooming && FlxG.camera.zoom < 1.35 && ClientPrefs.camZooms && curBeat % 4 == 0)
+		if (camZooming && FlxG.camera.zoom < 1.35 && ClientPrefs.camZooms && curBeat % camZoomPeriod == 0)
 		{
 			FlxG.camera.zoom += 0.015;
 			camHUD.zoom += 0.03;
