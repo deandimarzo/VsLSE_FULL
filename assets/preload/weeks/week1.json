@@ -1,21 +1,21 @@
 {
-    "storyName": "Demo Week",
-    "difficulties": "",
-    "hideFreeplay": false,
-    "weekBackground": "stage",
-    "freeplayColor": [
+	"storyName": "Demo Week",
+	"difficulties": "",
+	"hideFreeplay": false,
+	"weekBackground": "stage",
+	"freeplayColor": [
 		255,
 		50,
 		50
 	],
-    "weekBefore": "tutorial",
-    "startUnlocked": true,
-    "weekCharacters": [
+	"weekBefore": "tutorial",
+	"startUnlocked": true,
+	"weekCharacters": [
 		"dad",
 		"bf",
 		"gf"
 	],
-    "songs": [
+	"songs": [
 		[
 			"Amplified",
 			"lse",
@@ -34,7 +34,7 @@
 				253
 			]
 		],
-        [
+		[
 			"Limiter",
 			"lse",
 			[
@@ -44,6 +44,6 @@
 			]
 		]
 	],
-    "hideStoryMode": false,
-    "weekName": "Demo Week"
+	"hideStoryMode": false,
+	"weekName": "Demo Week"
 }
