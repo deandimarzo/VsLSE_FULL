@@ -3221,6 +3221,7 @@ class PlayState extends MusicBeatState
                         daNote.set_texture('NOTE_assets');
                         if(daNote.isSustainNote && !daNote.animation.curAnim.name.endsWith('end'))
                         {
+                            daNote.scale.y = Conductor.stepCrochet / 100 * 1.05;
                             daNote.scale.y *= songSpeed;
                             daNote.updateHitbox();
                         }
