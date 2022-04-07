@@ -2813,13 +2813,7 @@ class PlayState extends MusicBeatState
                 
                 
                 if (guitarTime) {
-                    // BEGIN MY AWFUL EXPERIMENTATION -LSE
-                    // daNote.distance starts around 2400.
-                    // initial coordinates: 540, 100
-                    // final coordinates: 540, 800
-                    
-                    
-             
+
                     var guitarDistance = daNote.distance / 2400;
                     
                    
@@ -2851,6 +2845,10 @@ class PlayState extends MusicBeatState
                         if (daNote.isSustainNote) {
                             daNote.scale.set(0.75,0.75);
                             daNote.x += 43;
+                            
+                            if (daNote.y > guitarStrumY) {
+                                daNote.visible = false;
+                            }
                         }
                         
                         daNote.x -= 10 + (daNote.width / 2); // gotta compensate for the changing note size
@@ -4529,7 +4527,7 @@ class PlayState extends MusicBeatState
             }
         }
         
-        var guitarOffset = guitarTime ? 105 : 0;
+        var guitarOffset = guitarTime ? 110 : 0;
 
 		var splash:NoteSplash = grpNoteSplashes.recycle(NoteSplash);
 		splash.setupNoteSplash(x + guitarOffset, y, data, skin, hue, sat, brt);
