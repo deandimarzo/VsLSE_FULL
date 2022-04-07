@@ -3153,21 +3153,22 @@ class PlayState extends MusicBeatState
                 bgLightningStrike.y = FlxG.random.int(-450, -200);
                 bgLightningStrike.scrollFactor.set();
                 bgLightningStrike.animation.finishCallback = function(name:String) {
-					trace("LIGHTNING DONE");
                     bgLightningStrike.kill();
 				};
                 bgLightningStrike.animation.play('STRIKE', true);
                 
                 bgLightning.add(bgLightningStrike);
-                lightningOverlay.alpha = 0.05;
-                FlxTween.tween(lightningOverlay, {alpha:0}, 0.2);
+                if (ClientPrefs.flashing) {
+                    lightningOverlay.alpha = 0.05;
+                    FlxTween.tween(lightningOverlay, {alpha:0}, 0.2);
+                }
                 
                 var position:Int = members.indexOf(boyfriendGroup);
                 if(members.indexOf(dadGroup) < position) {
                     position = members.indexOf(dadGroup);
                 }
                 insert(position, bgLightningStrike);
-                shakeScreen("0.1, 0.1", "");
+                shakeScreen("0.05, 0.05", "");
                 
                 
                 
