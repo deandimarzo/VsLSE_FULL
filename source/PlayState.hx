@@ -199,6 +199,8 @@ class PlayState extends MusicBeatState
     public static var guitarOriginX:Array<Float> = [532, 617, 706, 788];
     public static var guitarStrumX:Array<Float> = [474, 601, 725, 850];
     public static var guitarStrumNoteX:Array<Float> = [463, 590, 715 ,840];
+    
+    public var bgLightning:FlxSpriteGroup;
 
     public var starPower:Bool = false;
     public var starPowerThreshold:Int = 10;
@@ -349,6 +351,8 @@ class PlayState extends MusicBeatState
         
         guitarTime = false;
 
+        bgLightning = new FlxSpriteGroup();
+        add(bgLightning);
 		
 		
 		shader_chromatic_abberation = new ChromaticAberrationEffect();
@@ -911,15 +915,12 @@ class PlayState extends MusicBeatState
 		}
     
 
-
-
         bfFretboard = new FlxSprite();
         bfFretboard.loadGraphic(Paths.image("fretboard"));
         bfFretboard.x = (FlxG.width / 2) - (bfFretboard.width / 2);
         bfFretboard.y = -200;
         bfFretboard.scrollFactor.set();
         bfFretboard.alpha = 0;
-        
     
         starLightning = new FlxSprite();
         starLightning.frames = Paths.getSparrowAtlas('starLightning');
@@ -3131,7 +3132,30 @@ class PlayState extends MusicBeatState
                 FlxTween.tween(starFade, {alpha:spotAlpha},spotTime);
                 FlxTween.tween(dadSpotlight, {alpha:spotAlpha},spotTime);
                 FlxTween.tween(bfSpotlight, {alpha:spotAlpha},spotTime);
-        
+                
+            case 'Lightning Strike':
+                var bgLightningStrike:FlxSprite = new FlxSprite();
+                
+                bgLightningStrike.frames = Paths.getSparrowAtlas('lightning');
+                bgLightningStrike.animation.addByPrefix('STRIKE', 'STRIKE', 24, false);
+
+                bgLightningStrike.x = FlxG.random.int(0, 1280);
+                bgLightningStrike.y = FlxG.random.int(-450, -200);
+                bgLightningStrike.scrollFactor.set();
+                bgLightningStrike.animation.finishCallback = function(name:String) {
+					trace("LIGHTNING DONE");
+                    bgLightningStrike.kill();
+				};
+                bgLightningStrike.animation.play('STRIKE', true);
+                
+                bgLightning.add(bgLightningStrike);
+                
+                var position:Int = members.indexOf(boyfriendGroup);
+                if(members.indexOf(dadGroup) < position) {
+                    position = members.indexOf(dadGroup);
+                }
+                insert(position, bgLightningStrike);
+                
                 
                 
             case 'Enter Guitar Mode':
@@ -4615,6 +4639,8 @@ class PlayState extends MusicBeatState
 		trainFinishing = false;
 		startedMoving = false;
 	}
+            
+  
 
 	function lightningStrikeShit():Void
 	{
