@@ -3199,7 +3199,6 @@ class PlayState extends MusicBeatState
                     timeTxt.visible = showTime;
                     
                     starLightning.alpha = 0;
-            
 
                     healthBar.y = (FlxG.height * 0.89) + 4;
                     if(ClientPrefs.downScroll) healthBar.y = (0.11 * FlxG.height) + 4;
