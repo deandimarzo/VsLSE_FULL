@@ -209,6 +209,7 @@ class PlayState extends MusicBeatState
     public var starLightning:FlxSprite;
     public var guitarFade:FlxSprite;
     public var starFade:FlxSprite;
+    public var lightningOverlay:FlxSprite;
     
     public var dadSpotlight:FlxSprite;
     public var bfSpotlight:FlxSprite;
@@ -770,6 +771,14 @@ class PlayState extends MusicBeatState
         starFade.alpha = 0;
         starFade.scrollFactor.set();
 
+        lightningOverlay = new FlxSprite();
+        lightningOverlay.makeGraphic(FlxG.width * 4, FlxG.height * 4, FlxColor.WHITE);
+        lightningOverlay.x = -FlxG.width * 1.5;
+        lightningOverlay.y = -FlxG.height * 1.5;
+        lightningOverlay.alpha = 0;
+        lightningOverlay.scrollFactor.set();
+        
+
         add(guitarFade);
         add(starFade);
 
@@ -865,6 +874,7 @@ class PlayState extends MusicBeatState
 				position = members.indexOf(dadGroup);
 			}
 			insert(position, blammedLightsBlack);
+            insert(position, lightningOverlay);
 
 			blammedLightsBlack.wasAdded = true;
 			modchartSprites.set('blammedLightsBlack', blammedLightsBlack);
@@ -3149,12 +3159,15 @@ class PlayState extends MusicBeatState
                 bgLightningStrike.animation.play('STRIKE', true);
                 
                 bgLightning.add(bgLightningStrike);
+                lightningOverlay.alpha = 0.05;
+                FlxTween.tween(lightningOverlay, {alpha:0}, 0.2);
                 
                 var position:Int = members.indexOf(boyfriendGroup);
                 if(members.indexOf(dadGroup) < position) {
                     position = members.indexOf(dadGroup);
                 }
                 insert(position, bgLightningStrike);
+                shakeScreen("0.1, 0.1", "");
                 
                 
                 
@@ -3467,21 +3480,7 @@ class PlayState extends MusicBeatState
 				char.recalculateDanceIdle();
 
 			case 'Screen Shake':
-				var valuesArray:Array<String> = [value1, value2];
-				var targetsArray:Array<FlxCamera> = [camGame, camHUD];
-				for (i in 0...targetsArray.length) {
-					var split:Array<String> = valuesArray[i].split(',');
-					var duration:Float = 0;
-					var intensity:Float = 0;
-					if(split[0] != null) duration = Std.parseFloat(split[0].trim());
-					if(split[1] != null) intensity = Std.parseFloat(split[1].trim());
-					if(Math.isNaN(duration)) duration = 0;
-					if(Math.isNaN(intensity)) intensity = 0;
-
-					if(duration > 0 && intensity != 0) {
-						targetsArray[i].shake(intensity/10, duration);
-					}
-				}
+				shakeScreen(value1, value2);
 
 
 			case 'Change Character':
@@ -4713,6 +4712,8 @@ class PlayState extends MusicBeatState
 			limoCorpseTwo.visible = false;
 		}
 	}
+            
+    
 
 	private var preventLuaRemove:Bool = false;
 	override function destroy() {
@@ -4730,6 +4731,24 @@ class PlayState extends MusicBeatState
 		}
 		super.destroy();
 	}
+            
+    function shakeScreen(value1:String, value2:String) {
+     var valuesArray:Array<String> = [value1, value2];
+        var targetsArray:Array<FlxCamera> = [camGame, camHUD];
+        for (i in 0...targetsArray.length) {
+            var split:Array<String> = valuesArray[i].split(',');
+            var duration:Float = 0;
+            var intensity:Float = 0;
+            if(split[0] != null) duration = Std.parseFloat(split[0].trim());
+            if(split[1] != null) intensity = Std.parseFloat(split[1].trim());
+            if(Math.isNaN(duration)) duration = 0;
+            if(Math.isNaN(intensity)) intensity = 0;
+
+            if(duration > 0 && intensity != 0) {
+                targetsArray[i].shake(intensity/10, duration);
+            }
+        }   
+    }
 
 	public static function cancelMusicFadeTween() {
 		if(FlxG.sound.music.fadeTween != null) {
