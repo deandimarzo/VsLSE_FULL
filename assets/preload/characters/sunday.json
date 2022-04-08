@@ -1,78 +1,78 @@
 {
-    "animations": [
-        {
-            "offsets": [
-				-7,
+	"animations": [
+		{
+			"offsets": [
+				-2,
 				-64
 			],
-            "indices": [],
-            "fps": 24,
-            "anim": "singLEFT",
-            "loop": false,
-            "name": "sunday left"
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "sunday guitar left"
 		},
-        {
-            "offsets": [
-				-113,
+		{
+			"offsets": [
+				-72,
 				-71
 			],
-            "indices": [],
-            "fps": 24,
-            "anim": "singRIGHT",
-            "loop": false,
-            "name": "sunday right"
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "sunday guitar right"
 		},
-        {
-            "offsets": [
-				114,
+		{
+			"offsets": [
+				120,
 				-85
 			],
-            "indices": [],
-            "fps": 24,
-            "anim": "singDOWN",
-            "loop": false,
-            "name": "sunday down"
+			"indices": [],
+			"fps": 24,
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "sunday guitar down"
 		},
-        {
-            "offsets": [
-				95,
-				89
+		{
+			"offsets": [
+				100,
+				81
 			],
-            "indices": [],
-            "fps": 24,
-            "anim": "singUP",
-            "loop": false,
-            "name": "sunday up"
+			"indices": [],
+			"fps": 24,
+			"anim": "singUP",
+			"loop": false,
+			"name": "sunday guitar up"
 		},
-        {
-            "offsets": [
+		{
+			"offsets": [
 				-40,
 				-60
 			],
-            "indices": [],
-            "fps": 24,
-            "anim": "idle",
-            "loop": false,
-            "name": "sunday idle"
+			"indices": [],
+			"fps": 24,
+			"anim": "idle",
+			"loop": false,
+			"name": "sunday guitar idle"
 		}
 	],
-    "no_antialiasing": false,
-    "image": "characters/sunday_assets",
-    "position": [
+	"no_antialiasing": false,
+	"image": "characters/sunday_guitar_assets",
+	"position": [
 		0,
 		0
 	],
-    "healthicon": "face",
-    "flip_x": false,
-    "healthbar_colors": [
+	"healthicon": "face",
+	"flip_x": false,
+	"healthbar_colors": [
 		175,
 		102,
 		206
 	],
-    "camera_position": [
+	"camera_position": [
 		0,
 		20
 	],
-    "sing_duration": 6.1,
-    "scale": 1
+	"sing_duration": 6.1,
+	"scale": 1
 }

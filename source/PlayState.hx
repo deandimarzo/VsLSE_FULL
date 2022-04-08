@@ -201,6 +201,8 @@ class PlayState extends MusicBeatState
     public static var guitarStrumNoteX:Array<Float> = [463, 590, 715 ,840];
     
     public var bgLightning:FlxSpriteGroup;
+    public var bgFwoom:FlxSpriteGroup;
+    
 
     public var starPower:Bool = false;
     public var starPowerThreshold:Int = 10;
@@ -218,6 +220,7 @@ class PlayState extends MusicBeatState
     public var maniaMode:Bool = false;
     public var maniaBG:FlxSprite;
     public var guitarStrumY:Float = 630;
+    public var fwooming:Bool = false;
     
     public var guitarTween:FlxTween;
     
@@ -354,6 +357,9 @@ class PlayState extends MusicBeatState
 
         bgLightning = new FlxSpriteGroup();
         add(bgLightning);
+        
+        bgFwoom = new FlxSpriteGroup();
+        add(bgFwoom);
 		
 		
 		shader_chromatic_abberation = new ChromaticAberrationEffect();
@@ -759,7 +765,9 @@ class PlayState extends MusicBeatState
 
 
         guitarFade = new FlxSprite();
-        guitarFade.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+        guitarFade.makeGraphic(FlxG.width * 4, FlxG.height * 4, FlxColor.BLACK);
+        guitarFade.x = -FlxG.width * 1.5;
+        guitarFade.y = -FlxG.height * 1.5;
         guitarFade.alpha = 0;
         guitarFade.scrollFactor.set();
 
@@ -3170,6 +3178,13 @@ class PlayState extends MusicBeatState
                 insert(position, bgLightningStrike);
                 shakeScreen("0.05, 0.05", "");
                 
+            case 'Enter Fwooming':
+                fwooming = true;
+                FlxTween.tween(guitarFade, {alpha:0.2},0.5);
+                
+            case 'Exit Fwooming':
+                fwooming = false;
+                FlxTween.tween(guitarFade, {alpha:0},0.5);
                 
                 
             case 'Enter Guitar Mode':
@@ -4776,6 +4791,36 @@ class PlayState extends MusicBeatState
 		if(curStep == lastStepHit) {
 			return;
 		}
+        if (fwooming) {
+            if (curStep % 2 == 0) {
+                // SPAWN THE FWOOM   
+                var bgFwooming:FlxSprite = new FlxSprite();
+
+                bgFwooming.frames = Paths.getSparrowAtlas('FWOOM');
+                bgFwooming.animation.addByPrefix('FWOOM', 'FWOOM', 24, false);
+
+                bgFwooming.x = FlxG.random.int(-300, 1000);
+                bgFwooming.y = FlxG.random.int(-500, -300);
+                bgFwooming.scrollFactor.set();
+                bgFwooming.animation.finishCallback = function(name:String) {
+                    bgFwooming.kill();
+                };
+                bgFwooming.animation.play('FWOOM', true);
+
+                bgFwoom.add(bgFwooming);
+                if (ClientPrefs.flashing) {
+                    lightningOverlay.alpha = 0.04;
+                    FlxTween.tween(lightningOverlay, {alpha:0}, 0.5);
+                }
+
+                var position:Int = members.indexOf(boyfriendGroup);
+                if(members.indexOf(dadGroup) < position) {
+                    position = members.indexOf(dadGroup);
+                }
+                insert(position, bgFwooming);
+                // shakeScreen("0.05, 0.05", "");
+            }
+        }
 
 		lastStepHit = curStep;
 		setOnLuas('curStep', curStep);

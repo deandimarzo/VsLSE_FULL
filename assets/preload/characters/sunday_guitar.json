@@ -1,78 +1,78 @@
 {
-    "animations": [
-        {
-            "offsets": [
-				3,
-				-64
+	"animations": [
+		{
+			"offsets": [
+				4,
+				-67
 			],
-            "indices": [],
-            "fps": 24,
-            "anim": "singLEFT",
-            "loop": false,
-            "name": "sunday guitar left"
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "sunday guitar alt left"
 		},
-        {
-            "offsets": [
+		{
+			"offsets": [
 				-73,
 				-71
 			],
-            "indices": [],
-            "fps": 24,
-            "anim": "singRIGHT",
-            "loop": false,
-            "name": "sunday guitar right"
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "sunday guitar alt right"
 		},
-        {
-            "offsets": [
-				118,
-				-86
+		{
+			"offsets": [
+				125,
+				-90
 			],
-            "indices": [],
-            "fps": 24,
-            "anim": "singDOWN",
-            "loop": false,
-            "name": "sunday guitar down"
+			"indices": [],
+			"fps": 24,
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "sunday guitar alt down"
 		},
-        {
-            "offsets": [
-				100,
-				84
+		{
+			"offsets": [
+				61,
+				-67
 			],
-            "indices": [],
-            "fps": 24,
-            "anim": "singUP",
-            "loop": false,
-            "name": "sunday guitar up"
+			"indices": [],
+			"fps": 24,
+			"anim": "singUP",
+			"loop": false,
+			"name": "sunday guitar alt up"
 		},
-        {
-            "offsets": [
+		{
+			"offsets": [
 				-40,
 				-60
 			],
-            "indices": [],
-            "fps": 24,
-            "anim": "idle",
-            "loop": false,
-            "name": "sunday guitar idle"
+			"indices": [],
+			"fps": 24,
+			"anim": "idle",
+			"loop": false,
+			"name": "sunday guitar idle"
 		}
 	],
-    "no_antialiasing": false,
-    "image": "characters/sunday_guitar_assets",
-    "position": [
+	"no_antialiasing": false,
+	"image": "characters/sunday_guitar_assets",
+	"position": [
 		0,
 		0
 	],
-    "healthicon": "face",
-    "flip_x": false,
-    "healthbar_colors": [
+	"healthicon": "face",
+	"flip_x": false,
+	"healthbar_colors": [
 		175,
 		102,
 		206
 	],
-    "camera_position": [
+	"camera_position": [
 		0,
 		20
 	],
-    "sing_duration": 6.1,
-    "scale": 1
+	"sing_duration": 6.1,
+	"scale": 1
 }

@@ -76,6 +76,8 @@ class ChartingState extends MusicBeatState
         ['Enter Guitar Mode', "Guitar Time Babey."],
         ['Exit Guitar Mode', "Guitar Time Is Over. Sadge."],
         ['Lightning Strike', "aaaah"],
+        ['Enter Fwooming', "limiter effect"],
+        ['Exit Fwooming', "unlimiter effect"],
 		['Set GF Speed', "Sets GF head bopping speed,\nValue 1: 1 = Normal speed,\n2 = 1/2 speed, 4 = 1/4 speed etc.\nUsed on Fresh during the beatbox parts.\n\nWarning: Value must be integer!"],
 		['Blammed Lights', "Value 1: 0 = Turn off, 1 = Blue, 2 = Green,\n3 = Pink, 4 = Red, 5 = Orange, Anything else = Random.\n\nNote to modders: This effect is starting to get \nREEEEALLY overused, this isn't very creative bro smh."],
 		['Add Camera Zoom', "Used on MILF on that one \"hard\" part\nValue 1: Camera zoom add (Default: 0.015)\nValue 2: Zoom Time(default 0.5s)\nLeave the values blank if you want to use Default."],
