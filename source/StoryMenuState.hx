@@ -158,9 +158,9 @@ class StoryMenuState extends MusicBeatState
 		for (i in 0...WeekData.weeksList.length)
 		{
 			WeekData.setDirectoryFromWeek(WeekData.weeksLoaded.get(WeekData.weeksList[i]));
-			var weekThing:MenuItem = new MenuItem(875, -300, WeekData.weeksList[i]);
-			// weekThing.y += ((weekThing.height + 20) * i);
-			// weekThing.targetY = i;
+			var weekThing:MenuItem = new MenuItem(875, -500, WeekData.weeksList[i]);
+			weekThing.y += ((weekThing.height + 20) * i);
+			weekThing.targetY = i;
             weekThing.scrollFactor.set();
 			grpWeekText.add(weekThing);
 
@@ -372,16 +372,7 @@ class StoryMenuState extends MusicBeatState
 			curDifficulty = CoolUtil.difficulties.length-1;
 		if (curDifficulty >= CoolUtil.difficulties.length)
 			curDifficulty = 0;
-        
-        if (CoolUtil.difficulties[curDifficulty] == "Mania") {
-            txtRemix.text = 'Remix by iFlicky';
-            txtChart.text = 'Chart by FullCombro x Polarin';
-            txtRemix.alpha = 1;
-            txtChart.alpha = 1;
-        } else {
-            txtRemix.alpha = 0;
-            txtChart.alpha = 0;
-        }
+
 
 		var image:Dynamic = Paths.image('menudifficulties/' + Paths.formatToSongPath(CoolUtil.difficulties[curDifficulty]));
 		var newImagePath:String = '';
@@ -394,7 +385,7 @@ class StoryMenuState extends MusicBeatState
 			newImagePath = image;
         
         trace("curDif = " + CoolUtil.difficulties[curDifficulty]);
-        if (CoolUtil.difficulties[curDifficulty] == "Mania") {
+        if (curWeek > 0) {
             if (maniaMenuBG.alpha != 1) {
                 var tweenOffset = 100 * change;
                 maniaMenuBG.x += tweenOffset;
@@ -453,14 +444,15 @@ class StoryMenuState extends MusicBeatState
 		// txtWeekTitle.x = FlxG.width - (txtWeekTitle.width + 10);
 
 		var bullShit:Int = 0;
-
-
-		bgSprite.visible = true;
-		var assetName:String = leWeek.weekBackground;
-		if(assetName == null || assetName.length < 1) {
-			bgSprite.visible = false;
-		} else {
-			bgSprite.loadGraphic(Paths.image('menubackgrounds/menu_' + assetName));
+        
+        for (item in grpWeekText.members)
+		{
+			item.targetY = bullShit - curWeek;
+			if (item.targetY == Std.int(0) && !weekIsLocked(curWeek))
+				item.alpha = 1;
+			else
+				item.alpha = 0.6;
+			bullShit++;
 		}
 		
 		PlayState.storyWeek = curWeek;
@@ -520,7 +512,11 @@ class StoryMenuState extends MusicBeatState
 		txtTracklist.text = '';
 		for (i in 0...stringThing.length)
 		{
-			txtTracklist.text += stringThing[i] + '\n';
+            var stringManiaStrip:String = stringThing[i];
+            if (stringManiaStrip.toLowerCase().substr(stringManiaStrip.length - 5, 5) == "mania") {
+                stringManiaStrip = stringManiaStrip.substr(0, stringManiaStrip.length - 6);   
+            }
+			txtTracklist.text += stringManiaStrip + '\n';
 		}
 
 		txtTracklist.text = txtTracklist.text.toUpperCase();

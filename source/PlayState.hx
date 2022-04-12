@@ -313,17 +313,13 @@ class PlayState extends MusicBeatState
 	override public function create()
 	{
         
-        // DELETE THIS
-
    
 		Paths.clearStoredMemory();
         
-        if (CoolUtil.difficulties[storyDifficulty] == "Mania") maniaMode = true;
+        if (CoolUtil.difficulties[storyDifficulty] == "Unfair" || CoolUtil.difficulties[storyDifficulty] == "Fair") maniaMode = true;
         
         if (ClientPrefs.middleScroll || maniaMode) middleScrolling = true;
         
-        
-
 		// for lua
 		instance = this;
 
@@ -1307,10 +1303,8 @@ class PlayState extends MusicBeatState
 					schoolIntro(doof);
                     
                 case 'gain-stage':
-                    if (CoolUtil.difficulties[storyDifficulty] != "Mania") {
                         camFollowPos.x -= 560;
                         startDialogue(dialogueJson, 'LSE_Dialogue02');
-                    }
 
 				default:
 					startCountdown();
@@ -3773,15 +3767,6 @@ class PlayState extends MusicBeatState
 				var percent:Float = ratingPercent;
 				if(Math.isNaN(percent)) percent = 0;
                 var saveSong:String = SONG.song;
-                trace("SONG.song is " + saveSong);
-                trace ("saveSong ends with " + saveSong.substr(saveSong.length - 5, 5));
-                if (saveSong.substr(saveSong.length - 5, 5) == "mania") {
-                    saveSong = saveSong.substr(0, saveSong.length - 6);
-                }
-                trace("Saving Score for " + saveSong);
-                trace("On Diff " + storyDifficulty);
-                trace("Score " + songScore);
-                trace("Percent " + percent);
 
                 Highscore.saveScore(saveSong, songScore, storyDifficulty, percent);
 				#end

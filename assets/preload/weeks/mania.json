@@ -1,0 +1,40 @@
+{
+	"storyName": "Mania Week",
+	"difficulties": "Fair, Unfair",
+	"hideFreeplay": false,
+	"weekBackground": "stage",
+	"weekBefore": "week1",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"startUnlocked": false,
+	"hideStoryMode": false,
+	"songs": [
+		[
+			"Gain Stage Mania",
+			"dad",
+			[
+				146,
+				113,
+				253
+			]
+		],
+		[
+			"DAW WARS Mania",
+			"dad",
+			[
+				146,
+				113,
+				253
+			]
+		]
+	],
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"weekName": "Mania Week"
+}
