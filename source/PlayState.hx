@@ -1119,24 +1119,47 @@ class PlayState extends MusicBeatState
 		FlxG.fixedTimestep = false;
 		moveCameraSection(0);
 
-		healthBarBG = new AttachedSprite('healthBar');
-		healthBarBG.y = FlxG.height * 0.89;
-		healthBarBG.screenCenter(X);
-		healthBarBG.scrollFactor.set();
-		healthBarBG.visible = !ClientPrefs.hideHud;
-		healthBarBG.xAdd = -4;
-		healthBarBG.yAdd = -4;
-		add(healthBarBG);
-		if(ClientPrefs.downScroll) healthBarBG.y = 0.11 * FlxG.height;
+		  if(curStage == 'djent'){
 
-		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
-			'health', 0, 2);
-		healthBar.scrollFactor.set();
-		// healthBar
-		healthBar.visible = !ClientPrefs.hideHud;
-		healthBar.alpha = ClientPrefs.healthBarAlpha;
-		add(healthBar);
-		healthBarBG.sprTracker = healthBar;
+            //load in shadow guitar 
+            healthBarBG = new AttachedSprite('healthBarSD');
+            healthBarBG.y = FlxG.height * 0.89;
+            healthBarBG.screenCenter(X);
+            healthBarBG.scrollFactor.set();
+            healthBarBG.visible = !ClientPrefs.hideHud;
+            healthBarBG.xAdd = -31;
+            healthBarBG.yAdd = -57;
+            add(healthBarBG);
+            if(ClientPrefs.downScroll) healthBarBG.y = 0.11 * FlxG.height;
+
+            healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 60), Std.int(19), this, 'health', 0, 2);
+            healthBar.scrollFactor.set();
+            healthBar.visible = !ClientPrefs.hideHud;
+            healthBar.alpha = ClientPrefs.healthBarAlpha;
+            add(healthBar);
+            healthBarBG.sprTracker = healthBar;   
+
+            }
+            else{
+		      healthBarBG = new AttachedSprite('healthBar');
+		      healthBarBG.y = FlxG.height * 0.89;
+		      healthBarBG.screenCenter(X);
+              healthBarBG.scrollFactor.set();
+		      healthBarBG.visible = !ClientPrefs.hideHud;
+		      healthBarBG.xAdd = -31;
+		      healthBarBG.yAdd = -57;
+		      add(healthBarBG);
+		      if(ClientPrefs.downScroll) healthBarBG.y = 0.11 * FlxG.height;
+
+		      healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 60), Std.int(19), this, 'health', 0, 2);
+		      healthBar.scrollFactor.set();
+		      // healthBar
+		      healthBar.visible = !ClientPrefs.hideHud;
+		      healthBar.alpha = ClientPrefs.healthBarAlpha;
+		      add(healthBar);
+		      healthBarBG.sprTracker = healthBar;
+
+            }
 
 		iconP1 = new HealthIcon(boyfriend.healthIcon, true);
 		iconP1.y = healthBar.y - 75;
