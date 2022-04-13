@@ -150,9 +150,7 @@ class PauseSubState extends MusicBeatSubstate
 			var daSelected:String = menuItems[curSelected];
 			if(daSelected != 'BACK' && difficultyChoices.contains(daSelected)) {
 				var name:String = PlayState.SONG.song.toLowerCase();
-                if (name.substr(name.length - 5,5) == "mania") name = name.substr(0, name.length - 6);
-                trace(name.substr(name.length - 5,5));
-				var poop = Highscore.formatSong(name, curSelected);
+               var poop = Highscore.formatSong(name, curSelected);
 				PlayState.SONG = Song.loadFromJson(poop, name);
 				PlayState.storyDifficulty = curSelected;
 				CustomFadeTransition.nextCamera = transCamera;

@@ -443,6 +443,11 @@ class PlayState extends MusicBeatState
 					curStage = 'stage';
 			}
 		}
+    
+        var maniaOverlay:FlxSprite = new FlxSprite();
+            maniaOverlay.loadGraphic(Paths.image("mania/" + songName));
+            maniaOverlay.scrollFactor.set();
+            add(maniaOverlay);
 
 		var stageData:StageFile = StageData.getStageFile(curStage);
 		if(stageData == null) { //Stage couldn't be found, create a dummy stage for preventing a crash
@@ -1778,10 +1783,7 @@ class PlayState extends MusicBeatState
             dad.alpha = 0;
             trace("MANIA MODE!!!");
                 
-            var maniaOverlay:FlxSprite = new FlxSprite();
-            maniaOverlay.loadGraphic(Paths.image("ddr_overlay"));
-            maniaOverlay.scrollFactor.set();
-            add(maniaOverlay);
+            
             iconP1.visible = false;
             iconP2.visible = false;
             healthBar.visible = false;
@@ -3936,7 +3938,7 @@ class PlayState extends MusicBeatState
 		}
 
 
-		if(daRating == 'sick' && !note.noteSplashDisabled && !maniaMode)
+		if(daRating == 'sick' && !note.noteSplashDisabled)
 		{
 			spawnNoteSplashOnNote(note);
 		}
@@ -4572,6 +4574,10 @@ class PlayState extends MusicBeatState
             if (starPower) {
                 skin = "guitarSplashesStar";
             }
+        }
+        
+        if (maniaMode) {
+            skin = "noteSplashesMania";
         }
         
         var guitarOffset = guitarTime ? 110 : 0;
