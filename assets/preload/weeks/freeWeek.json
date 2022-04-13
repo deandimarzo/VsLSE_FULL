@@ -1,28 +1,24 @@
 {
 	"storyName": "Demo Week",
-	"difficulties": "",
+	"difficulties": "Easy, Normal, Hard",
 	"hideFreeplay": false,
 	"weekBackground": "stage",
+	"weekBefore": "tutorial",
 	"freeplayColor": [
 		255,
 		50,
 		50
 	],
-	"weekBefore": "tutorial",
 	"startUnlocked": true,
-	"weekCharacters": [
-		"dad",
-		"bf",
-		"gf"
-	],
+	"hideStoryMode": true,
 	"songs": [
 		[
 			"Daw Wars",
 			"lse",
 			[
-				255,
-				50,
-				50
+				160,
+				0,
+				0
 			]
 		],
 		[
@@ -35,6 +31,10 @@
 			]
 		]
 	],
-	"hideStoryMode": true,
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
 	"weekName": "Demo Week"
 }

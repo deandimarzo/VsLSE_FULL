@@ -3,47 +3,47 @@
 	"difficulties": "Easy, Normal, Hard",
 	"hideFreeplay": false,
 	"weekBackground": "stage",
-	"weekBefore": "tutorial",
 	"freeplayColor": [
 		255,
 		50,
 		50
 	],
+	"weekBefore": "tutorial",
 	"startUnlocked": true,
-	"hideStoryMode": false,
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
 	"songs": [
 		[
 			"Amplified",
 			"lse",
 			[
 				255,
-				50,
-				50
+				255,
+				255
 			]
 		],
 		[
 			"Gain Stage",
 			"lse",
 			[
-				146,
-				113,
-				253
+				255,
+				255,
+				255
 			]
 		],
 		[
 			"Limiter",
 			"lse",
 			[
-				146,
-				113,
-				253
+				255,
+				255,
+				255
 			]
 		]
 	],
-	"weekCharacters": [
-		"dad",
-		"bf",
-		"gf"
-	],
+	"hideStoryMode": false,
 	"weekName": "Demo Week"
 }

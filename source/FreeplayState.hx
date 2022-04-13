@@ -11,6 +11,7 @@ import flixel.addons.display.FlxGridOverlay;
 import flixel.addons.effects.FlxSkewedSprite;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.tweens.FlxEase;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
@@ -45,8 +46,6 @@ class FreeplayState extends MusicBeatState
 	private var grpSongs:FlxTypedGroup<FlxSkewedSprite>;
 	private var curPlaying:Bool = false;
 
-	private var iconArray:Array<HealthIcon> = [];
-    
     public var bgMania:FlxSprite;
     public var txtMania1:FlxText;
     public var txtMania2:FlxText;
@@ -92,7 +91,7 @@ class FreeplayState extends MusicBeatState
 		WeekData.setDirectoryFromWeek();
 
 
-		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		bg = new FlxSprite().loadGraphic(Paths.image('freeplayBG'));
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 		bg.scale.x = bg.scale.y = scaleRatio;
@@ -129,12 +128,7 @@ class FreeplayState extends MusicBeatState
 			grpSongs.add(songText);
 
 			Paths.currentModDirectory = songs[i].folder;
-			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
-			icon.sprTracker = songText;
 
-			// using a FlxGroup is too much fuss!
-			iconArray.push(icon);
-			add(icon);
 
 			// songText.x += 40;
 			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
@@ -278,9 +272,9 @@ class FreeplayState extends MusicBeatState
 			changeSelection(shiftMult);
 		}
 
-		if (controls.UI_LEFT_P)
+		if (controls.UI_DOWN_P)
 			changeDiff(-1);
-		else if (controls.UI_RIGHT_P)
+		else if (controls.UI_UP_P)
 			changeDiff(1);
 		else if (upP || downP) changeDiff();
 
@@ -400,7 +394,7 @@ class FreeplayState extends MusicBeatState
 		#end
 
 		PlayState.storyDifficulty = curDifficulty;
-		diffText.text = '< ' + CoolUtil.difficultyString() + ' >';
+		diffText.text = 'v ' + CoolUtil.difficultyString() + ' ^';
 		positionHighscore();
 	}
 
@@ -437,26 +431,34 @@ class FreeplayState extends MusicBeatState
 
 		var bullShit:Int = 0;
 
-		for (i in 0...iconArray.length)
-		{
-			iconArray[i].alpha = 0.6;
-		}
-
-		iconArray[curSelected].alpha = 1;
-
+        var jacketSpacing:Int = 50;
+        var jacketZoom:Float = 1.1;
+        var targetX:Float = 0;
+        
 		for (item in grpSongs.members)
 		{
-			item.y = (bullShit - curSelected) * 50;
-			bullShit++;
+			item.screenCenter(Y);            
+            targetX = 440;
+            targetX += (bullShit - curSelected) * (jacketSpacing + item.width);
+            FlxTween.tween(item,{x:targetX},0.2, {ease: FlxEase.quadInOut});
+			if (bullShit == curSelected)  
+            {
+                FlxTween.tween(item.scale,{x:1.2, y:1.2},0.2, {ease: FlxEase.quadInOut});
+            } else {
+                FlxTween.tween(item.scale,{x:1, y:1},0.2, {ease: FlxEase.quadInOut});
+            }
+            bullShit++;
+            
 
-			item.alpha = 0.6;
+			// item.alpha = 0.6;
 			// item.setGraphicSize(Std.int(item.width * 0.8));
-
-			if (item.y == 0)
-			{
-				item.alpha = 1;
-				// item.setGraphicSize(Std.int(item.width));
-			}
+            /*
+                if (item.y == 0)
+                {
+                    item.alpha = 1;
+                    // item.setGraphicSize(Std.int(item.width));
+                }
+            */
 		}
 		
 		Paths.currentModDirectory = songs[curSelected].folder;

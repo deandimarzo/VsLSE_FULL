@@ -3,22 +3,26 @@
 	"difficulties": "Fair, Unfair",
 	"hideFreeplay": false,
 	"weekBackground": "stage",
-	"weekBefore": "week1",
 	"freeplayColor": [
 		146,
 		113,
 		253
 	],
+	"weekBefore": "week1",
 	"startUnlocked": false,
-	"hideStoryMode": false,
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
 	"songs": [
 		[
 			"Gain Stage Mania",
 			"dad",
 			[
-				146,
-				113,
-				253
+				200,
+				0,
+				200
 			]
 		],
 		[
@@ -31,10 +35,6 @@
 			]
 		]
 	],
-	"weekCharacters": [
-		"dad",
-		"bf",
-		"gf"
-	],
+	"hideStoryMode": false,
 	"weekName": "Mania Week"
 }
