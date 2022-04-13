@@ -19,6 +19,9 @@ import flixel.tweens.FlxTween;
 import lime.utils.Assets;
 import flixel.system.FlxSound;
 import openfl.utils.Assets as OpenFlAssets;
+import WiggleEffect.WiggleEffectType;
+import flixel.addons.effects.chainable.FlxEffectSprite;
+import flixel.addons.effects.chainable.FlxWaveEffect;
 import WeekData;
 #if MODS_ALLOWED
 import sys.FileSystem;
@@ -89,13 +92,31 @@ class FreeplayState extends MusicBeatState
 			}
 		}
 		WeekData.setDirectoryFromWeek();
+        
+        var wiggleShit:WiggleEffect = new WiggleEffect();
+        var waveEffectBG = new FlxWaveEffect(FlxWaveMode.ALL, 4, -1, 3, 20);
+        
+        wiggleShit.effectType = WiggleEffectType.DREAMY;
+        wiggleShit.waveAmplitude = 0.01;
+        wiggleShit.waveFrequency = 60;
+        wiggleShit.waveSpeed = 0.8;
 
 
 		bg = new FlxSprite().loadGraphic(Paths.image('freeplayBG'));
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
+        bg.shader = wiggleShit.shader;
 		add(bg);
 		bg.scale.x = bg.scale.y = scaleRatio;
 		bg.screenCenter();
+        
+        var waveSprite = new FlxEffectSprite(bg, [waveEffectBG]);
+        // Using scale since setGraphicSize() doesnt work???
+        // waveSprite.scale.set(1, 1);
+        // waveSprite.setPosition(0, 0);
+        // waveSprite.scrollFactor.set(1, 0.8);
+        // waveSprite.setGraphicSize(Std.int(waveSprite.width * 6));
+        // waveSprite.updateHitbox();
+        add(waveSprite);
         
         bgMania = new FlxSprite(FlxG.width - 400,300);
         bgMania.makeGraphic(400,46,FlxColor.BLACK);
@@ -434,9 +455,11 @@ class FreeplayState extends MusicBeatState
         var jacketSpacing:Int = 50;
         var jacketZoom:Float = 1.1;
         var targetX:Float = 0;
+        var targetSkew:Float = 0;
         
 		for (item in grpSongs.members)
 		{
+            targetSkew = 0;
 			item.screenCenter(Y);            
             targetX = 440;
             targetX += (bullShit - curSelected) * (jacketSpacing + item.width);
@@ -444,8 +467,16 @@ class FreeplayState extends MusicBeatState
 			if (bullShit == curSelected)  
             {
                 FlxTween.tween(item.scale,{x:1.2, y:1.2},0.2, {ease: FlxEase.quadInOut});
+                FlxTween.tween(item.skew,{x:0, y:0},0.2, {ease: FlxEase.quadInOut});
             } else {
-                FlxTween.tween(item.scale,{x:1, y:1},0.2, {ease: FlxEase.quadInOut});
+                if (bullShit < curSelected) {
+                    targetSkew = -3;
+                }
+                else {
+                    targetSkew = 3;
+                }
+                FlxTween.tween(item.scale,{x:0.9, y:0.9},0.2, {ease: FlxEase.quadInOut});
+                FlxTween.tween(item.skew,{x:0, y:targetSkew},0.2, {ease: FlxEase.quadInOut});
             }
             bullShit++;
             
