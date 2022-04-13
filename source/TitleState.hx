@@ -66,6 +66,14 @@ class TitleState extends MusicBeatState
 	var credTextShit:Alphabet;
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
+    
+    var titleBG:FlxSprite;
+    var titleLogo:FlxSprite;
+    var titleSD:FlxSprite;
+    var titleSunday:FlxSprite;
+    var titleGF:FlxSprite;
+    var titleBF:FlxSprite;
+    var titleLSE:FlxSprite;
 
 	var curWacky:Array<String> = [];
 
@@ -251,12 +259,48 @@ class TitleState extends MusicBeatState
 		persistentUpdate = true;
         
         
-        var titleBG:FlxSprite = new FlxSprite();
+        
+        titleBG = new FlxSprite();
         titleBG.loadGraphic(Paths.image('titleBG'));
         add(titleBG);
         
+        titleLogo = new FlxSprite(157, 0);
+        titleLogo.loadGraphic(Paths.image('title-logo'));
+        titleLogo.y -= titleLogo.height + 20;
+        add(titleLogo);
+        
+        titleSD = new FlxSprite();
+        titleSD.loadGraphic(Paths.image('title-shadowdean'));
+        titleSD.setPosition(FlxG.width + 10, FlxG.height - titleSD.height);
+        titleSD.color = FlxColor.BLACK;
+        add(titleSD);
+        
+        titleSunday = new FlxSprite();
+        titleSunday.loadGraphic(Paths.image('title-sunday'));
+        titleSunday.setPosition(FlxG.width + 10, FlxG.height - titleSunday.height);
+        titleSunday.color = FlxColor.BLACK;
+        add(titleSunday);
+        
+        titleGF = new FlxSprite();
+        titleGF.loadGraphic(Paths.image('title-gf'));
+        titleGF.setPosition(FlxG.width + 10, FlxG.height - titleGF.height + 80);
+        add(titleGF);
+        
+        titleBF = new FlxSprite();
+        titleBF.loadGraphic(Paths.image('title-bf'));
+        titleBF.setPosition(FlxG.width + 10, FlxG.height - titleBF.height);
+        add(titleBF);
+        
+        titleLSE = new FlxSprite();
+        titleLSE.loadGraphic(Paths.image('title-lse'));
+        titleLSE.setPosition(FlxG.width + 10, FlxG.height - titleLSE.height);
+        add(titleLSE);
         
         
+        
+        
+        
+        /* 
         titleText = new FlxSprite();
 		titleText.frames = Paths.getSparrowAtlas('titleEnter');
 		titleText.animation.addByPrefix('idle', "idle", 24);
@@ -266,6 +310,8 @@ class TitleState extends MusicBeatState
 		titleText.updateHitbox();
 		titleText.screenCenter(Y);
 		add(titleText);
+
+*/
 
         
         
@@ -354,12 +400,14 @@ class TitleState extends MusicBeatState
 		{
 			if(pressedEnter)
 			{
+                /*
 				if(titleText != null) 
                 {
                     titleText.animation.play('press');
                     titleText.screenCenter(Y);
                     titleText.y += 40;
                 }
+*/
 
 				FlxG.camera.flash(FlxColor.WHITE, 1);
 				FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
@@ -549,6 +597,38 @@ class TitleState extends MusicBeatState
 			FlxG.camera.flash(FlxColor.WHITE, 4);
 			remove(credGroup);
 			skippedIntro = true;
+            
+            
+            new FlxTimer().start(1, function(tmr:FlxTimer)
+			{
+				// Drop Logo
+                FlxTween.tween(titleLogo, {y: 18}, 1.2, {ease: FlxEase.elasticOut});
+                
+                new FlxTimer().start(1, function(tmr:FlxTimer)
+                {
+                    FlxTween.tween(titleLSE, {x: 640}, 1.2, {ease: FlxEase.elasticOut});
+                    new FlxTimer().start(0.5, function(tmr:FlxTimer)
+                    {
+                        FlxTween.tween(titleBF, {x: 840}, 1.2, {ease: FlxEase.elasticOut});
+                        new FlxTimer().start(0.5, function(tmr:FlxTimer)
+                        {
+                            FlxTween.tween(titleGF, {x: 940}, 1.2, {ease: FlxEase.elasticOut});
+                            new FlxTimer().start(1.2, function(tmr:FlxTimer)
+                            {
+                                FlxTween.tween(titleSunday, {x: 520}, 1.2, {ease: FlxEase.elasticOut});
+                                new FlxTimer().start(0.5, function(tmr:FlxTimer)
+                                {
+                                    FlxTween.tween(titleSD, {x: 720}, 1.2, {ease: FlxEase.elasticOut});
+                                });
+                            });
+                        });
+                    });
+                });
+			});
+            
+            
+       
+            
 		}
 	}
 }
