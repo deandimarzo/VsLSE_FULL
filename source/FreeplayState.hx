@@ -96,10 +96,6 @@ class FreeplayState extends MusicBeatState
         var wiggleShit:WiggleEffect = new WiggleEffect();
         var waveEffectBG = new FlxWaveEffect(FlxWaveMode.ALL, 4, -1, 3, 20);
         
-        wiggleShit.effectType = WiggleEffectType.DREAMY;
-        wiggleShit.waveAmplitude = 0.01;
-        wiggleShit.waveFrequency = 60;
-        wiggleShit.waveSpeed = 0.8;
 
 
 		bg = new FlxSprite().loadGraphic(Paths.image('freeplayBG'));
@@ -109,13 +105,14 @@ class FreeplayState extends MusicBeatState
 		bg.scale.x = bg.scale.y = scaleRatio;
 		bg.screenCenter();
         
+        
+
+        wiggleShit.effectType = WiggleEffectType.DREAMY;
+        wiggleShit.waveAmplitude = 0.01;
+        wiggleShit.waveFrequency = 60;
+        wiggleShit.waveSpeed = 0.8;
+        
         var waveSprite = new FlxEffectSprite(bg, [waveEffectBG]);
-        // Using scale since setGraphicSize() doesnt work???
-        // waveSprite.scale.set(1, 1);
-        // waveSprite.setPosition(0, 0);
-        // waveSprite.scrollFactor.set(1, 0.8);
-        // waveSprite.setGraphicSize(Std.int(waveSprite.width * 6));
-        // waveSprite.updateHitbox();
         add(waveSprite);
         
         bgMania = new FlxSprite(FlxG.width - 400,300);
