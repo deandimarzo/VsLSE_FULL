@@ -41,7 +41,7 @@ function onCreate()
     addLuaSprite('studio-background', false);
     addLuaSprite('studio-desk', false);
     addLuaSprite('studio-guitars', true);
-    addLuaSprite('studio-shelf', false);
+    addLuaSprite('studio-shelf', true);
     addLuaSprite('studio-foreground', true);
     addLuaSprite('fade',true);
     addLuaSprite('light',true);
