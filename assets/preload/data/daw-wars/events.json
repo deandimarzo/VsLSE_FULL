@@ -1,0 +1,99 @@
+{
+	"song": {
+		"speed": 2.8,
+		"stage": "djent",
+		"player1": "bf",
+		"player2": "shadow_dean",
+		"player3": null,
+		"events": [
+			[
+				49200,
+				[
+					[
+						"AscendRed",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				58800,
+				[
+					[
+						"AscendRed",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				68400,
+				[
+					[
+						"AscendRed",
+						"0",
+						""
+					]
+				]
+			],
+			[
+				147600,
+				[
+					[
+						"AscendRed",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				166800,
+				[
+					[
+						"AscendRed",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				175200,
+				[
+					[
+						"AscendRed",
+						"0",
+						""
+					]
+				]
+			],
+			[
+				205200,
+				[
+					[
+						"AscendRed",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				224400,
+				[
+					[
+						"AscendRed",
+						"0",
+						""
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": null,
+		"validScore": false,
+		"gfVersion": "amp_GF",
+		"bpm": 200,
+		"arrowSkin": null,
+		"needsVoices": true,
+		"song": "daw wars"
+	}
+}
