@@ -2,7 +2,7 @@ function onEvent(name,value1,value2)
     if name == 'AscendRed' then
     if value1 > '0.01' then
         flash()
-        doTweenAlpha('fadetween', 'fade', 0.7, 0.1, 'linear');
+        setProperty('fade.alpha',0.7);
         setProperty('light.alpha',0.4);
         setProperty('light2.alpha',0.4);
         triggerEvent('Change Character','dad','shadow_dean_ascend')
@@ -12,13 +12,11 @@ function onEvent(name,value1,value2)
 
     else
         flash()
-        doTweenAlpha('fadetween', 'fade', 0, 0.1, 'linear');
-        doTweenAlpha('lighttween', 'light', 0, 0.1, 'linear');
-        doTweenAlpha('light2tween', 'light2', 0, 0.1, 'linear');
-        triggerEvent('Change Character','dad','shadow_dean')
-        triggerEvent('Change Character','bf','bf')
+        setProperty('fade.alpha',0);
         setProperty('light.alpha',0);
         setProperty('light2.alpha',0);
+        triggerEvent('Change Character','dad','shadow_dean')
+        triggerEvent('Change Character','bf','bf')
     end
 end
 end

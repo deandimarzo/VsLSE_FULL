@@ -1,1 +1,3 @@
-type number ooo zoom
+1 == turn on
+
+0 == turn off
