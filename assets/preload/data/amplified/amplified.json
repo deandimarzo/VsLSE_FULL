@@ -3901,8 +3901,8 @@
 				59651.1627906977,
 				[
 					[
-						"Fade Background",
-						"0.7",
+						"Ascend",
+						"1",
 						""
 					]
 				]
@@ -3953,7 +3953,7 @@
 					[
 						"Change Character",
 						"dad",
-						"lse"
+						"lse_ascend"
 					]
 				]
 			],
@@ -3963,7 +3963,7 @@
 					[
 						"Change Character",
 						"bf",
-						"lsebf"
+						"lsebf_ascend"
 					]
 				]
 			],
@@ -3973,7 +3973,7 @@
 					[
 						"Enter Guitar Mode",
 						"bf",
-						"lsebf"
+						"lsebf_ascend"
 					]
 				]
 			],
@@ -4001,7 +4001,7 @@
 				104476.744186046,
 				[
 					[
-						"Fade Background",
+						"Ascend",
 						"0",
 						""
 					]
