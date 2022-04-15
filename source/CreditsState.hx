@@ -82,28 +82,45 @@ class CreditsState extends MusicBeatState
 		#end
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
-            ['Vs. LongestSoloEver Team'],
+            ['Directors'],
 			['Sam H',		'samh',		'Director',						'https://twitter.com/Sam_HOfficial',	'00FFFF'],
-            ['LongestSoloEver',		'lse',		'Composer / Coder / Charts / Menu Design / LSE Voice Actor',						'https://twitter.com/longestsoloever',	'FF6666'],
+            ['LongestSoloEver',		'lse',		'Music / Lead Coder / Charts / Menu Design / LSE Voice Actor',						'https://twitter.com/longestsoloever',	'FF6666'],
+            [''],
+            ['Art'],
             ['Manicies',		'manicies',		'Sprite Artist / Animator',						'https://twitter.com/Manicies',	'6579de'],
-            ['MarbleInsanity',		'marble',		'Character Design / Menu Art',						'https://twitter.com/MarbleInsanity',	'd1a125'],
+            ['MarbleInsanity',		'marble',		'Character Design / Menu Art, Mania Stage Art',						'https://twitter.com/MarbleInsanity',	'd1a125'],
+            ['Spacedust',		'spacedust',		'Background Artist',						'',	'a0a0a0'],
+            [''],
+            ['Music'],
             ['iFlicky',		'iflicky',		'Gain Stage Mania Remix',						'https://www.youtube.com/c/iFlicky',	'c549db'],
+            ['Starbreak',		'starbreak',		'Menu Theme',						'https://www.youtube.com/c/StarbreakMusic',	'0d2678'],
+            [''],
+            ['Charting'],
+            ['Cerbera',		'cerbera',		'Charts',						'https://www.youtube.com/c/Cerberaa',	'e434be'],
+            ['niffirg',		'niffirg',		'Charts',						'https://www.youtube.com/c/niffirg0',	'8200ff'],
             ['FullCombro',		'combro',		'Mania Mode Charts',						'https://www.youtube.com/FullCombro',	'cac280'],
             ['Polarin', 'polarin', 'Mania Mode Charts', 'https://www.tiktok.com/@polarin_', 'cac280'],
-            ['Starbreak',		'starbreak',		'Menu Theme',						'https://www.youtube.com/c/StarbreakMusic',	'0d2678'],
-            ['Spacedust',		'spacedust',		'Background Artist',						'',	'a0a0a0'],
+            ['Eun', 'eun', 'Mania Mode Charts', '', 'cac280'],            
+            [''],
+            ['Code'],
+            ['Serkoid', 'serkoid', 'Coding, Events', 'https://www.youtube.com/c/Serkoid', '3957db'],
+            ['BCTIX', 'bctix', 'Coding, Events', 'https://www.youtube.com/channel/UC-iwRp32yGbcc-Pdrkv8X5A', '990099'],
+            ['Maverick X', 'maverickx', 'Coding', 'https://twitter.com/MaverickZero9/status/1514953027303743488', 'bbbbdd'],
+            [''],
+            ['Voice Acting'],
             ['Cougar MacDowall',		'cougar',		'BF Voice Actor',						'https://twitter.com/CougarMacDowal1',	'51acbf'],
-			['Psych Engine Team'],
-			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',						'https://twitter.com/Shadow_Mario_',	'444444'],
-			['RiverOaken',			'riveroaken',		'Main Artist/Animator of Psych Engine',					'https://twitter.com/river_oaken',		'C30085'],
-			['bb-panzu',			'bb-panzu',			'Additional Programmer of Psych Engine',				'https://twitter.com/bbsub3',			'389A58'],
+			['Victoria Rose',		'tori',		'GF Voice Actress',						'https://www.youtube.com/channel/UCpUixLCQIpdbM9MZNnB3S4g',	'ffbbbb'],
 			[''],
-			["Funkin' Crew"],
-			['ninjamuffin99',		'ninjamuffin99',	"Programmer of Friday Night Funkin'",					'https://twitter.com/ninja_muffin99',	'F73838'],
-			['PhantomArcade',		'phantomarcade',	"Animator of Friday Night Funkin'",						'https://twitter.com/PhantomArcade3K',	'FFBB1B'],
-			['evilsk8r',			'evilsk8r',			"Artist of Friday Night Funkin'",						'https://twitter.com/evilsk8r',			'53E52C'],
-			['kawaisprite',			'kawaisprite',		"Composer of Friday Night Funkin'",						'https://twitter.com/kawaisprite',		'6475F3']
-		]; 
+            ['Playtesters'],
+            ['Terceiro Lugar',		'terceiro',		'Playtester',						'https://twitter.com/terceiro_lugar',	'31334a'],
+            ['Zerk',		'zerk',		'Playtester',						'https://twitter.com/matthew_berzerk',	'96403b'],
+            ['Kerebuu',		'kerebuu',		'Playtester',						'',	'ffd1ff'],
+            [''],
+            ['Special Thanks'],
+            ['bb-panzu',			'bb-panzu',			'Creator of Sunday',				'https://twitter.com/bbsub3',			'389A58'],
+            ['kazzyrus',			'kazzyrus',			'Moral Support and Memes',				'https://twitter.com/kazzyrus',			'333333']
+                
+        ]; 
 		
 		for(i in pisspoop){
 			creditsStuff.push(i);

@@ -101,24 +101,7 @@ class FreeplayState extends MusicBeatState
         
 
         
-        bgMania = new FlxSprite(FlxG.width - 400,300);
-        bgMania.makeGraphic(400,46,FlxColor.BLACK);
-        bgMania.alpha = 0;
-        add(bgMania);
         
-        txtMania1 = new FlxText(bgMania.x + 2, bgMania.y + 2, 0, "", 18);
-		txtMania1.setFormat(Paths.font("vcr.ttf"), 22, FlxColor.WHITE, LEFT);
-		txtMania1.alpha = 0;
-        txtMania1.text="REMIX BY iFlicky";
-
-        
-        txtMania2 = new FlxText(bgMania.x + 2, bgMania.y + 18, 0, "", 18);
-		txtMania2.setFormat(Paths.font("vcr.ttf"), 22, FlxColor.WHITE, LEFT);
-		txtMania2.alpha = 0;
-        txtMania2.text="CHART BY FullCombro x Polarin";
-        
-        add(txtMania1);
-        add(txtMania2);
         
         
 
@@ -146,6 +129,25 @@ class FreeplayState extends MusicBeatState
 		scoreBG = new FlxSprite(scoreText.x - 6, 0).makeGraphic(1, 66, 0xFF000000);
 		scoreBG.alpha = 0.6;
 		add(scoreBG);
+        
+        bgMania = new FlxSprite(FlxG.width - 400,scoreBG.y + scoreBG.height);
+        bgMania.makeGraphic(400,46,FlxColor.BLACK);
+        bgMania.alpha = 0;
+        add(bgMania);
+        
+        txtMania1 = new FlxText(bgMania.x + 2, bgMania.y + 2, 0, "", 18);
+		txtMania1.setFormat(Paths.font("vcr.ttf"), 22, FlxColor.WHITE, LEFT);
+		txtMania1.alpha = 0;
+        
+
+        
+        txtMania2 = new FlxText(bgMania.x + 2, bgMania.y + 18, 0, "", 18);
+		txtMania2.setFormat(Paths.font("vcr.ttf"), 22, FlxColor.WHITE, LEFT);
+		txtMania2.alpha = 0;
+        
+        
+        add(txtMania1);
+        add(txtMania2);
 
 		diffText = new FlxText(scoreText.x, scoreText.y + 36, 0, "", 24);
 		diffText.font = scoreText.font;
@@ -380,14 +382,23 @@ class FreeplayState extends MusicBeatState
 		if (curDifficulty >= CoolUtil.difficulties.length)
 			curDifficulty = 0;
 
-        if (curDifficulty == 3) {
-            FlxTween.tween(bgMania,{alpha:0.8},0.5);
+        if (CoolUtil.difficulties.length == 2) {
+            FlxTween.tween(bgMania,{alpha:0.6},0.5);
             FlxTween.tween(txtMania1,{alpha:1},0.5);
             FlxTween.tween(txtMania2,{alpha:1},0.5);
         } else {
             FlxTween.tween(bgMania,{alpha:0},0.5);
             FlxTween.tween(txtMania1,{alpha:0},0.5);
             FlxTween.tween(txtMania2,{alpha:0},0.5);
+        }
+        trace(Paths.formatToSongPath(songs[curSelected].songName));
+        switch Paths.formatToSongPath(songs[curSelected].songName) {
+            case "gain-stage-mania": 
+                txtMania1.text="REMIX BY iFlicky";
+                txtMania2.text="CHART BY FullCombro x Polarin";
+            case "daw-wars-mania": 
+                txtMania1.text="REMIX BY LongestSoloEver";
+                txtMania2.text="CHART BY Polarin x Eun";
         }
         
 		lastDifficultyName = CoolUtil.difficulties[curDifficulty];
