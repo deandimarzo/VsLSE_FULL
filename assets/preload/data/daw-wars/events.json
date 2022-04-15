@@ -1,6 +1,6 @@
 {
 	"song": {
-		"speed": 2.8,
+		"speed": 3.2,
 		"stage": "djent",
 		"player1": "bf",
 		"player2": "shadow_dean",
@@ -33,6 +33,61 @@
 						"AscendRed",
 						"0",
 						""
+					]
+				]
+			],
+			[
+				87450,
+				[
+					[
+						"Add Camera Zoom",
+						"0.2",
+						"0.2"
+					]
+				]
+			],
+			[
+				87525,
+				[
+					[
+						"Enter Guitar Mode",
+						"",
+						""
+					],
+					[
+						"Change Character",
+						"bf",
+						"lsebf"
+					]
+				]
+			],
+			[
+				116250,
+				[
+					[
+						"Exit Guitar Mode",
+						"",
+						""
+					]
+				]
+			],
+			[
+				116325,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf"
+					]
+				]
+			],
+			[
+				116400,
+				[
+					[
+						"Add Camera Zoom",
+						"-0.2",
+						"0.2"
 					]
 				]
 			],

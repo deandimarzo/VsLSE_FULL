@@ -130,8 +130,8 @@ class FreeplayState extends MusicBeatState
 		scoreBG.alpha = 0.6;
 		add(scoreBG);
         
-        bgMania = new FlxSprite(FlxG.width - 400,scoreBG.y + scoreBG.height);
-        bgMania.makeGraphic(400,46,FlxColor.BLACK);
+        bgMania = new FlxSprite(FlxG.width - 500,scoreBG.y + scoreBG.height);
+        bgMania.makeGraphic(500,46,FlxColor.BLACK);
         bgMania.alpha = 0;
         add(bgMania);
         

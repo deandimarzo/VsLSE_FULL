@@ -1331,7 +1331,7 @@ class PlayState extends MusicBeatState
             if (daSong == 'daw-wars' && !seenCutscene) {
                 camFollowPos.x -= 560;
                 startDialogue(dialogueJson, 'DW_Dialogue');
-            } else if (!seenCutscene) {
+            } else if (!isStoryMode && !seenCutscene) {
                startCountdown();
             }
             
