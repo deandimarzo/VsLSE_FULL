@@ -87,6 +87,39 @@
 			"anim": "singRIGHTmiss",
 			"indices": [],
 			"name": "BF NOTE RIGHT MISS guitar"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				59,
+				32
+			],
+			"anim": "firstDeath",
+			"fps": 24,
+			"name": "BF dies guitar",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				49,
+				26
+			],
+			"anim": "deathLoop",
+			"fps": 24,
+			"name": "BF Dead Loop guitar",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				49,
+				90
+			],
+			"anim": "deathConfirm",
+			"fps": 24,
+			"name": "BF Dead confirm Guitar",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,

@@ -3261,7 +3261,7 @@ class PlayState extends MusicBeatState
                         daNote.set_texture('NOTE_guitar');
                     });
 
-        
+                    GameOverSubstate.characterName = 'lsebf';
                     
                     // Move Strums
                     playerStrums.forEach(function(spr:StrumNote)
@@ -3296,6 +3296,8 @@ class PlayState extends MusicBeatState
                     FlxTween.tween(starFade, {alpha:0},1);
         
                     starPowered(false);    
+
+                    GameOverSubstate.characterName = 'bf';
                     
                     // put stuff back where it goes
                     timeBarBG.visible = showTime;
