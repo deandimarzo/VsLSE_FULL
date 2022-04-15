@@ -3830,8 +3830,13 @@ class PlayState extends MusicBeatState
 					if(FlxTransitionableState.skipNextTransIn) {
 						CustomFadeTransition.nextCamera = null;
 					}
-					MusicBeatState.switchState(new StoryMenuState());
-
+					var weekName:String = WeekData.getWeekFileName();
+					if (weekName == 'week1')
+					{
+					MusicBeatState.switchState(new CheckFreeplayState());
+					} else {
+						MusicBeatState.switchState(new StoryMenuState());
+					}
 					// if ()
 					if(!ClientPrefs.getGameplaySetting('practice', false) && !ClientPrefs.getGameplaySetting('botplay', false)) {
 						StoryMenuState.weekCompleted.set(WeekData.weeksList[storyWeek], true);
