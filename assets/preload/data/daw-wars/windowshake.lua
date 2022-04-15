@@ -1,0 +1,10 @@
+function opponentNoteHit(id, direction, noteType, isSustainNote)
+	setPropertyFromClass('lime.app.Application', 'current.window.x', getPropertyFromClass('lime.app.Application', 'current.window.x')+20)
+	setPropertyFromClass('lime.app.Application', 'current.window.y', getPropertyFromClass('lime.app.Application', 'current.window.y')+20)
+	setPropertyFromClass('lime.app.Application', 'current.window.x', getPropertyFromClass('lime.app.Application', 'current.window.x')-20)
+	setPropertyFromClass('lime.app.Application', 'current.window.y', getPropertyFromClass('lime.app.Application', 'current.window.y')-20)
+	setPropertyFromClass('lime.app.Application', 'current.window.x', getPropertyFromClass('lime.app.Application', 'current.window.x')-20)
+	setPropertyFromClass('lime.app.Application', 'current.window.y', getPropertyFromClass('lime.app.Application', 'current.window.y')-20)
+	setPropertyFromClass('lime.app.Application', 'current.window.x', getPropertyFromClass('lime.app.Application', 'current.window.x')+20)
+	setPropertyFromClass('lime.app.Application', 'current.window.y', getPropertyFromClass('lime.app.Application', 'current.window.y')+20)
+end
