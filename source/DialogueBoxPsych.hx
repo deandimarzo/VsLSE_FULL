@@ -318,10 +318,12 @@ class DialogueBoxPsych extends FlxSpriteGroup
 					add(daText);
 					
 					if(skipDialogueThing != null) {
-						skipDialogueThing();
+                        skipDialogueThing();
+                        
 					}
 				} else if(currentText >= dialogueList.dialogue.length) {
 					dialogueEnded = true;
+                    
 					for (i in 0...textBoxTypes.length) {
 						var checkArray:Array<String> = ['', 'center-'];
 						var animName:String = box.animation.curAnim.name;
@@ -339,6 +341,7 @@ class DialogueBoxPsych extends FlxSpriteGroup
 					daText.destroy();
 					daText = null;
 					updateBoxOffsets(box);
+                    curDialogueSound.stop();
 					FlxG.sound.music.fadeOut(1, 0);
 				} else {
 					startNextDialog();
@@ -472,7 +475,6 @@ class DialogueBoxPsych extends FlxSpriteGroup
         */
         
         // New and less cursed Sound Code.
-        curDialogueSound.stop();
         curDialogueSound.loadEmbedded(Paths.sound(bgSong + "_" + currentText));
         curDialogueSound.play(true);
         
