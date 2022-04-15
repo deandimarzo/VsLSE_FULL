@@ -941,6 +941,17 @@ class PlayState extends MusicBeatState
         bfFretboard.y = -200;
         bfFretboard.scrollFactor.set();
         bfFretboard.alpha = 0;
+
+        var lightningPreCache:FlxSprite = new FlxSprite();
+                
+        lightningPreCache.frames = Paths.getSparrowAtlas('lightning');
+        lightningPreCache.animation.addByPrefix('STRIKE', 'STRIKE', 24, false);
+
+        lightningPreCache.x = 0;
+        lightningPreCache.y = 0;   
+        lightningPreCache.alpha = 0;
+        lightningPreCache.animation.play('STRIKE', true);
+        add(lightningPreCache);
     
         starLightning = new FlxSprite();
         starLightning.frames = Paths.getSparrowAtlas('starLightning');
