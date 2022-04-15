@@ -24,8 +24,8 @@ class CheckFreeplayState extends MusicBeatState
 		add(bg);
 
 		warnText = new FlxText(0, 0, FlxG.width,
-			"you should check freeplay \n
-			 NOW",
+			"NEW SONGS UNLOCKED \n
+			 IN FREEPLAY",
 			32);
 		warnText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		warnText.screenCenter(Y);

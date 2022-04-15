@@ -199,7 +199,7 @@ class DialogueBoxPsych extends FlxSpriteGroup
         bgSong = song;
 
 		if(song != null && song != '') {
-			FlxG.sound.playMusic(Paths.music(song), 0);
+			FlxG.sound.playMusic(Paths.music("LSE_Dialogue02"), 0);
 			FlxG.sound.music.fadeIn(2, 0, 1);
 		}
         
@@ -342,6 +342,7 @@ class DialogueBoxPsych extends FlxSpriteGroup
 					daText = null;
 					updateBoxOffsets(box);
                     curDialogueSound.stop();
+                    
 					FlxG.sound.music.fadeOut(1, 0);
 				} else {
 					startNextDialog();
@@ -477,6 +478,12 @@ class DialogueBoxPsych extends FlxSpriteGroup
         // New and less cursed Sound Code.
         curDialogueSound.loadEmbedded(Paths.sound(bgSong + "_" + currentText));
         curDialogueSound.play(true);
+        trace(bgSong + "_" + currentText);
+        if (bgSong + "_" + currentText == "DW_Dialogue_2") {
+            trace("It's the line!");
+            FlxG.sound.playMusic(Paths.music("djentDialogue"), 0);
+            FlxG.sound.music.fadeIn(2, 0, 1);
+        }
         
 		if(curDialogue.text == null || curDialogue.text.length < 1) curDialogue.text = ' ';
 		if(curDialogue.boxState == null) curDialogue.boxState = 'normal';

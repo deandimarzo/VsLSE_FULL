@@ -100,7 +100,7 @@ class CreditsState extends MusicBeatState
             ['niffirg',		'niffirg',		'Charts',						'https://www.youtube.com/c/niffirg0',	'8200ff'],
             ['FullCombro',		'combro',		'Mania Mode Charts',						'https://www.youtube.com/FullCombro',	'cac280'],
             ['Polarin', 'polarin', 'Mania Mode Charts', 'https://www.tiktok.com/@polarin_', 'cac280'],
-            ['Eun', 'eun', 'Mania Mode Charts', '', 'cac280'],            
+            ['carljoneadams', 'carljoneadams', 'Mania Mode Charts', '', 'cac280'],            
             [''],
             ['Code'],
             ['Serkoid', 'serkoid', 'Coding, Events', 'https://www.youtube.com/c/Serkoid', '3957db'],

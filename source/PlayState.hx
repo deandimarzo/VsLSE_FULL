@@ -1327,11 +1327,14 @@ class PlayState extends MusicBeatState
                             camFollowPos.x -= 560;
                             startDialogue(dialogueJson, 'LSE_Dialogue01');    
                     case 'gain-stage':
-                            camFollowPos.x -= 560;
+                            camFollowPos.x -= 260;
                             startDialogue(dialogueJson, 'LSE_Dialogue02');
                     case 'limiter':
-                            camFollowPos.x -= 560;
+                            camFollowPos.x -= 260;
                             startDialogue(dialogueJson, 'LSE_Dialogue03');
+                        
+                    case 'daw-wars':
+                            botplayTxt.text = "DJENTBOT-PLAY";
 
                     default:
                         startCountdown();

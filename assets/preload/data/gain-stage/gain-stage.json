@@ -27,7 +27,7 @@
 				[
 					[
 						"Ascend",
-						"1",
+						"0.6",
 						""
 					]
 				]
@@ -639,6 +639,21 @@
 						"Ascend",
 						"0.7",
 						""
+					]
+				]
+			],
+			[
+				117187.5,
+				[
+					[
+						"Change Character",
+						"dad",
+						"lse_ascend"
+					],
+					[
+						"Change Character",
+						"bf",
+						"lsebf_ascend"
 					]
 				]
 			],
@@ -1617,7 +1632,7 @@
 				[
 					[
 						"Ascend",
-						"1",
+						"0.6",
 						""
 					]
 				]
