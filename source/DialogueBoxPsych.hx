@@ -8,6 +8,7 @@ import flixel.group.FlxSpriteGroup;
 import flixel.input.FlxKeyManager;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import flixel.system.FlxSound;
 import flixel.util.FlxTimer;
 import flixel.FlxSubState;
 import haxe.Json;
@@ -172,6 +173,9 @@ class DialogueBoxPsych extends FlxSpriteGroup
 	public var finishThing:Void->Void;
 	public var nextDialogueThing:Void->Void = null;
 	public var skipDialogueThing:Void->Void = null;
+    
+    public var curDialogueSound:FlxSound = new FlxSound();
+    
 	var bgFade:FlxSprite = null;
 	var box:FlxSprite;
 	var textToType:String = '';
@@ -461,8 +465,16 @@ class DialogueBoxPsych extends FlxSpriteGroup
 		} while(curDialogue == null);
 
         // FlxG.sound.destroy(); // Hopefully kill dialogue line? - update: IT WORKS!
+        // The old, cursed sound code.
+        /*
         FlxG.sound.play(Paths.sound(bgSong + "_" + currentText));
         trace("Playing " + Paths.sound(bgSong + "_" + currentText));
+        */
+        
+        // New and less cursed Sound Code.
+        curDialogueSound.stop();
+        curDialogueSound.loadEmbedded(Paths.sound(bgSong + "_" + currentText));
+        curDialogueSound.play(true);
         
 		if(curDialogue.text == null || curDialogue.text.length < 1) curDialogue.text = ' ';
 		if(curDialogue.boxState == null) curDialogue.boxState = 'normal';

@@ -77,6 +77,8 @@ class TitleState extends MusicBeatState
     var titleLSE:FlxSprite;
 
 	var curWacky:Array<String> = [];
+    
+    var showHiddenCharacters:Bool = false;
 
 	var wackyImage:FlxSprite;
 
@@ -191,6 +193,7 @@ class TitleState extends MusicBeatState
 		if (FlxG.save.data.weekCompleted != null)
 		{
 			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
+            showHiddenCharacters = true;
 		}
 
 		FlxG.mouse.visible = false;
@@ -274,13 +277,13 @@ class TitleState extends MusicBeatState
         titleSD = new FlxSprite();
         titleSD.loadGraphic(Paths.image('title-shadowdean'));
         titleSD.setPosition(FlxG.width + 10, FlxG.height - titleSD.height);
-        titleSD.color = FlxColor.BLACK;
+        if (!showHiddenCharacters) titleSD.color = FlxColor.BLACK;
         add(titleSD);
         
         titleSunday = new FlxSprite();
         titleSunday.loadGraphic(Paths.image('title-sunday'));
         titleSunday.setPosition(FlxG.width + 10, FlxG.height - titleSunday.height);
-        titleSunday.color = FlxColor.BLACK;
+        if (!showHiddenCharacters) titleSunday.color = FlxColor.BLACK;
         add(titleSunday);
         
         titleGF = new FlxSprite();
@@ -611,10 +614,10 @@ class TitleState extends MusicBeatState
                     FlxTween.tween(titleLSE, {x: 640}, 1.2, {ease: FlxEase.elasticOut});
                     new FlxTimer().start(0.3, function(tmr:FlxTimer)
                     {
-                        FlxTween.tween(titleBF, {x: 840}, 1.2, {ease: FlxEase.elasticOut});
+                        FlxTween.tween(titleBF, {x: 920}, 1.2, {ease: FlxEase.elasticOut});
                         new FlxTimer().start(0.3, function(tmr:FlxTimer)
                         {
-                            FlxTween.tween(titleGF, {x: 940}, 1.2, {ease: FlxEase.elasticOut});
+                            FlxTween.tween(titleGF, {x: 1020}, 1.2, {ease: FlxEase.elasticOut});
                             new FlxTimer().start(0.8, function(tmr:FlxTimer)
                             {
                                 FlxTween.tween(titleSunday, {x: 520}, 1.2, {ease: FlxEase.elasticOut});
