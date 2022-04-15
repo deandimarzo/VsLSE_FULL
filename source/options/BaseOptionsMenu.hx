@@ -77,7 +77,9 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		descBox.alpha = 0.6;
 		add(descBox);
 
-		var titleText:Alphabet = new Alphabet(0, 0, title, true, false, 0, 0.6);
+		var titleText:FlxText = new FlxText(0, 0, FlxG.width, title);
+		titleText.setFormat(Paths.font("Gameplay.ttf"), 64, FlxColor.fromRGB(255, 255, 255), CENTER);
+		titleText.setBorderStyle(OUTLINE, FlxColor.BLACK, 3, 1);
 		titleText.x += 60;
 		titleText.y += 40;
 		titleText.alpha = 0.4;

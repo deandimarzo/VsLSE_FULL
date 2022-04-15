@@ -23,6 +23,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
+import flixel.group.FlxGroup;
 import Controls;
 
 using StringTools;
@@ -30,9 +31,10 @@ using StringTools;
 class OptionsState extends MusicBeatState
 {
 	var options:Array<String> = ['Note Colors', 'Controls', 'Adjust Delay and Combo', 'Graphics', 'Visuals and UI', 'Gameplay'];
-	private var grpOptions:FlxTypedGroup<Alphabet>;
+	private var grpOptions:FlxTypedGroup<FlxText>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
+	
 
 	function openSelectedSubstate(label:String) {
 		switch(label) {
@@ -67,15 +69,28 @@ class OptionsState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 
-		grpOptions = new FlxTypedGroup<Alphabet>();
+		grpOptions = new FlxTypedGroup<FlxText>();
 		add(grpOptions);
 
 		for (i in 0...options.length)
 		{
-			var optionText:Alphabet = new Alphabet(0, 0, options[i], true, false);
-			optionText.screenCenter();
-			optionText.y += (100 * (i - (options.length / 2))) + 50;
-			grpOptions.add(optionText);
+
+			var coolText:FlxText = new FlxText(0, 0, FlxG.width, options[i]);
+				coolText.setFormat(Paths.font("Gameplay.ttf"), 64, FlxColor.fromRGB(255, 255, 255), CENTER);
+				coolText.screenCenter();
+				coolText.setBorderStyle(OUTLINE, FlxColor.BLACK, 3, 1);
+				coolText.y += (100 * (i - (options.length / 2))) + 50;
+				grpOptions.add(coolText);
+
+
+
+
+			// var daOptionsTxt:FlxText = new FlxText(0, 0, FlxG.width, options[i]);
+			// //var optionText:Alphabet = new Alphabet(0, 0, options[i], true, false);
+			// daOptionsTxt.setFormat("Friday Night Funkin Regular", 64, FlxColor.fromRGB(255, 255, 255), CENTER);
+			// daOptionsTxt.screenCenter();
+			// daOptionsTxt.y += (100 * (i - (options.length / 2))) + 50;
+			// grpOptions.add(daOptionsTxt);
 		}
 
 		selectorLeft = new Alphabet(0, 0, '>', true, false);
@@ -124,17 +139,19 @@ class OptionsState extends MusicBeatState
 		var bullShit:Int = 0;
 
 		for (item in grpOptions.members) {
-			item.targetY = bullShit - curSelected;
+			var selected:Int = 0;
+			selected = bullShit - curSelected;
 			bullShit++;
 
 			item.alpha = 0.6;
-			if (item.targetY == 0) {
+			if (selected == 0) {
 				item.alpha = 1;
+			}
 				selectorLeft.x = item.x - 63;
 				selectorLeft.y = item.y;
 				selectorRight.x = item.x + item.width + 15;
 				selectorRight.y = item.y;
-			}
+			
 		}
 		FlxG.sound.play(Paths.sound('scrollMenu'));
 	}
