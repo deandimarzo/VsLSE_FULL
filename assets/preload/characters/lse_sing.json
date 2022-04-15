@@ -1,78 +1,78 @@
 {
-	"animations": [
-		{
-			"offsets": [
+    "animations": [
+        {
+            "offsets": [
 				64,
 				-20
 			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singLEFT",
-			"indices": [],
-			"name": "sing_left"
+            "loop": false,
+            "fps": 24,
+            "anim": "singLEFT",
+            "indices": [],
+            "name": "sing_left"
 		},
-		{
-			"offsets": [
+        {
+            "offsets": [
 				16,
 				-65
 			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singDOWN",
-			"indices": [],
-			"name": "sing_down"
+            "loop": false,
+            "fps": 24,
+            "anim": "singDOWN",
+            "indices": [],
+            "name": "sing_down"
 		},
-		{
-			"offsets": [
+        {
+            "offsets": [
 				10,
 				62
 			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singUP",
-			"indices": [],
-			"name": "sing_up"
+            "loop": false,
+            "fps": 24,
+            "anim": "singUP",
+            "indices": [],
+            "name": "sing_up"
 		},
-		{
-			"offsets": [
+        {
+            "offsets": [
 				-5,
 				-53
 			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singRIGHT",
-			"indices": [],
-			"name": "sing_right"
+            "loop": false,
+            "fps": 24,
+            "anim": "singRIGHT",
+            "indices": [],
+            "name": "sing_right"
 		},
-		{
-			"offsets": [
+        {
+            "offsets": [
 				0,
 				0
 			],
-			"loop": false,
-			"fps": 24,
-			"anim": "idle",
-			"indices": [],
-			"name": "sing_idle"
+            "loop": false,
+            "fps": 24,
+            "anim": "idle",
+            "indices": [],
+            "name": "sing_idle"
 		}
 	],
-	"no_antialiasing": false,
-	"image": "characters/lse_assets_sing",
-	"position": [
+    "no_antialiasing": false,
+    "image": "characters/lse_assets_sing",
+    "position": [
 		0,
 		0
 	],
-	"healthicon": "lse",
-	"flip_x": false,
-	"healthbar_colors": [
-		175,
-		102,
-		206
+    "healthicon": "lse",
+    "flip_x": false,
+    "healthbar_colors": [
+		255,
+		62,
+		62
 	],
-	"camera_position": [
+    "camera_position": [
 		0,
 		-50
 	],
-	"sing_duration": 6.1,
-	"scale": 1
+    "sing_duration": 6.1,
+    "scale": 1
 }

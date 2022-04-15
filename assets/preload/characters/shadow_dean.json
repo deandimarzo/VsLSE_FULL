@@ -1,78 +1,78 @@
 {
-	"animations": [
-		{
-			"offsets": [
+    "animations": [
+        {
+            "offsets": [
 				-21,
 				-6
 			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singLEFT",
-			"indices": [],
-			"name": "left"
+            "loop": false,
+            "fps": 24,
+            "anim": "singLEFT",
+            "indices": [],
+            "name": "left"
 		},
-		{
-			"offsets": [
+        {
+            "offsets": [
 				240,
 				-142
 			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singDOWN",
-			"indices": [],
-			"name": "down"
+            "loop": false,
+            "fps": 24,
+            "anim": "singDOWN",
+            "indices": [],
+            "name": "down"
 		},
-		{
-			"offsets": [
+        {
+            "offsets": [
 				11,
 				-26
 			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singUP",
-			"indices": [],
-			"name": "up"
+            "loop": false,
+            "fps": 24,
+            "anim": "singUP",
+            "indices": [],
+            "name": "up"
 		},
-		{
-			"offsets": [
+        {
+            "offsets": [
 				45,
 				-103
 			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singRIGHT",
-			"indices": [],
-			"name": "right"
+            "loop": false,
+            "fps": 24,
+            "anim": "singRIGHT",
+            "indices": [],
+            "name": "right"
 		},
-		{
-			"offsets": [
+        {
+            "offsets": [
 				0,
 				0
 			],
-			"loop": false,
-			"fps": 24,
-			"anim": "idle",
-			"indices": [],
-			"name": "idle"
+            "loop": false,
+            "fps": 24,
+            "anim": "idle",
+            "indices": [],
+            "name": "idle"
 		}
 	],
-	"no_antialiasing": false,
-	"image": "characters/shadow_dean",
-	"position": [
+    "no_antialiasing": false,
+    "image": "characters/shadow_dean",
+    "position": [
 		-110,
 		0
 	],
-	"healthicon": "shadowdean",
-	"flip_x": false,
-	"healthbar_colors": [
-		175,
-		102,
-		206
+    "healthicon": "shadowdean",
+    "flip_x": false,
+    "healthbar_colors": [
+		0,
+		0,
+		0
 	],
-	"camera_position": [
+    "camera_position": [
 		0,
 		-50
 	],
-	"sing_duration": 6.1,
-	"scale": 1
+    "sing_duration": 6.1,
+    "scale": 1
 }
