@@ -19,9 +19,6 @@ import flixel.tweens.FlxTween;
 import lime.utils.Assets;
 import flixel.system.FlxSound;
 import openfl.utils.Assets as OpenFlAssets;
-import WiggleEffect.WiggleEffectType;
-import flixel.addons.effects.chainable.FlxEffectSprite;
-import flixel.addons.effects.chainable.FlxWaveEffect;
 import WeekData;
 #if MODS_ALLOWED
 import sys.FileSystem;
@@ -93,27 +90,16 @@ class FreeplayState extends MusicBeatState
 		}
 		WeekData.setDirectoryFromWeek();
         
-        var wiggleShit:WiggleEffect = new WiggleEffect();
-        var waveEffectBG = new FlxWaveEffect(FlxWaveMode.ALL, 4, -1, 3, 20);
-        
-
 
 		bg = new FlxSprite().loadGraphic(Paths.image('freeplayBG'));
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
-        bg.shader = wiggleShit.shader;
+     
 		add(bg);
 		bg.scale.x = bg.scale.y = scaleRatio;
 		bg.screenCenter();
         
         
 
-        wiggleShit.effectType = WiggleEffectType.DREAMY;
-        wiggleShit.waveAmplitude = 0.01;
-        wiggleShit.waveFrequency = 60;
-        wiggleShit.waveSpeed = 0.8;
-        
-        var waveSprite = new FlxEffectSprite(bg, [waveEffectBG]);
-        add(waveSprite);
         
         bgMania = new FlxSprite(FlxG.width - 400,300);
         bgMania.makeGraphic(400,46,FlxColor.BLACK);

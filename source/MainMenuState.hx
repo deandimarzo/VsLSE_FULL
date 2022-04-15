@@ -19,9 +19,7 @@ import flixel.util.FlxColor;
 import lime.app.Application;
 import Achievements;
 import editors.MasterEditorMenu;
-import WiggleEffect.WiggleEffectType;
-import flixel.addons.effects.chainable.FlxEffectSprite;
-import flixel.addons.effects.chainable.FlxWaveEffect;
+
 import flixel.input.keyboard.FlxKey;
 
 using StringTools;
@@ -68,18 +66,7 @@ class MainMenuState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
         
-        var wiggleShit:WiggleEffect = new WiggleEffect();
-        var waveEffectBG = new FlxWaveEffect(FlxWaveMode.ALL, 4, -1, 3, 20);
 
-        wiggleShit.effectType = WiggleEffectType.DREAMY;
-        wiggleShit.waveAmplitude = 0.01;
-        wiggleShit.waveFrequency = 60;
-        wiggleShit.waveSpeed = 0.8;
-        
-        bg.shader = wiggleShit.shader;
-        
-        var waveSprite = new FlxEffectSprite(bg, [waveEffectBG]);
-        add(waveSprite);
         
         var menuFloor:FlxSprite = new FlxSprite(0, 553, Paths.image('mainmenu/menu_floor'));
         add(menuFloor);

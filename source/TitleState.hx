@@ -35,9 +35,7 @@ import flixel.system.ui.FlxSoundTray;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
-import WiggleEffect.WiggleEffectType;
-import flixel.addons.effects.chainable.FlxEffectSprite;
-import flixel.addons.effects.chainable.FlxWaveEffect;
+
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
@@ -267,18 +265,6 @@ class TitleState extends MusicBeatState
         titleBG.loadGraphic(Paths.image('titleBG'));
         add(titleBG);
         
-        var wiggleShit:WiggleEffect = new WiggleEffect();
-        var waveEffectBG = new FlxWaveEffect(FlxWaveMode.ALL, 4, -1, 3, 20);
-
-        wiggleShit.effectType = WiggleEffectType.DREAMY;
-        wiggleShit.waveAmplitude = 0.01;
-        wiggleShit.waveFrequency = 60;
-        wiggleShit.waveSpeed = 0.8;
-        
-        titleBG.shader = wiggleShit.shader;
-        
-        var waveSprite = new FlxEffectSprite(titleBG, [waveEffectBG]);
-        add(waveSprite);
         
         titleLogo = new FlxSprite(157, 0);
         titleLogo.loadGraphic(Paths.image('title-logo'));
