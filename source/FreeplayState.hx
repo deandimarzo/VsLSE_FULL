@@ -212,7 +212,14 @@ class FreeplayState extends MusicBeatState
 
 	public function addSong(songName:String, weekNum:Int, songCharacter:String, color:Int)
 	{
-		songs.push(new SongMetadata(songName, weekNum, songCharacter, color));
+        var songPathName = Paths.formatToSongPath(songName);
+        trace(songPathName);
+        if (FlxG.save.data.weekCompleted == null && (songPathName == 'gain-stage-mania' || songPathName == 'daw-wars-mania' || songPathName == 'daw-wars' || songPathName == 'means-of-destruction')) 
+        {
+            return;       
+        } else {
+            songs.push(new SongMetadata(songName, weekNum, songCharacter, color));
+        }
 	}
 
 	/*public function addWeek(songs:Array<String>, weekNum:Int, weekColor:Int, ?songCharacters:Array<String>)
@@ -398,7 +405,7 @@ class FreeplayState extends MusicBeatState
                 txtMania2.text="CHART BY FullCombro x Polarin";
             case "daw-wars-mania": 
                 txtMania1.text="REMIX BY LongestSoloEver";
-                txtMania2.text="CHART BY Polarin x Eun";
+                txtMania2.text="CHART BY Polarin x carljoneadams";
         }
         
 		lastDifficultyName = CoolUtil.difficulties[curDifficulty];
