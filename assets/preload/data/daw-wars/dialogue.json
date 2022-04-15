@@ -1,0 +1,74 @@
+{
+	"dialogue": [
+		{
+			"expression": "talk",
+			"text": "Great job today, man! You ever think about recording some of this stuff?",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "lse"
+		},
+		{
+			"expression": "talk",
+			"text": "Oh, he makes songs in FL Studio every day!",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "gf"
+		},
+		{
+			"expression": "talk",
+			"text": "He uh...he what?",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "lse"
+		},
+		{
+			"expression": "excited",
+			"text": "BEEP!",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "bf"
+		},
+		{
+			"expression": "talk",
+			"text": "I...I just don't understand whhhyhyhy454525...\\nthhhh pattern-based wwwwor88kfl**ws are j42sft",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "lse"
+		},
+		{
+			"expression": "shocked",
+			"text": "...Dean? ...are you okay?",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "gf"
+		},
+		{
+			"expression": "talk",
+			"text": "DEAN'S ON SABBATICAL. LONG TIME NO SEE, BOYFRIEND.",
+			"boxState": "angry",
+			"speed": 0.05,
+			"portrait": "lse"
+		},
+		{
+			"expression": "shocked",
+			"text": "B-...BEEP?",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "bf"
+		},
+		{
+			"expression": "talk",
+			"text": "YOU THOUGHT YOU COULD GET AWAY WITH USING SUCH AN INFERIOR PIECE OF\\nSOFTWARE?",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "lse"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "lse",
+			"boxState": "angry",
+			"expression": "talk",
+			"text": "PRO TOOLS IS THE INDUSTRY STANDARD.\\nI WON'T ALLOW THIS KIND OF DISRESPECT\\nIN MY HOUSE."
+		}
+	]
+}
