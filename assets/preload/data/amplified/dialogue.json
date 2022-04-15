@@ -1,0 +1,39 @@
+{
+	"dialogue": [
+		{
+			"speed": 0.05,
+			"portrait": "lse",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Hey, right on time for your guitar lesson! You must be...Boyfriend?"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "gf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "That's him! Hey, do you have any speakers I could sit on?"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "lse",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Uh, sure, there's an amp right over there. So, what do you want to work on today?"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "BOP"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "lse",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Got it, we'll start with something simple!"
+		}
+	]
+}

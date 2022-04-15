@@ -1,0 +1,39 @@
+{
+	"dialogue": [
+		{
+			"speed": 0.05,
+			"portrait": "lse",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Man, that was intense! Alright, I think I've got one last thing to teach you."
+		},
+		{
+			"speed": 0.05,
+			"portrait": "gf",
+			"boxState": "normal",
+			"expression": "confused",
+			"text": "What do you mean teach him? You've just been singing random songs this whole time. You've barely even played guitar!"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "excited",
+			"text": "BEEP"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "lse",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Yeah, you're getting the hang of it! Alright, this next one's a i V iidim i in D minor. Watch me for the changes and try to keep up!"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "shocked",
+			"text": "-BAH"
+		}
+	]
+}
