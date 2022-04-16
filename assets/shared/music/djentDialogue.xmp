@@ -8,9 +8,9 @@
             xmlns:stRef="http://ns.adobe.com/xap/1.0/sType/ResourceRef#"
             xmlns:dc="http://purl.org/dc/elements/1.1/"
             xmlns:xmpDM="http://ns.adobe.com/xmp/1.0/DynamicMedia/">
-         <xmp:MetadataDate>2022-04-15T18:22:26-04:00</xmp:MetadataDate>
-         <xmp:ModifyDate>2022-04-15T18:22:26-04:00</xmp:ModifyDate>
-         <xmpMM:InstanceID>xmp.iid:a6f1200f-3ccc-304f-a4c9-92aea302ea44</xmpMM:InstanceID>
+         <xmp:MetadataDate>2022-04-15T21:27:12-04:00</xmp:MetadataDate>
+         <xmp:ModifyDate>2022-04-15T21:27:12-04:00</xmp:ModifyDate>
+         <xmpMM:InstanceID>xmp.iid:f2ab7f83-7ace-d64f-a39e-5dd38ccec3db</xmpMM:InstanceID>
          <xmpMM:DocumentID>xmp.did:ac5aab67-d824-e146-b9f8-ef5dcabbdd85</xmpMM:DocumentID>
          <xmpMM:OriginalDocumentID>xmp.did:b942817b-dbbd-d644-b328-d4de78539ae3</xmpMM:OriginalDocumentID>
          <xmpMM:History>
@@ -40,6 +40,20 @@
                   <stEvt:action>saved</stEvt:action>
                   <stEvt:instanceID>xmp.iid:a6f1200f-3ccc-304f-a4c9-92aea302ea44</stEvt:instanceID>
                   <stEvt:when>2022-04-15T18:22:26-04:00</stEvt:when>
+                  <stEvt:softwareAgent>Adobe Audition 22.3 (Windows)</stEvt:softwareAgent>
+                  <stEvt:changed>/</stEvt:changed>
+               </rdf:li>
+               <rdf:li rdf:parseType="Resource">
+                  <stEvt:action>saved</stEvt:action>
+                  <stEvt:instanceID>xmp.iid:5a99857a-179c-454a-a1b6-bf740dd0118c</stEvt:instanceID>
+                  <stEvt:when>2022-04-15T21:27:12-04:00</stEvt:when>
+                  <stEvt:softwareAgent>Adobe Audition 22.3 (Windows)</stEvt:softwareAgent>
+                  <stEvt:changed>/metadata</stEvt:changed>
+               </rdf:li>
+               <rdf:li rdf:parseType="Resource">
+                  <stEvt:action>saved</stEvt:action>
+                  <stEvt:instanceID>xmp.iid:f2ab7f83-7ace-d64f-a39e-5dd38ccec3db</stEvt:instanceID>
+                  <stEvt:when>2022-04-15T21:27:12-04:00</stEvt:when>
                   <stEvt:softwareAgent>Adobe Audition 22.3 (Windows)</stEvt:softwareAgent>
                   <stEvt:changed>/</stEvt:changed>
                </rdf:li>
