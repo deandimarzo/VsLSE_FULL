@@ -214,12 +214,12 @@ class FreeplayState extends MusicBeatState
 	{
         var songPathName = Paths.formatToSongPath(songName);
         trace(songPathName);
-    //    if (FlxG.save.data.weekCompleted == null && (songPathName == 'gain-stage-mania' || songPathName == 'daw-wars-mania' || songPathName == 'daw-wars' || songPathName == 'means-of-destruction')) 
-    //    {
-    //        return;       
-    //    } else {
+        if (FlxG.save.data.weekCompleted == null && (songPathName == 'gain-stage-mania' || songPathName == 'daw-wars-mania' || songPathName == 'daw-wars' || songPathName == 'means-of-destruction')) 
+        {
+            return;       
+        } else {
             songs.push(new SongMetadata(songName, weekNum, songCharacter, color));
-    //    }
+        }
 	}
 
 	/*public function addWeek(songs:Array<String>, weekNum:Int, weekColor:Int, ?songCharacters:Array<String>)
