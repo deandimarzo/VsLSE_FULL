@@ -4647,7 +4647,9 @@ class PlayState extends MusicBeatState
         }
         
         var guitarOffset = guitarTime ? 110 : 0;
-        guitarOffset = maniaMode ? 72 : 0;
+        if (maniaMode) {
+            guitarOffset = 72;   
+        }
         var maniaYOffset = maniaMode ? 79 : 0;
 
 		var splash:NoteSplash = grpNoteSplashes.recycle(NoteSplash);

@@ -65,9 +65,9 @@
     "healthicon": "shadowdean",
     "flip_x": false,
     "healthbar_colors": [
-		0,
-		0,
-		0
+		88,
+		85,
+		87
 	],
     "camera_position": [
 		0,
