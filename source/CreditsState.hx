@@ -105,7 +105,7 @@ class CreditsState extends MusicBeatState
             ['Code'],
             ['Serkoid', 'serkoid', 'Coding, Events', 'https://www.youtube.com/c/Serkoid', '3957db'],
             ['BCTIX', 'bctix', 'Coding, Events', 'https://www.youtube.com/channel/UC-iwRp32yGbcc-Pdrkv8X5A', '990099'],
-            ['Maverick X', 'maverickx', 'Coding', 'https://twitter.com/MaverickZero9/status/1514953027303743488', 'bbbbdd'],
+            ['Norbee', 'maverickx', 'Coding', 'https://twitter.com/MaverickZero9/status/1514953027303743488', 'bbbbdd'],
             [''],
             ['Voice Acting'],
             ['Cougar MacDowall',		'cougar',		'BF Voice Actor',						'https://twitter.com/CougarMacDowal1',	'51acbf'],
