@@ -76,10 +76,10 @@ if not lowQuality then
             --doTweenZoom('TAG','VARIABLE',ZOOM VALUE,DURATION,'EASING TYPE');
             doTweenZoom('screenZoom','camGame', 0.9,20,'quadInOut');
         end
-        if curBeat == 291 then
+        if curBeat == 292 then
             doTweenAngle('screenTilt','camGame',-3,0.1,'expoIn');
             --doTweenZoom('TAG','VARIABLE',ZOOM VALUE,DURATION,'EASING TYPE');
-            doTweenZoom('screenZoom','camGame', 0.7,0.1,'expoIn');
+            doTweenZoom('screenZoom','camGame', 1,0.1,'expoIn');
         end
         if curBeat == 308 then
         	triggerEvent('Change Character','bf','lsebf')
