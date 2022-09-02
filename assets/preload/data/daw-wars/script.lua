@@ -6,6 +6,11 @@ if not lowQuality then
             --doTweenZoom('TAG','VARIABLE',ZOOM VALUE,DURATION,'EASING TYPE');
             doTweenZoom('screenZoom','camGame', 0.66, 8,'quadInOut');
         end
+        if curBeat == 16 then
+             setProperty('iconP2.alpha',1)
+            setProperty('dad.alpha',1)
+        end
+
         if curBeat == 30 then
             doTweenAngle('screenTilt','camGame',-5,0.25,'expoIn');
             --doTweenZoom('TAG','VARIABLE',ZOOM VALUE,DURATION,'EASING TYPE');
@@ -143,4 +148,9 @@ if not lowQuality then
             doTweenZoom('screenZoom','camGame', 0.7, 0.5,'expoIn');
         end
     end
+end
+
+function onCreatePost()
+    setProperty('dad.alpha',0)
+    setProperty('iconP2.alpha',0)
 end

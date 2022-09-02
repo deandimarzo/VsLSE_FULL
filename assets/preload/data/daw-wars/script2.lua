@@ -1,6 +1,6 @@
 
-local xx = 520;
-local yy = 350;
+local xx = 320;
+local yy = 250;
 local xx2 = 720;
 local yy2 = 350;
 local ofs = 20;

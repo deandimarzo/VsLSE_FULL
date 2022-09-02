@@ -1,16 +1,15 @@
-
-local xx = 320;
-local yy = 250;
-local xx2 = 720;
-local yy2 = 350;
+local xx = 350;
+local yy = 350;
+local xx2 = 760;
+local yy2 = 200;
 local ofs = 20;
 local followchars = true;
 local del = 0;
 local del2 = 0;
 
 
-function onUpdate()
-    if curBeat > 404 then
+function onUpdate() --scream
+    if curBeat > 303 then
 	if del > 0 then
 		del = del - 1
 	end
